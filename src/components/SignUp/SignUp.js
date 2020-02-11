@@ -3,13 +3,13 @@ import { makeStyles } from "@material-ui/styles";
 import React from "react";
 
 const useStyles = makeStyles(() => ({
-  root: { height:"100vh", position: "relative", alignItems: "center", justifyContent: "center", flexDirection: "column" },
+  root: { height: "100vh", position: "relative" },
   container: { flexDirection: "column", height: "100%", alignItems: "center", justifyContent: "center" },
-  item: { width: 380,},
+  item: { width: 380, },
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
-  input: { width: "100%", fontSize: 14, color: "#979797", justifySelf: "center" },
-  button: { backgroundColor: "#00897b", color: "#ffffff", fontSize: 14 },
-  link: { alignSelf: "left", fontSize:14 }
+  input: { width: "100%", fontSize: 14, },
+  button: { color: "#ffffff", fontSize: 14 },
+  link: { alignSelf: "left", fontSize: 14 }
 }));
 
 const SignUp = () => {
@@ -55,12 +55,12 @@ const SignUp = () => {
           </form>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button}>
-            Sign In
+          <Button variant="contained" fullWidth className={classes.button} color="primary">
+            Sign Up
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} style={{backgroundColor:"#c8c8c8"}}>
+          <Button variant="contained" fullWidth className={classes.button} style={{ backgroundColor: "#c8c8c8" }}>
             Cancel
           </Button>
         </Grid>
