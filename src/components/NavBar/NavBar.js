@@ -10,7 +10,6 @@ const VerticalTabs = withStyles(theme => ({
   flexContainer: {
     display: "grid"
   }
-
 }))(Tabs);
 
 const MenuTab = withStyles(theme => ({
