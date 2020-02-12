@@ -1,4 +1,4 @@
-import { AppBar, makeStyles, Tab, Tabs, Grid, Paper } from "@material-ui/core";
+import { AppBar, makeStyles, Tab, Tabs, Grid, Paper, Card } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React, { useState } from "react";
 import { MainPage } from "../"
@@ -14,6 +14,7 @@ const VerticalTabs = withStyles(theme => ({
 }))(Tabs);
 
 const MenuTab = withStyles(theme => ({
+  textColorPrimary: "white",
   selected: {
     color: "black",
     backgroundColor: "white",
@@ -21,7 +22,7 @@ const MenuTab = withStyles(theme => ({
   }
 }))(Tab);
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: { width: "100vw", height: "100vh", flexDirection: "row" },
   container: { flexDirection: "column", height: "100%", width: 80, alignItems: "center", justifyContent: "flex-start", backgroundColor: "teal" },
   item: { minWidth: 80, width: 80, height: 80, fontSize: 14, fontWeight: "bold" },
@@ -38,9 +39,8 @@ const NavBar = props => {
   const currentTab = (<MainPage />);
   return (
     <Grid container className={classes.root}>
-      <Grid item style={{ flex: 1, width: 80 }}>
-        {/* <AppBar className={classes.container} style={{width:80}}> */}
-        <Paper className={classes.container}>
+      <Grid item style={{ width: 80 }}>
+        <AppBar className={classes.container} position="static" style={{width:80}}>
           <VerticalTabs
             orientation="vertical"
             variant="fullWidth"
@@ -50,10 +50,9 @@ const NavBar = props => {
             <MenuTab className={classes.item} label="User" />
             <MenuTab className={classes.item} label="Message" />
           </VerticalTabs>
-        </Paper>
-        {/* </AppBar> */}
+        </AppBar>
       </Grid>
-      <Grid item style={{ flex: 15 }}>
+      <Grid item style={{ flex: 1, marginLeft:25, marginTop:25}}>
         {currentTab}
       </Grid>
     </Grid>
