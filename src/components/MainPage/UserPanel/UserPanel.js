@@ -1,11 +1,13 @@
+import { Box, Grid, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
-import { Grid, Box, makeStyles } from "@material-ui/core";
 import { SearchBar } from "../..";
+import UserList from "./UserList";
 
 const useStyle = makeStyles(() => ({
-  root: { width: "100%", },
-  item: { width: "100%", },
-  box: { padding: 20, height: "100%" },
+  root: { width: "100%", height: "100%", flexDirection: "column" },
+  item: { flex: 1, width: "100%", },
+  userList: { flex: 9 },
+  box: { height: "100%", },
 }))
 
 const UserPanel = () => {
@@ -14,9 +16,12 @@ const UserPanel = () => {
   return (
     <Grid className={classes.root} container>
       <Grid className={classes.item} item>
-        <Box item className={classes.box} border={2} borderColor={"#979797"}>
+        <Box item className={classes.box} border={1} borderColor={"#979797"}>
           <SearchBar setFilter={(filter) => setUserFilter(filter)} />
         </Box>
+      </Grid>
+      <Grid className={classes.userList} item>
+        <UserList filter={userFilter}/>
       </Grid>
     </Grid>
   );

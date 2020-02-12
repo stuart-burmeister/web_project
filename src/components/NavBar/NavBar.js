@@ -1,7 +1,7 @@
-import { AppBar, makeStyles, Tab, Tabs, Grid, Paper, Card } from "@material-ui/core";
+import { AppBar, Grid, makeStyles, Tab, Tabs } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React, { useState } from "react";
-import { MainPage } from "../"
+import { MainPage } from "../";
 
 const VerticalTabs = withStyles(theme => ({
   indicator: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
   root: { width: "100vw", height: "100vh", flexDirection: "row" },
   container: { flexDirection: "column", height: "100%", width: 80, alignItems: "center", justifyContent: "flex-start", },
   menuItem: { minWidth: 80, width: 80, height: 80, fontSize: 14, fontWeight: "bold" },
-  activeTab: { flex: 1, marginLeft: 25, marginTop: 25 }
+  activeTab: { flex: 1, paddingLeft: 25, paddingTop: 25 }
 }));
 
 const NavBar = props => {
