@@ -1,6 +1,6 @@
 const theme = {
   typography: {
-    fontFamily: "AppleSDGothicNeo",
+    fontFamily: "AppleSDGothicNeo-regular",
   },
   palette: {
     primary: { main: "#00897b", },

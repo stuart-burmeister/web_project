@@ -3,7 +3,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import React, { useState } from "react";
 
 const useStyles = makeStyles(() => ({
-  root: { width: "100%", height: "100%", justifyContent: 'center', margin: 20 },
+  root: { width: "100%", height: "100%", justifyContent: 'center',},
   inputField: { width: "65%" },
   button: { width: "10%", color: "white", backgroundColor: "#c8c8c8", marginLeft: 10 }
 }));

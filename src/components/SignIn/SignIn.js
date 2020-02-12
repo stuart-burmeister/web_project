@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import React from "react";
 
 const useStyles = makeStyles(() => ({
-  root: { height: "100vh", position: "relative", },
+  root: { height: "100%", position: "relative", },
   container: { flexDirection: "column", height: "100%", alignItems: "center", justifyContent: "center" },
   item: { width: 380, },
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
