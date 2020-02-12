@@ -1,8 +1,7 @@
-import { Button, List, ListItem, ListItemText, Typography, makeStyles, Tab, AppBar, Tabs } from "@material-ui/core";
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import App from "../../App";
+import { AppBar, makeStyles, Tab, Tabs, Grid, Paper } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
+import React, { useState } from "react";
+import { MainPage } from "../"
 
 const VerticalTabs = withStyles(theme => ({
   indicator: {
@@ -22,13 +21,10 @@ const MenuTab = withStyles(theme => ({
   }
 }))(Tab);
 
-const useStyles = makeStyles(() => ({
-  container: { flexDirection: "column", height: "100vh", width: "80px", alignItems: "center", justifyContent: "flex-start" },
-  item: { width: 80, height: 80, fontSize: 14, fontWeight: "bold" },
-  header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
-  input: { width: "100%", fontSize: 14 },
-  button: { color: "#ffffff", fontSize: 14 },
-  link: { alignSelf: "left", fontSize: 14 }
+const useStyles = makeStyles((theme) => ({
+  root: { width: "100vw", height: "100vh", flexDirection: "row" },
+  container: { flexDirection: "column", height: "100%", width: 80, alignItems: "center", justifyContent: "flex-start", backgroundColor: "teal" },
+  item: { minWidth: 80, width: 80, height: 80, fontSize: 14, fontWeight: "bold" },
 }));
 
 const NavBar = props => {
@@ -39,17 +35,29 @@ const NavBar = props => {
   { title: "Message", link: "links[2]" },];
   const [value, setValue] = useState(0);
   //const history = useHistory();
+  const currentTab = (<MainPage />);
   return (
-    <AppBar className={classes.container} position="static">
-      <VerticalTabs
-        orientation="vertical"
-        value={value}
-        onChange={(_, newValue) => setValue(newValue)}>
-        <MenuTab disableRipple className={classes.item} label="Main" />
-        <MenuTab disableRipple className={classes.item} label="User" />
-        <MenuTab disableRipple className={classes.item} label="Message" />
-      </VerticalTabs>
-    </AppBar>
+    <Grid container className={classes.root}>
+      <Grid item style={{ flex: 1, width: 80 }}>
+        {/* <AppBar className={classes.container} style={{width:80}}> */}
+        <Paper className={classes.container}>
+          <VerticalTabs
+            orientation="vertical"
+            variant="fullWidth"
+            value={value}
+            onChange={(_, newValue) => setValue(newValue)}>
+            <MenuTab className={classes.item} label="Main" />
+            <MenuTab className={classes.item} label="User" />
+            <MenuTab className={classes.item} label="Message" />
+          </VerticalTabs>
+        </Paper>
+        {/* </AppBar> */}
+      </Grid>
+      <Grid item style={{ flex: 15 }}>
+        {currentTab}
+      </Grid>
+    </Grid>
+
   );
 }
 
