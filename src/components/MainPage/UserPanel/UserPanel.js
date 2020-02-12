@@ -8,7 +8,7 @@ const useStyle = makeStyles(() => ({
   item: { flex: 1, width: "100%", },
   userList: { flex: 9 },
   box: { height: "100%", padding :20 },
-  heading: { fontFamily: "AppleSDGothicNeo-Bold"}
+  heading: { fontFamily: "AppleSDGothicNeo-Bold", fontWeight:"bold", fontSize: 24, color: 'black'}
 }))
 
 const UserPanel = () => {
