@@ -49,8 +49,7 @@ const NavBar = props => {
             onChange={(_, newValue) => setValue(newValue)}>
             <MenuTab className={classes.menuItem} label="Main" />
             <MenuTab className={classes.menuItem} label="User"/>
-            <MenuTab className={classes.menuItem} label="Message">
-            </MenuTab>
+            <MenuTab className={classes.menuItem} label="Message"/>
           </VerticalTabs>
         </AppBar>
       </Grid>

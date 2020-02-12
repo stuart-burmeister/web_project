@@ -17,7 +17,7 @@ const UserPanel = () => {
   return (
     <Grid className={classes.root} container>
       <Grid className={classes.item} item>
-        <Box item className={classes.box} border={1} borderColor={"#979797"}>
+        <Box item className={classes.box}  color={"#979797"} borderBottom={1} >
           <Typography className={classes.heading}>
             User List
           </Typography>
