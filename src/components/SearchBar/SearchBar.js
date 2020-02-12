@@ -7,13 +7,13 @@ const SearchBar = (props) => {
   const [inputVal, setInputVal] = useState("");
 
   return (
-    <Card>
-      <TextField variant="outlined" label="Search" onChange={(newValue) => setInputVal(newValue)} value={inputVal}>
+    <div style={{width:"100%",height:"100%"}}>
+      <TextField style={{width:"65%"}} variant="outlined" label="Search" onChange={({target}) => setInputVal(target.value)} value={inputVal}>
       </TextField>
-      <Button onClick={() => setFilter(inputVal)}>
-        <SearchIcon />
+      <Button style={{width:"10%",height:"100%", color:"white", backgroundColor:"#c8c8c8", marginLeft:10}} onClick={() => setFilter(inputVal)}>
+        <SearchIcon fontSize="large"/>
       </Button>
-    </Card>
+    </div>
   );
 }
 

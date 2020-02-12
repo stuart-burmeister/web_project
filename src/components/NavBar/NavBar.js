@@ -23,8 +23,9 @@ const MenuTab = withStyles(theme => ({
 
 const useStyles = makeStyles(() => ({
   root: { width: "100vw", height: "100vh", flexDirection: "row" },
-  container: { flexDirection: "column", height: "100%", width: 80, alignItems: "center", justifyContent: "flex-start", backgroundColor: "teal" },
-  item: { minWidth: 80, width: 80, height: 80, fontSize: 14, fontWeight: "bold" },
+  container: { flexDirection: "column", height: "100%", width: 80, alignItems: "center", justifyContent: "flex-start", },
+  menuItem: { minWidth: 80, width: 80, height: 80, fontSize: 14, fontWeight: "bold" },
+  activeTab: { flex: 1, marginLeft: 25, marginTop: 25 }
 }));
 
 const NavBar = props => {
@@ -38,20 +39,20 @@ const NavBar = props => {
   const currentTab = (<MainPage />);
   return (
     <Grid container className={classes.root}>
-      <Grid item style={{ width: 80 }}>
-        <AppBar className={classes.container} position="static" style={{width:80}}>
+      <Grid item >
+        <AppBar className={classes.container} position="static">
           <VerticalTabs
             orientation="vertical"
             variant="fullWidth"
             value={value}
             onChange={(_, newValue) => setValue(newValue)}>
-            <MenuTab className={classes.item} label="Main" />
-            <MenuTab className={classes.item} label="User" />
-            <MenuTab className={classes.item} label="Message" />
+            <MenuTab className={classes.menuItem} label="Main" />
+            <MenuTab className={classes.menuItem} label="User" />
+            <MenuTab className={classes.menuItem} label="Message" />
           </VerticalTabs>
         </AppBar>
       </Grid>
-      <Grid item style={{ flex: 1, marginLeft:25, marginTop:25}}>
+      <Grid item className={classes.activeTab}>
         {currentTab}
       </Grid>
     </Grid>
