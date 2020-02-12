@@ -20,9 +20,9 @@ const MainPage = () => {
         </Box>
       </Grid>
       <Grid className={classes.messagePanel} item>
-      <Box className={classes.box} border={1} borderColor={"#979797"}>
-        <UserPanel />
-      </Box>
+        <Box className={classes.box} border={1} borderColor={"#979797"}>
+          <UserPanel />
+        </Box>
       </Grid>
     </Grid>
   );

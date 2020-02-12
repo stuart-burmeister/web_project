@@ -5,7 +5,7 @@ import UserList from "./UserList";
 
 const useStyle = makeStyles(() => ({
   root: { width: "100%", height: "100%", flexDirection: "column" },
-  item: { flex: 1, width: "100%", },
+  item: { height: 157, width: "100%", },
   userList: { flex: 9 },
   box: { height: "100%", padding :20 },
   heading: { fontFamily: "AppleSDGothicNeo-Bold", fontWeight:"bold", fontSize: 24, color: 'black'}
