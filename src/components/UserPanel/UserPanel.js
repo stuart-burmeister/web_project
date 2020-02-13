@@ -1,6 +1,6 @@
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import { SearchBar } from "../../..";
+import { SearchBar } from "../";
 import { UserList } from "./components";
 
 const useStyle = makeStyles(() => ({

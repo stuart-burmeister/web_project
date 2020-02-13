@@ -1,8 +1,7 @@
 import { AppBar, Grid, makeStyles, Tab, Tabs } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React, { useState } from "react";
-import { MainPage } from "../";
-import MessagePage from "../MessagePage";
+import { MainPage, MessagePage, UserPage } from "../";
 
 const VerticalTabs = withStyles(theme => ({
   indicator: {
@@ -35,11 +34,7 @@ const NavBar = props => {
   const { links } = props;
   const [value, setValue] = useState(0);
   const classes = useStyles();
-  const pages = [<MainPage/>,null, <MessagePage/>]
-  const tabs = [{ title: "Main", link: "links[0]" },
-  { title: "User", link: "links[1]" },
-  { title: "Message", link: "links[2]" },];
-  //const history = useHistory();
+  const pages = [<MainPage/>,<UserPage/>, <MessagePage/>]
   const currentTab = pages[value];
   return (
     <Grid container className={classes.root}>

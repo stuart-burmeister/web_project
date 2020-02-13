@@ -5,3 +5,5 @@ export { default as SignIn } from "./SignIn";
 export { default as SignUp } from "./SignUp";
 export { default as MessagePage } from "./MessagePage";
 export { default as MessageList } from "./MessageList";
+export { default as UserPage } from "./UserPage";
+export { default as UserPanel } from "./UserPanel";
