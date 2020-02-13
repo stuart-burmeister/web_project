@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Box, makeStyles } from "@material-ui/core";
-import { SignUp, UserPanel } from "../";
+import { SignUp, UserPanel, ModifyUser } from "../";
 
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "row" },
@@ -15,7 +15,7 @@ const UserPage = () => {
     <Grid className={classes.root} container spacing={3}>
       <Grid className={classes.userPanel} item>
         <Box className={classes.box} border={1} borderColor={"#979797"}>
-          <SignUp />
+          <ModifyUser />
         </Box>
       </Grid>
       <Grid className={classes.messagePanel} item>
