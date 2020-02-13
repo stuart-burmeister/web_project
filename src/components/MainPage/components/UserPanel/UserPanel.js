@@ -1,7 +1,7 @@
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import { SearchBar } from "../..";
-import UserList from "./UserList";
+import { SearchBar } from "../../..";
+import { UserList } from "./components";
 
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "column" },

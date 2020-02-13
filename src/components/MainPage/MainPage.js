@@ -1,10 +1,10 @@
 import React from "react";
 import { Grid, Box, makeStyles } from "@material-ui/core";
-import UserPanel from "./UserPanel";
+import {UserPanel} from "./components/";
 import SignUp from "../SignUp";
 
 const useStyle = makeStyles(() => ({
-  root: { width: "100%", height: "100%", flexDirection: "row" },
+  root: { display:"flex", width: "100%", height: "100%", flexDirection: "row" },
   box: { height: "100%", },
   userPanel: { flex: 1 },
   messagePanel: { flex: 2 },
