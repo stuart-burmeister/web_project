@@ -45,7 +45,6 @@ const MessagePanel = props => {
         </Box>
         <Grid className={classes.userList} item>
           <MessageList messages={messages} />
-          {/* <UserList filter={userFilter} /> */}
         </Grid>
       </Grid>
 
