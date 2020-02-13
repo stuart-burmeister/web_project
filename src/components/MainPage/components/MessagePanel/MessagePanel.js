@@ -1,6 +1,6 @@
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { MessageList } from "./components"
+import { MessageList } from "../../../"
 
 const messageDummy = [
   { date: "2020/03/03", text: "Hello. this message is from the future." },
@@ -44,7 +44,7 @@ const MessagePanel = props => {
           }
         </Box>
         <Grid className={classes.userList} item>
-          <MessageList messages={messages} />
+          <MessageList messages={messages} maxHeight="84vh"/>
         </Grid>
       </Grid>
 

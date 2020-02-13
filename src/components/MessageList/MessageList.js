@@ -1,9 +1,9 @@
 import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import React from "react";
 
-const useStyles = makeStyles(() => ({
+const useStyles =  makeStyles(() => ({
   root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
-  container: { maxHeight: "76vh" },
+  container: { maxHeight: props => props.maxHeight },
   headMail: {
     maxWidth: 250,
     fontWeight: "bold",
@@ -22,8 +22,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 const MessageList = props => {
-  const { messages } = props;
-  const classes = useStyles();
+  const { messages} = props;
+  const classes = useStyles(props);
   return (
     <div className={classes.root}>
       <TableContainer className={classes.container}>
@@ -31,10 +31,10 @@ const MessageList = props => {
           <TableHead >
             <TableRow>
               <TableCell className={classes.headMail}>
-                EMAIL
+                DATE
               </TableCell>
               <TableCell className={classes.head}>
-                NAME
+                TEXT
               </TableCell>
             </TableRow>
           </TableHead>
