@@ -35,7 +35,7 @@ const MessagePanel = props => {
   return (
     <Grid className={classes.root} container>
       <Grid className={classes.item} item>
-        <Box item className={classes.box} color={"#979797"} borderBottom={1} >
+        <Box className={classes.box} color={"#979797"} borderBottom={1} >
           {
             title && (
               <Typography className={classes.heading}>

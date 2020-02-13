@@ -59,7 +59,7 @@ const MessageList = props => {
               messages.map((row, index) => {
                 const rowStyle = index % 2 ? classes.evenRow : classes.oddRow;
                 return (
-                  <TableRow>
+                  <TableRow key={"row-"+index}>
                     <TableCell className={rowStyle}>
                       <IconButton className={classes.oval} >
                         <div >
