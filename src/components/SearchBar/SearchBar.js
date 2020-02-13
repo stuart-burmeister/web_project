@@ -3,8 +3,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import React, { useState } from "react";
 
 const useStyles = makeStyles(() => ({
-  root: { width: "100%", height: "100%", justifyContent: 'center',paddingTop:10},
-  inputField: { width: 330, height:56 },
+  root: { width: "100%", height: "100%", justifyContent: 'center', paddingTop: 10, },
+  inputField: { width: 330, height: 56 },
   button: { width: 56, height: 56, color: "white", backgroundColor: "#c8c8c8", marginLeft: 10 }
 }));
 

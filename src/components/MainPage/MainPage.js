@@ -5,7 +5,7 @@ import SignUp from "../SignUp";
 
 const useStyle = makeStyles(() => ({
   root: { width: "100%", height: "100%", flexDirection: "row" },
-  box: { height: "100%"},
+  box: { height: "100%", },
   userPanel: { flex: 1 },
   messagePanel: { flex: 2 },
 }))
