@@ -16,12 +16,12 @@ const MainPage = () => {
     <Grid className={classes.root} container spacing={3}>
       <Grid className={classes.userPanel} item>
         <Box className={classes.box} border={1} borderColor={"#979797"}>
-          <SignUp />
+          <UserPanel />
         </Box>
       </Grid>
       <Grid className={classes.messagePanel} item>
         <Box className={classes.box} border={1} borderColor={"#979797"}>
-          <UserPanel />
+          <UserPanel title />
         </Box>
       </Grid>
     </Grid>

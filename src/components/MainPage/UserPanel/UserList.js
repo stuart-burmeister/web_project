@@ -1,15 +1,7 @@
 import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import React from "react";
 
-const useStyles = makeStyles(() => ({
-  head: {
-    backgroundColor: "white",
-    borderWidth: 5
-  },
-  body: {
-    fontSize: 14
-  }
-}));
+
 
 const dummyValues = [
   { name: "erin", email: "friend@sis.com" },
@@ -30,36 +22,59 @@ const dummyValues = [
   { name: "moosh", email: "snooze@lazy.co.uk" },
 ];
 
+const useStyles = makeStyles(() => ({
+  root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
+  container: { maxHeight: "76vh" },
+  headMail: {
+    maxWidth: 250,
+    fontWeight: "bold",
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: "#979797"
+  },
+  head: {
+    fontWeight: "bold",
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: "#979797"
+  },
+  evenRow: { backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
+  oddRow: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
+}));
+
 const UserList = props => {
   const { filter } = props;
   const classes = useStyles();
   const users = dummyValues;
   return (
-    <div style={{ display: "flex", height: "100%", width: "100%", flexDirection: "column", }}>
-      <TableContainer style={{ maxHeight: 630 }}>
+    <div className={classes.root}>
+      <TableContainer className={classes.container}>
         <Table stickyHeader>
           <TableHead >
-            <TableRow style={{ backgroundColor: "#979797" }}>
-              <TableCell style={{ width: 250, fontWeight: "bold", backgroundColor: "white", borderWidth: 1, borderColor: "#979797" }}>
+            <TableRow>
+              <TableCell className={classes.headMail}>
                 EMAIL
               </TableCell>
-              <TableCell style={{ fontWeight: "bold", backgroundColor: "white", borderWidth: 1, borderColor: "#979797" }}>
+              <TableCell className={classes.head}>
                 NAME
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {
-              users.map((row, index) => (
-                <TableRow>
-                  <TableCell style={{ backgroundColor: (index % 2 === 0) ? "white" : "#979797", fontWeight: "bold" }}>
-                    {row.email}
-                  </TableCell>
-                  <TableCell style={{ backgroundColor: (index % 2 === 0) ? "white" : "#979797", fontWeight: "bold" }}>
-                    {row.name}
-                  </TableCell>
-                </TableRow>
-              ))
+              users.map((row, index) => {
+                const rowStyle = index % 2 ? classes.evenRow : classes.oddRow;
+                return (
+                  <TableRow>
+                    <TableCell className={rowStyle}>
+                      {row.email}
+                    </TableCell>
+                    <TableCell className={rowStyle}>
+                      {row.name}
+                    </TableCell>
+                  </TableRow>
+                )
+              })
             }
           </TableBody>
         </Table>

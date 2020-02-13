@@ -11,16 +11,21 @@ const useStyle = makeStyles(() => ({
   heading: { fontFamily: "AppleSDGothicNeo-Bold", fontWeight: "bold", fontSize: 24, color: 'black' }
 }))
 
-const UserPanel = () => {
+const UserPanel = props => {
+  const { title } = props;
   const [userFilter, setUserFilter] = useState("");
   const classes = useStyle();
   return (
     <Grid className={classes.root} container>
       <Grid className={classes.item} item>
         <Box item className={classes.box} color={"#979797"} borderBottom={1} >
-          <Typography className={classes.heading}>
-            User List
-          </Typography>
+          {
+            title && (
+              <Typography className={classes.heading}>
+                User List
+              </Typography>)
+          }
+
           <SearchBar setFilter={(filter) => setUserFilter(filter)} />
         </Box>
         <Grid className={classes.userList} item>
