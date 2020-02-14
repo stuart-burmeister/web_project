@@ -2,46 +2,47 @@ import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import React from "react";
 
 const dummyValues = [
-  { name: "erin", email: "friend@sis.com" },
+  { name: "erin", email: "friend@sis.com", messages: []},
   { name: "His Lordship Montgomery Ericcson Lancaster III", email: "superboy@play.co.za" },
-  { name: "pete", email: "friend@bro.com" },
-  { name: "moosh", email: "snooze@lazy.co.uk" },
-  { name: "erin", email: "friend@sis.com" },
-  { name: "His Lordship Montgomery Ericcson Lancaster III", email: "superboy@play.co.za" },
-  { name: "pete", email: "friend@bro.com" },
-  { name: "moosh", email: "snooze@lazy.co.uk" },
-  { name: "erin", email: "friend@sis.com" },
-  { name: "His Lordship Montgomery Ericcson Lancaster III", email: "superboy@play.co.za" },
-  { name: "pete", email: "friend@bro.com" },
-  { name: "moosh", email: "snooze@lazy.co.uk" },
-  { name: "erin", email: "friend@sis.com" },
-  { name: "His Lordship Montgomery Ericcson Lancaster III", email: "superboy@play.co.za" },
-  { name: "pete", email: "friend@bro.com" },
-  { name: "moosh", email: "snooze@lazy.co.uk" },
+  { name: "peterey", email: "friend@bro.com" },
+  { name: "mooshu", email: "snooze@lazy.co.uk" },
+  { name: "noni", email: "friend@sis.com" },
+  { name: "mont", email: "superboy@play.co.za" },
+  { name: "pt", email: "friend@bro.com" },
+  { name: "noosh", email: "snooze@lazy.co.uk" },
+  { name: "nonimoo", email: "friend@sis.com" },
+  { name: "monty", email: "superboy@play.co.za" },
+  { name: "ptp", email: "friend@bro.com" },
+  { name: "skadoosh", email: "snooze@lazy.co.uk" },
+  { name: "moosey", email: "friend@sis.com" },
+  { name: "fluff", email: "superboy@play.co.za" },
+  { name: "gwa", email: "friend@bro.com" },
+  { name: "noo", email: "snooze@lazy.co.uk" },
 ];
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
   container: { maxHeight: "76vh" },
-  headMail: {
+  header__mail: {
     maxWidth: 250,
     fontWeight: "bold",
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "#979797"
   },
-  head: {
+  header__name: {
     fontWeight: "bold",
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "#979797"
   },
-  oddRow: { backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
-  evenRow: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
+  odd__row: { backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
+  even__row: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
+  selected__row: { backgroundColor: "#73bbff", fontWeight: "bold", fontSize: 14 }
 }));
 
 const UserList = props => {
-  const { filter } = props;
+  const { filter, selectedUser, onSelect } = props;
   const classes = useStyles();
   const users = dummyValues;
   return (
@@ -50,10 +51,10 @@ const UserList = props => {
         <Table stickyHeader>
           <TableHead >
             <TableRow>
-              <TableCell className={classes.headMail}>
+              <TableCell className={classes.header__mail}>
                 EMAIL
               </TableCell>
-              <TableCell className={classes.head}>
+              <TableCell className={classes.header__name}>
                 NAME
               </TableCell>
             </TableRow>
@@ -61,9 +62,13 @@ const UserList = props => {
           <TableBody>
             {
               users.map((row, index) => {
-                const rowStyle = index % 2 ? classes.evenRow : classes.oddRow;
+                var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
+                const isRowSelected = selectedUser && row.name === selectedUser.name;
+                if (isRowSelected){
+                  rowStyle = classes.selected__row;
+                }
                 return (
-                  <TableRow key={"row-"+index}>
+                  <TableRow key={"row-"+index} selected={isRowSelected} hover onClick={() => onSelect(row)}>
                     <TableCell className={rowStyle}>
                       {row.email}
                     </TableCell>

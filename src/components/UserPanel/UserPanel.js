@@ -12,7 +12,7 @@ const useStyle = makeStyles(() => ({
 }))
 
 const UserPanel = props => {
-  const { title } = props;
+  const { title, selectedUser, onSelect} = props;
   const [userFilter, setUserFilter] = useState("");
   const classes = useStyle();
   return (
@@ -25,14 +25,12 @@ const UserPanel = props => {
                 User List
               </Typography>)
           }
-
-          <SearchBar setFilter={(filter) => setUserFilter(filter)} />
+          <SearchBar setFilter={(newFilter) => setUserFilter(newFilter)} />
         </Box>
         <Grid className={classes.user__list} >
-          <UserList filter={userFilter} />
+          <UserList filter={userFilter} selectedUser={selectedUser} onSelect={(user) => onSelect(user)} />
         </Grid>
       </Grid>
-
     </Grid>
   );
 }

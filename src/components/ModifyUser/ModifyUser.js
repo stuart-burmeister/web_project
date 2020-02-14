@@ -1,6 +1,6 @@
 import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import React from "react";
+import React, { useState } from "react";
 
 const useStyles = makeStyles(() => ({
   root: { height: "100%", position: "relative" },
@@ -9,10 +9,13 @@ const useStyles = makeStyles(() => ({
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
   input: { width: "100%", fontSize: 14, },
   button: { color: "#ffffff", fontSize: 14 },
-  cancel__button: { color: "#ffffff", fontSize: 14, backgroundColor: "#c8c8c8"},
+  cancel__button: { color: "#ffffff", fontSize: 14, backgroundColor: "#c8c8c8" },
 }));
 
-const ModifyUser = () => {
+const ModifyUser = props => {
+  const { name, email, onChangeName, onChangeEmail, onCancel } = props;
+
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -27,6 +30,8 @@ const ModifyUser = () => {
             <TextField className={classes.input}
               variant="outlined"
               label="EMAIL"
+              value={email}
+              onChange={(event) => onChangeEmail(event.target.value)}
               InputLabelProps={{ shrink: true, className: classes.input }} />
           </form>
         </Grid>
@@ -35,6 +40,8 @@ const ModifyUser = () => {
             <TextField className={classes.input}
               variant="outlined"
               label="NAME"
+              value={name}
+              onChange={(event) => onChangeName(event.target.value)}
               InputLabelProps={{ shrink: true, className: classes.input }} />
           </form>
         </Grid>
@@ -65,7 +72,7 @@ const ModifyUser = () => {
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.cancel__button}>
+          <Button variant="contained" fullWidth className={classes.cancel__button} onClick={() => onCancel()}>
             Cancel
           </Button>
         </Grid>

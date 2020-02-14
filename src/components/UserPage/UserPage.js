@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Box, makeStyles } from "@material-ui/core";
 import { SignUp, UserPanel, ModifyUser } from "../";
 
@@ -10,17 +10,36 @@ const useStyle = makeStyles(() => ({
 }));
 
 const UserPage = () => {
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [currentName, setCurrentName] = useState("");
+  const [currentEmail, setCurrentEmail] = useState("");
   const classes = useStyle();
+
+  const changeUser = (newUser) =>{
+    setSelectedUser(newUser);
+    setCurrentName(newUser.name);
+    setCurrentEmail(newUser.email);
+  };
+
+  var inputClass = (<SignUp/>);
+  if (selectedUser !== null){
+    inputClass = <ModifyUser name={currentName} email={currentEmail}
+      onChangeName={(newName) => setCurrentName(newName)}
+      onChangeEmail={(newEmail) => setCurrentEmail(newEmail)}
+      onCancel={() => setSelectedUser(null)}/>
+  }
+
   return (
     <Grid className={classes.root} container spacing={3}>
       <Grid className={classes.input__panel} item>
         <Box className={classes.box} border={1} borderColor={"#979797"}>
-          <ModifyUser />
+          {inputClass}
         </Box>
       </Grid>
       <Grid className={classes.user__panel} item>
         <Box className={classes.box} border={1} borderColor={"#979797"}>
-          <UserPanel title />
+          <UserPanel title selectedUser={selectedUser}
+          onSelect={(user) => changeUser(user)} />
         </Box>
       </Grid>
     </Grid>
