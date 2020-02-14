@@ -1,9 +1,10 @@
 import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
+import {dummyValues} from "../../../../data/DummyData"
 
-const dummyValues = [
-  { name: "erin", email: "friend@sis.com", messages: [] },
+const __dummyValues = [
+  { name: "Erin", email: "friend@sis.com", messages: [] },
   { name: "His Lordship Montgomery Ericcson Lancaster III", email: "superboy@play.co.za" },
   { name: "peterey", email: "friend@bro.com" },
   { name: "mooshu", email: "snooze@lazy.co.uk" },
@@ -45,7 +46,7 @@ const useStyles = makeStyles(() => ({
 const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
   const classes = useStyles();
-  const users = dummyValues.filter((entry) => entry.name.includes(filter));
+  const users = dummyValues.filter((entry) =>  entry.name.toLowerCase().includes(filter.toLowerCase()));
   return (
     <div className={classes.root}>
       <TableContainer className={classes.container}>
@@ -68,11 +69,6 @@ const UserList = props => {
                 if (isRowSelected) {
                   rowStyle = classes.selected__row;
                 }
-
-                if (!row.name.includes(filter)) {
-                  return null;
-                }
-
                 return (
                   <TableRow key={"row-" + index} selected={isRowSelected} hover onClick={() => onSelect(row)}>
                     <TableCell className={rowStyle}>

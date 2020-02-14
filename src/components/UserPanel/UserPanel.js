@@ -26,7 +26,7 @@ const UserPanel = props => {
                 User List
               </Typography>)
           }
-          <SearchBar setFilter={(newFilter) => setUserFilter(newFilter)} />
+          <SearchBar setFilter={(newFilter) => setUserFilter(newFilter.toLowerCase())} />
         </Box>
         <Grid className={classes.user__list} >
           <UserList filter={userFilter} selectedUser={selectedUser} onSelect={(user) => onSelect(user)} />
