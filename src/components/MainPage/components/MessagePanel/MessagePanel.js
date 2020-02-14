@@ -3,21 +3,21 @@ import React from "react";
 import { MessageList } from "../../../"
 
 const messageDummy = [
-  { date: "2020/03/03", text: "Hello. this message is from the future." },
-  { date: "1066/11/02", text: "Salutations! This message is from the past." },
-  { date: "2020/02/13", text: "G'day! This message is from Aus!" },
-  { date: "2020/03/03", text: "Hello. this message is from the future." },
-  { date: "1066/11/02", text: "Salutations! This message is from the past." },
-  { date: "2020/02/13", text: "G'day! This message is from Aus!" },
-  { date: "2020/03/03", text: "Hello. this message is from the future." },
-  { date: "1066/11/02", text: "Salutations! This message is from the past." },
-  { date: "2020/02/13", text: "G'day! This message is from Aus!" },
-  { date: "2020/03/03", text: "Hello. this message is from the future." },
-  { date: "1066/11/02", text: "Salutations! This message is from the past." },
-  { date: "2020/02/13", text: "G'day! This message is from Aus!" },
-  { date: "2020/03/03", text: "Hello. this message is from the future." },
-  { date: "1066/11/02", text: "Salutations! This message is from the past." },
-  { date: "2020/02/13", text: "G'day! This message is from Aus!" }
+  { id: 1, date: "2020/03/03", text: "Hello. this message is from the future." },
+  { id: 2, date: "1066/11/02", text: "Salutations! This message is from the past." },
+  { id: 3, date: "2020/02/13", text: "G'day! This message is from Aus!" },
+  { id: 4, date: "2020/03/03", text: "Hello. this message is from the future." },
+  { id: 5, date: "1066/11/02", text: "Salutations! This message is from the past." },
+  { id: 6, date: "2020/02/13", text: "G'day! This message is from Aus!" },
+  { id: 7, date: "2020/03/03", text: "Hello. this message is from the future." },
+  { id: 8, date: "1066/11/02", text: "Salutations! This message is from the past." },
+  { id: 9, date: "2020/02/13", text: "G'day! This message is from Aus!" },
+  { id: 10, date: "2020/03/03", text: "Hello. this message is from the future." },
+  { id: 11, date: "1066/11/02", text: "Salutations! This message is from the past." },
+  { id: 12, date: "2020/02/13", text: "G'day! This message is from Aus!" },
+  { id: 13, date: "2020/03/03", text: "Hello. this message is from the future." },
+  { id: 14, date: "1066/11/02", text: "Salutations! This message is from the past." },
+  { id: 15, date: "2020/02/13", text: "G'day! This message is from Aus!" }
 ];
 
 const useStyle = makeStyles(() => ({

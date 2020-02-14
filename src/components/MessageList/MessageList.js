@@ -1,6 +1,7 @@
 import { IconButton, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
+import { DeleteDialog, ModifyDialog } from "..";
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
@@ -26,6 +27,7 @@ const useStyles = makeStyles(() => ({
   },
   odd__row: { backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
   even__row: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
+  selected__row: { backgroundColor: "#73bbff", fontWeight: "bold", fontSize: 14 },
   oval: {
     display: "flex",
     flexDirection: "column",
@@ -40,6 +42,20 @@ const useStyles = makeStyles(() => ({
 const MessageList = props => {
   const { messages } = props;
   const classes = useStyles(props);
+  const [currentMessage, setCurrentMessage] = useState({id:0,text:""});
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openModify, setOpenModify] = useState(false);
+
+  const onDelete = () => {
+    setOpenDelete(false);
+    setCurrentMessage({id:0,text:""});
+  };
+
+  const onModify = (newText) => {
+    setOpenModify(false);
+    setCurrentMessage({id:0,text:""});
+  }
+
   return (
     <div className={classes.root}>
       <TableContainer className={classes.container}>
@@ -47,10 +63,10 @@ const MessageList = props => {
           <TableHead >
             <TableRow>
               <TableCell className={classes.icon} />
-              <TableCell className={classes.headMail}>
+              <TableCell className={classes.header__date}>
                 DATE
               </TableCell>
-              <TableCell className={classes.head}>
+              <TableCell className={classes.header__name}>
                 TEXT
               </TableCell>
             </TableRow>
@@ -58,11 +74,20 @@ const MessageList = props => {
           <TableBody>
             {
               messages.map((row, index) => {
-                const rowStyle = index % 2 ? classes.even__row : classes.odd__row;
+                var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
+                if (currentMessage && currentMessage.id === row.id){
+                  rowStyle = classes.selected__row;
+                }
                 return (
-                  <TableRow key={"row-" + index}>
+                  <TableRow key={"row-" + index} onClick={() => {
+                    setCurrentMessage(row);
+                    setOpenModify(true);
+                    }}>
                     <TableCell className={rowStyle}>
-                      <IconButton className={classes.oval} >
+                      <IconButton className={classes.oval} onClick={() => {
+                        setCurrentMessage(row);
+                        setOpenDelete(true);
+                      }} >
                         <div >
                           X
                         </div>
@@ -81,6 +106,8 @@ const MessageList = props => {
           </TableBody>
         </Table>
       </TableContainer>
+      <ModifyDialog open={openModify} onClose={(newText) => onModify(newText)} message={currentMessage}/>
+      <DeleteDialog open={openDelete} onClose={() => onDelete()} />
     </div>
   );
 };
