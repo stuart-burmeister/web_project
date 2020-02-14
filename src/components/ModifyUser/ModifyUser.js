@@ -9,8 +9,7 @@ const useStyles = makeStyles(() => ({
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
   input: { width: "100%", fontSize: 14, },
   button: { color: "#ffffff", fontSize: 14 },
-  cancelButton: { color: "#ffffff", fontSize: 14, backgroundColor: "#c8c8c8"},
-  link: { alignSelf: "left", fontSize: 14 }
+  cancel__button: { color: "#ffffff", fontSize: 14, backgroundColor: "#c8c8c8"},
 }));
 
 const ModifyUser = () => {
@@ -61,12 +60,12 @@ const ModifyUser = () => {
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.cancelButton}>
+          <Button variant="contained" fullWidth className={classes.cancel__button}>
             Delete
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.cancelButton}>
+          <Button variant="contained" fullWidth className={classes.cancel__button}>
             Cancel
           </Button>
         </Grid>

@@ -10,21 +10,21 @@ const useStyles = makeStyles(() => ({
     borderWidth: 1,
     borderColor: "#979797"
   },
-  headMail: {
+  header__date: {
     maxWidth: 250,
     fontWeight: "bold",
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "#979797"
   },
-  head: {
+  header__name: {
     fontWeight: "bold",
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "#979797"
   },
-  oddRow: { backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
-  evenRow: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
+  odd__row: { backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
+  even__row: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
   oval: {
     display:"flex",
     flexDirection:"column",
@@ -57,7 +57,7 @@ const MessageList = props => {
           <TableBody>
             {
               messages.map((row, index) => {
-                const rowStyle = index % 2 ? classes.evenRow : classes.oddRow;
+                const rowStyle = index % 2 ? classes.even__row : classes.odd__row;
                 return (
                   <TableRow key={"row-"+index}>
                     <TableCell className={rowStyle}>

@@ -25,7 +25,7 @@ const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "row" },
   box: { height: "100%", },
   panel: { flex: 1 },
-  inputPanel: { flex: 1, padding:20 , color: "#979797"},
+  input__panel: { flex: 1, padding:20 , color: "#979797"},
 }))
 
 const MessagePage = props => {
@@ -37,7 +37,7 @@ const MessagePage = props => {
           <Box className={classes.inputPanel} borderBottom={1}>
             <MessageInput setMessage={() => { }} />
           </Box>
-          <Box className={classes.inputPanel} borderBottom={1}>
+          <Box className={classes.input__panel} borderBottom={1}>
             <SearchBar setFilter={() => { }} />
           </Box>
           <Box>

@@ -23,9 +23,9 @@ const messageDummy = [
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "column" },
   item: { display: "flex", flexDirection: "column", flex: 0.5, width: "100%", },
-  userList: { flex: 9, },
   box: { flex: 1, padding: 20, },
-  heading: { fontFamily: "AppleSDGothicNeo-Bold", fontWeight: "bold", fontSize: 24, color: 'black' }
+  heading: { fontFamily: "AppleSDGothicNeo-Bold", fontWeight: "bold", fontSize: 24, color: 'black' },
+  message__list: { flex: 9, },
 }))
 
 const MessagePanel = props => {
@@ -43,7 +43,7 @@ const MessagePanel = props => {
               </Typography>)
           }
         </Box>
-        <Grid className={classes.userList} item>
+        <Grid className={classes.message__list} item>
           <MessageList messages={messages} maxHeight="84vh"/>
         </Grid>
       </Grid>

@@ -6,9 +6,9 @@ import { UserList } from "./components";
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "column" },
   item: { display: "flex", flexDirection: "column", flex: 1, width: "100%", },
-  userList: { flex: 9, },
   box: { flex: 1, padding: 20, },
-  heading: { fontFamily: "AppleSDGothicNeo-Bold", fontWeight: "bold", fontSize: 24, color: 'black' }
+  heading: { fontFamily: "AppleSDGothicNeo-Bold", fontWeight: "bold", fontSize: 24, color: 'black' },
+  user__list: { flex: 9, },
 }))
 
 const UserPanel = props => {
@@ -28,7 +28,7 @@ const UserPanel = props => {
 
           <SearchBar setFilter={(filter) => setUserFilter(filter)} />
         </Box>
-        <Grid className={classes.userList} >
+        <Grid className={classes.user__list} >
           <UserList filter={userFilter} />
         </Grid>
       </Grid>
