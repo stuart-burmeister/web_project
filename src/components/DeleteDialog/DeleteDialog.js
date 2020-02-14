@@ -1,5 +1,6 @@
 import React from "react";
 import { Dialog, DialogTitle, Button, makeStyles, Box, DialogActions } from "@material-ui/core";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex", flex: 1, alignContent: "center", justifyContent: "center" },
@@ -31,5 +32,10 @@ const DeleteDialog = props => {
     </Dialog>
   );
 };
+
+DeleteDialog.propTypes = {
+  open: PropTypes.bool,
+  onClose: PropTypes.func
+}
 
 export default DeleteDialog;

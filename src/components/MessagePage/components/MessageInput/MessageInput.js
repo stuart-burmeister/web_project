@@ -1,5 +1,6 @@
 import { Button, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   root: { display: "flex", width: "100%", height: "100%", paddingTop: 10 },
@@ -20,5 +21,9 @@ const MessageInput = props => {
     </div>
   );
 }
+
+MessageInput.propTypes = {
+  setMessage: PropTypes.func.isRequired,
+};
 
 export default MessageInput;

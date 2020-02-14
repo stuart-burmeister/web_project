@@ -1,4 +1,4 @@
-import { Box, Grid, makeStyles } from "@material-ui/core";
+import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import React, {useState} from "react";
 import { MessagePanel } from "./components/";
 import { UserPanel } from "../";
@@ -8,6 +8,8 @@ const useStyle = makeStyles(() => ({
   user__panel: { flex: 1 },
   box: { height: "100%", },
   message__panel: { flex: 2 },
+  empty__panel: {display: "flex",height:"100%", width:"100%", backgroundColor:"black", alignItems:"center", justifyContent:"center"},
+  message: {fontWeight: "bold"}
 }));
 
 const MainPage = () => {
@@ -23,8 +25,13 @@ const MainPage = () => {
       <Grid className={classes.message__panel} item>
         <Box className={classes.box} border={1} borderColor={"#979797"}>
           {
-            currentUser &&
-            <MessagePanel title messages={currentUser.messages} />
+            currentUser ?
+            <MessagePanel title messages={currentUser.messages} /> :
+            <Box className={classes.empty__panel}>
+              <Typography className={classes.message} color="primary">
+                Select an item on the left.
+              </Typography>
+            </Box>
           }
         </Box>
       </Grid>

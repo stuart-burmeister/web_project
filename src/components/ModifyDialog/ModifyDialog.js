@@ -1,5 +1,6 @@
 import { Button, Dialog, DialogActions, DialogTitle, makeStyles, TextField, Box } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex", flex: 1, alignContent: "center", justifyContent: "center" },
@@ -33,6 +34,14 @@ const ModifyDialog = props => {
       </Box>
     </Dialog>
   );
+};
+
+ModifyDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  message: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+  }),
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ModifyDialog;

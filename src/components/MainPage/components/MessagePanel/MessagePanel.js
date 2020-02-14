@@ -1,6 +1,7 @@
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { MessageList } from "../../../"
+import { MessageList } from "../../../";
+import PropTypes from "prop-types";
 
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "column" },
@@ -32,6 +33,15 @@ const MessagePanel = props => {
 
     </Grid>
   );
+};
+
+MessagePanel.propTypes ={
+  title: PropTypes.bool,
+  messages : PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  }))
 };
 
 export default MessagePanel;

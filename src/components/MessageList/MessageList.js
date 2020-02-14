@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
     borderWidth: 1,
     borderColor: "#979797"
   },
-  odd__row: { backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
+  odd__row: {backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
   even__row: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
   selected__row: { backgroundColor: "#73bbff", fontWeight: "bold", fontSize: 14 },
   oval: {

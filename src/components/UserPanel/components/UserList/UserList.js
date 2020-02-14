@@ -1,26 +1,7 @@
 import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
-import {dummyValues} from "../../../../data/DummyData"
-
-const __dummyValues = [
-  { name: "Erin", email: "friend@sis.com", messages: [] },
-  { name: "His Lordship Montgomery Ericcson Lancaster III", email: "superboy@play.co.za" },
-  { name: "peterey", email: "friend@bro.com" },
-  { name: "mooshu", email: "snooze@lazy.co.uk" },
-  { name: "noni", email: "friend@sis.com" },
-  { name: "mont", email: "superboy@play.co.za" },
-  { name: "pt", email: "friend@bro.com" },
-  { name: "noosh", email: "snooze@lazy.co.uk" },
-  { name: "nonimoo", email: "friend@sis.com" },
-  { name: "monty", email: "superboy@play.co.za" },
-  { name: "ptp", email: "friend@bro.com" },
-  { name: "skadoosh", email: "snooze@lazy.co.uk" },
-  { name: "moosey", email: "friend@sis.com" },
-  { name: "fluff", email: "superboy@play.co.za" },
-  { name: "gwa", email: "friend@bro.com" },
-  { name: "noo", email: "snooze@lazy.co.uk" },
-];
+import { dummyValues } from "../../../../data/DummyData";
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
@@ -46,7 +27,7 @@ const useStyles = makeStyles(() => ({
 const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
   const classes = useStyles();
-  const users = dummyValues.filter((entry) =>  entry.name.toLowerCase().includes(filter.toLowerCase()));
+  const users = dummyValues.filter((entry) => entry.name.toLowerCase().includes(filter.toLowerCase()));
   return (
     <div className={classes.root}>
       <TableContainer className={classes.container}>

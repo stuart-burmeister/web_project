@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 
-const NavBar = props => {
+const NavBar = () => {
   const [value, setValue] = useState(0);
   const classes = useStyles();
   const pages = [<MainPage/>,<UserPage/>, <MessagePage/>]
