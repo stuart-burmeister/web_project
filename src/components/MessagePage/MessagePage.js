@@ -34,7 +34,7 @@ const MessagePage = props => {
     <Grid className={classes.root} container spacing={3}>
       <Grid className={classes.panel} item>
         <Box className={classes.box} border={1} borderColor={"#979797"}>
-          <Box className={classes.inputPanel} borderBottom={1}>
+          <Box className={classes.input__panel} borderBottom={1}>
             <MessageInput setMessage={() => { }} />
           </Box>
           <Box className={classes.input__panel} borderBottom={1}>

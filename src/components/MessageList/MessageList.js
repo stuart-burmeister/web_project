@@ -79,10 +79,7 @@ const MessageList = props => {
                   rowStyle = classes.selected__row;
                 }
                 return (
-                  <TableRow key={"row-" + index} onClick={() => {
-                    setCurrentMessage(row);
-                    setOpenModify(true);
-                    }}>
+                  <TableRow key={"row-" + index} >
                     <TableCell className={rowStyle}>
                       <IconButton className={classes.oval} onClick={() => {
                         setCurrentMessage(row);
@@ -96,7 +93,10 @@ const MessageList = props => {
                     <TableCell className={rowStyle}>
                       {row.date}
                     </TableCell>
-                    <TableCell className={rowStyle}>
+                    <TableCell className={rowStyle} onClick={() => {
+                      setCurrentMessage(row);
+                      setOpenModify(true);
+                      }}>
                       {row.text}
                     </TableCell>
                   </TableRow>

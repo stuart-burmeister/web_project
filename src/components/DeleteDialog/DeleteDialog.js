@@ -1,7 +1,6 @@
 import React from "react";
 import { Dialog, DialogTitle, Button, makeStyles, Box, DialogActions } from "@material-ui/core";
 
-
 const useStyles = makeStyles(() => ({
   root: { display: "flex", flex: 1, alignContent: "center", justifyContent: "center" },
   container: { flexDirection: "column", width: 400, height: 150 },
