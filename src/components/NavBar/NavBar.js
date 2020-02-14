@@ -2,6 +2,7 @@ import { AppBar, Grid, makeStyles, Tab, Tabs } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React, { useState } from "react";
 import { MainPage, MessagePage, UserPage } from "../";
+import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
 
 const VerticalTabs = withStyles(theme => ({
   indicator: {
@@ -28,32 +29,48 @@ const useStyles = makeStyles(() => ({
   active__tab: { flex: 1, paddingLeft: 25, paddingTop: 25 },
 }));
 
+const linkPaths = [
+  "/main",
+  "/user",
+  "/message",
+]
 
-const NavBar = () => {
+const NavBar = props => {
+  //const {history} = props;
   const [value, setValue] = useState(0);
+  let history = useHistory();
   const classes = useStyles();
   const pages = [<MainPage/>,<UserPage/>, <MessagePage/>]
   const currentTab = pages[value];
   return (
-    <Grid container className={classes.root}>
-      <Grid item >
-        <AppBar className={classes.container} position="static">
-          <VerticalTabs
-            orientation="vertical"
-            variant="fullWidth"
-            value={value}
-            onChange={(_, newValue) => setValue(newValue)}>
-            <MenuTab className={classes.menu__item} label="Main" />
-            <MenuTab className={classes.menu__item} label="User"/>
-            <MenuTab className={classes.menu__item} label="Message"/>
-          </VerticalTabs>
-        </AppBar>
+      <Grid container className={classes.root}>
+        <Grid item >
+          <AppBar className={classes.container} position="static">
+            <VerticalTabs
+              orientation="vertical"
+              variant="fullWidth"
+              value={value}
+              onChange={(_, newValue) => history.push(linkPaths[newValue])}>
+              <MenuTab className={classes.menu__item} label="Main" />
+              <MenuTab className={classes.menu__item} label="User"/>
+              <MenuTab className={classes.menu__item} label="Message"/>
+            </VerticalTabs>
+          </AppBar>
+        </Grid>
+        <Grid item className={classes.active__tab}>
+          <Switch>
+            <Route path="/main">
+              <MainPage/>
+            </Route>
+            <Route path="/user">
+              <UserPage/>
+            </Route>
+            <Route path="/message">
+              <MessagePage/>
+            </Route>
+          </Switch>      
+        </Grid>
       </Grid>
-      <Grid item className={classes.active__tab}>
-        {currentTab}
-      </Grid>
-    </Grid>
-
   );
 }
 
