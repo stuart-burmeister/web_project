@@ -29,9 +29,10 @@ const useStyle = makeStyles(() => ({
 }))
 
 const MessagePanel = props => {
-  const { title, } = props;
+  const { title, filter } = props;
   const messages = messageDummy;
-  const classes = useStyle()
+  const classes = useStyle();
+
   return (
     <Grid className={classes.root} container>
       <Grid className={classes.item} item>

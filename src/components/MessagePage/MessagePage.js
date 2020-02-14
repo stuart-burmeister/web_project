@@ -1,5 +1,5 @@
 import { Box, Grid, makeStyles } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { MessageList, SearchBar } from "../";
 import { MessageInput } from "./components";
 
@@ -28,8 +28,10 @@ const useStyle = makeStyles(() => ({
   input__panel: { flex: 1, padding: 20, color: "#979797" },
 }))
 
-const MessagePage = props => {
+const MessagePage = () => {
   const classes = useStyle();
+  const [filter, setFilter] = useState("");
+  const messages = messageDummy.filter((entry) => entry.text.toLowerCase().includes(filter.toLowerCase()));
   return (
     <Grid className={classes.root} container spacing={3}>
       <Grid className={classes.panel} item>
@@ -38,10 +40,10 @@ const MessagePage = props => {
             <MessageInput setMessage={() => { }} />
           </Box>
           <Box className={classes.input__panel} borderBottom={1}>
-            <SearchBar setFilter={() => { }} />
+            <SearchBar setFilter={(newFilter) => setFilter(newFilter)} />
           </Box>
           <Box>
-            <MessageList messages={messageDummy} maxHeight="67vh" />
+            <MessageList messages={messages} maxHeight="67vh" />
           </Box>
         </Box>
       </Grid>
