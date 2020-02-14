@@ -1,11 +1,12 @@
 import { IconButton, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import PropTypes from "prop-types";
 import React from "react";
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
   container: { maxHeight: props => props.maxHeight },
   icon: {
-    width:20,
+    width: 20,
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "#979797"
@@ -26,12 +27,12 @@ const useStyles = makeStyles(() => ({
   odd__row: { backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
   even__row: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
   oval: {
-    display:"flex",
-    flexDirection:"column",
+    display: "flex",
+    flexDirection: "column",
     width: "16px",
     height: "16px",
     backgroundColor: "#979797",
-    fontSize:14,
+    fontSize: 14,
     color: "white",
   },
 }));
@@ -59,7 +60,7 @@ const MessageList = props => {
               messages.map((row, index) => {
                 const rowStyle = index % 2 ? classes.even__row : classes.odd__row;
                 return (
-                  <TableRow key={"row-"+index}>
+                  <TableRow key={"row-" + index}>
                     <TableCell className={rowStyle}>
                       <IconButton className={classes.oval} >
                         <div >
@@ -82,6 +83,16 @@ const MessageList = props => {
       </TableContainer>
     </div>
   );
+};
+
+MessageList.propTypes = {
+  messages: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    user: PropTypes.any,
+  })),
+  maxHeight: PropTypes.string,
 };
 
 export default MessageList;

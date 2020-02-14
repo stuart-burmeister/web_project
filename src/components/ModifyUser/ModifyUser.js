@@ -1,7 +1,8 @@
 import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { DeleteDialog } from "../"
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 
 const useStyles = makeStyles(() => ({
   root: { height: "100%", position: "relative" },
@@ -15,6 +16,7 @@ const useStyles = makeStyles(() => ({
 
 const ModifyUser = props => {
   const { name, email, onChangeName, onChangeEmail, onCancel } = props;
+  const [openDialog, setOpenDialog] = useState(false);
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -66,7 +68,7 @@ const ModifyUser = props => {
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.cancel__button}>
+          <Button variant="contained" fullWidth className={classes.cancel__button} onClick={() => setOpenDialog(true)}>
             Delete
           </Button>
         </Grid>
@@ -76,6 +78,7 @@ const ModifyUser = props => {
           </Button>
         </Grid>
       </Grid>
+      <DeleteDialog open={openDialog} onClose={() => setOpenDialog(false)} />
     </div>
   );
 }

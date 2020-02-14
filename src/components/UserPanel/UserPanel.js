@@ -43,6 +43,6 @@ UserPanel.propTypes = {
     name: PropTypes.string,
   }),
   onSelect: PropTypes.func.isRequired,
-}
+};
 
 export default UserPanel;

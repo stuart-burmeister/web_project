@@ -8,3 +8,4 @@ export { default as SignIn } from "./SignIn";
 export { default as SignUp } from "./SignUp";
 export { default as UserPage } from "./UserPage";
 export { default as UserPanel } from "./UserPanel";
+export { default as DeleteDialog } from "./DeleteDialog";
