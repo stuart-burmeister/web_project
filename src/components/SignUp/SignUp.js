@@ -9,7 +9,6 @@ const useStyles = makeStyles(() => ({
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
   input: { width: "100%", fontSize: 14, },
   button: { color: "#ffffff", fontSize: 14 },
-  link: { alignSelf: "left", fontSize: 14 }
 }));
 
 const SignUp = () => {

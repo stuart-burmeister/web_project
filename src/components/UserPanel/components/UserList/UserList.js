@@ -1,8 +1,9 @@
 import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import PropTypes from "prop-types";
 import React from "react";
 
 const dummyValues = [
-  { name: "erin", email: "friend@sis.com", messages: []},
+  { name: "erin", email: "friend@sis.com", messages: [] },
   { name: "His Lordship Montgomery Ericcson Lancaster III", email: "superboy@play.co.za" },
   { name: "peterey", email: "friend@bro.com" },
   { name: "mooshu", email: "snooze@lazy.co.uk" },
@@ -44,7 +45,7 @@ const useStyles = makeStyles(() => ({
 const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
   const classes = useStyles();
-  const users = dummyValues;
+  const users = dummyValues.filter((entry) => entry.name.includes(filter));
   return (
     <div className={classes.root}>
       <TableContainer className={classes.container}>
@@ -64,11 +65,16 @@ const UserList = props => {
               users.map((row, index) => {
                 var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
                 const isRowSelected = selectedUser && row.name === selectedUser.name;
-                if (isRowSelected){
+                if (isRowSelected) {
                   rowStyle = classes.selected__row;
                 }
+
+                if (!row.name.includes(filter)) {
+                  return null;
+                }
+
                 return (
-                  <TableRow key={"row-"+index} selected={isRowSelected} hover onClick={() => onSelect(row)}>
+                  <TableRow key={"row-" + index} selected={isRowSelected} hover onClick={() => onSelect(row)}>
                     <TableCell className={rowStyle}>
                       {row.email}
                     </TableCell>
@@ -85,5 +91,14 @@ const UserList = props => {
     </div>
   );
 };
+
+UserList.propTypes = {
+  filter: PropTypes.string,
+  selectedUser: PropTypes.shape({
+    email: PropTypes.string,
+    name: PropTypes.string,
+  }),
+  onSelect: PropTypes.func.isRequired
+}
 
 export default UserList;

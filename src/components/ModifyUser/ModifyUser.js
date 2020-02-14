@@ -1,6 +1,7 @@
 import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import React, { useState } from "react";
+import PropTypes from "prop-types";
+import React from "react";
 
 const useStyles = makeStyles(() => ({
   root: { height: "100%", position: "relative" },
@@ -14,8 +15,6 @@ const useStyles = makeStyles(() => ({
 
 const ModifyUser = props => {
   const { name, email, onChangeName, onChangeEmail, onCancel } = props;
-
-
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -79,6 +78,14 @@ const ModifyUser = props => {
       </Grid>
     </div>
   );
+}
+
+ModifyUser.propTypes = {
+  name: PropTypes.string,
+  email: PropTypes.string,
+  onChangeName: PropTypes.func.isRequired,
+  onChangeEmail: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 }
 
 export default ModifyUser;

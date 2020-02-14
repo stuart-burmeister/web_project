@@ -1,4 +1,5 @@
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { SearchBar } from "../";
 import { UserList } from "./components";
@@ -12,7 +13,7 @@ const useStyle = makeStyles(() => ({
 }))
 
 const UserPanel = props => {
-  const { title, selectedUser, onSelect} = props;
+  const { title, selectedUser, onSelect } = props;
   const [userFilter, setUserFilter] = useState("");
   const classes = useStyle();
   return (
@@ -33,6 +34,15 @@ const UserPanel = props => {
       </Grid>
     </Grid>
   );
+}
+
+UserPanel.propTypes = {
+  title: PropTypes.bool,
+  selectedUser: PropTypes.shape({
+    email: PropTypes.string,
+    name: PropTypes.string,
+  }),
+  onSelect: PropTypes.func.isRequired,
 }
 
 export default UserPanel;
