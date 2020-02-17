@@ -12,9 +12,22 @@ const useStyles = makeStyles(() => ({
   button: { color: "#ffffff", fontSize: 14 },
   link: { alignSelf: "left", fontSize: 14 }
 }));
-
 const SignIn = props => {
   const { onSignIn, onSignUp } = props;
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const signInAccount = () => {
+    const user = { mail: mail, password: password };
+    var didSucceed = true;
+    //didSucceed = trySignIn(user);
+    if(didSucceed)
+    {
+      sessionStorage.setItem('isSignedIn', true);
+      onSignIn();
+    }
+  };
+
   const classes = useStyles();
   return (
     <Box className={classes.root}>
@@ -29,7 +42,8 @@ const SignIn = props => {
             <TextField className={classes.input}
               variant="outlined"
               label="EMAIL"
-              InputLabelProps={{ shrink: true, className: classes.input }} />
+              InputLabelProps={{ shrink: true, className: classes.input }} 
+              onChange={(event) => setMail(event.target.value)}/>
           </form>
         </Grid>
         <Grid item className={classes.item}>
@@ -37,11 +51,12 @@ const SignIn = props => {
             <TextField variant="outlined" className={classes.input}
               label="PASSWORD"
               InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password" />
+              type="password" 
+              onChange={(event) => setPassword(event.target.value)}/>
           </form>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="primary" onClick={() => onSignIn()}>
+          <Button variant="contained" fullWidth className={classes.button} color="primary" onClick={() => signInAccount()}>
             Sign In
           </Button>
         </Grid>
