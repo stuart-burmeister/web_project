@@ -1,7 +1,19 @@
+import { useQuery } from "@apollo/react-hooks";
 import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React from "react";
 import { dummyValues } from "../../../../data/DummyData";
+
+const SEARCH_USERS = gql`
+
+  query searchUser($username: String, $email: String){
+    searchUser(args: {username: $username, email: $email}){
+      username
+      email
+    }
+  }
+`;
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
@@ -27,6 +39,15 @@ const useStyles = makeStyles(() => ({
 const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
   const classes = useStyles();
+
+  const { data, loading, error } = useQuery(SEARCH_USERS);
+  if (loading) console.log("load");
+  if (error) console.log(error);
+  if (!data) console.log("no data..");
+  else{
+    console.log(data);
+  }
+
   const users = dummyValues.filter((entry) => entry.name.toLowerCase().includes(filter.toLowerCase()));
   return (
     <div className={classes.root}>

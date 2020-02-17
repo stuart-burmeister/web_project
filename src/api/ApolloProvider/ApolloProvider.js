@@ -13,18 +13,34 @@ const ApolloProvider = props => {
     uri: "https://hn66xh54q0.execute-api.ap-northeast-2.amazonaws.com/dev0-vsmart00/api"
   });
 
+  const linkAlt = ApolloLink.from([
+    onError(({ graphQLErrors, networkError }) => {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message, locations, path }) =>
+          console.warn(
+            `GraphQLError: Message: ${message}, Location: ${locations}, Path: ${path}`
+          )
+        );
+      }
+      if (networkError) {
+        console.warn(`NetworkError: ${networkError}`);
+      }
+    }),
+    new ApolloLink((operation, forward) => {
+      console.info(operation);
+      return forward(operation);
+    }),
+    new createUploadLink({
+      uri: process.env.REACT_APP_CF_GRAPHQL_URL,
+      headers: {
+        "keep-alive": "true"
+      }
+    })
+  ]);
+
   const client = new ApolloClient({
     cache: cache,
     link: link,
-    typeDefs: getTypedefs(),
-    defaultOptions: {
-      query: {
-        fetchPolicy: "network-only"
-      },
-      watchQuery: {
-        fetchPolicy: "network-only"
-      }
-    }
   });
   return <Provider client={client}>{props.children}</Provider>;
 };
