@@ -1,5 +1,6 @@
 import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import PropTypes from "prop-types";
 import React from "react";
 
 const useStyles = makeStyles(() => ({
@@ -55,18 +56,23 @@ const SignUp = props => {
           </form>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="primary">
+          <Button variant="contained" fullWidth className={classes.button} color="primary" onClick={() => onSignUp()}>
             Sign Up
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} style={{ backgroundColor: "#c8c8c8" }}>
+          <Button variant="contained" fullWidth className={classes.button} color="#c8c8c8" onClick={() => onCancel()}>
             Cancel
           </Button>
         </Grid>
       </Grid>
     </div>
   );
+}
+
+SignUp.propTypes = {
+  onSignUp: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 }
 
 export default SignUp;

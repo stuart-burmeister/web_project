@@ -1,9 +1,9 @@
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from "@material-ui/styles";
 import React from 'react';
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import { theme } from "./themes";
-import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
-import { NavView } from "./views"
+import { NavView, SignInView } from "./views";
 
 function App() {
 
@@ -11,6 +11,8 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={createMuiTheme(theme)}>
+        <Route exact path="/" render={() => <Redirect to="/signin" />} />
+        <SignInView />
         <NavView />
       </ThemeProvider>
     </Router>

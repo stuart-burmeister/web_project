@@ -1,5 +1,6 @@
 import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import PropTypes from "prop-types";
 import React from "react";
 
 const useStyles = makeStyles(() => ({
@@ -12,7 +13,8 @@ const useStyles = makeStyles(() => ({
   link: { alignSelf: "left", fontSize: 14 }
 }));
 
-const SignIn = () => {
+const SignIn = props => {
+  const { onSignIn, onSignUp } = props;
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -39,18 +41,23 @@ const SignIn = () => {
           </form>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="primary">
+          <Button variant="contained" fullWidth className={classes.button} color="primary" onClick={() => onSignIn()}>
             Sign In
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button className={classes.link}>
+          <Button className={classes.link} onClick={() => onSignUp()}>
             Sign up
           </Button>
         </Grid>
       </Grid>
     </div>
   );
+}
+
+SignIn.propTypes = {
+  onSignIn: PropTypes.func.isRequired,
+  onSignUp: PropTypes.func.isRequired,
 }
 
 export default SignIn;

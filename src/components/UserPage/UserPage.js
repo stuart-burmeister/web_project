@@ -1,6 +1,6 @@
+import { Box, Grid, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
-import { Grid, Box, makeStyles } from "@material-ui/core";
-import { SignUp, UserPanel, ModifyUser } from "../";
+import { ModifyUser, SignUp, UserPanel } from "../";
 
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "row" },
@@ -15,18 +15,18 @@ const UserPage = () => {
   const [currentEmail, setCurrentEmail] = useState("");
   const classes = useStyle();
 
-  const changeUser = (newUser) =>{
+  const changeUser = (newUser) => {
     setSelectedUser(newUser);
     setCurrentName(newUser.name);
     setCurrentEmail(newUser.email);
   };
 
-  var inputClass = (<SignUp/>);
-  if (selectedUser !== null){
+  var inputClass = (<SignUp onCancel={() => { }} onSignUp={() => { }} />);
+  if (selectedUser !== null) {
     inputClass = <ModifyUser name={currentName} email={currentEmail}
       onChangeName={(newName) => setCurrentName(newName)}
       onChangeEmail={(newEmail) => setCurrentEmail(newEmail)}
-      onCancel={() => setSelectedUser(null)}/>
+      onCancel={() => setSelectedUser(null)} />
   }
 
   return (
@@ -38,8 +38,9 @@ const UserPage = () => {
       </Grid>
       <Grid className={classes.user__panel} item>
         <Box className={classes.box} border={1} borderColor={"#979797"}>
-          <UserPanel title selectedUser={selectedUser}
-          onSelect={(user) => changeUser(user)} />
+          <UserPanel title
+            selectedUser={selectedUser}
+            onSelect={(user) => changeUser(user)} />
         </Box>
       </Grid>
     </Grid>
