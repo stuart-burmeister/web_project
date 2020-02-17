@@ -1,31 +1,48 @@
-import { Button, Grid, TextField, Typography, Box } from "@material-ui/core";
+import { useMutation } from "@apollo/react-hooks";
+import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import gql from "graphql-tag";
 import PropTypes from "prop-types";
-import React, {useState} from "react";
+import React, { useState } from "react";
+
+
+export const SIGNIN_USER = gql`
+  mutation signIn($email: String!, $password: String!) {
+    signIn(email: $email, password: $password)
+  }
+`;
 
 const useStyles = makeStyles(() => ({
-  root: { display:"flex", flex:1, height:"100%", position: "relative",},
-  container: { flexDirection: "column", flex:1, alignItems: "center", justifyContent: "center",},
+  root: { display: "flex", flex: 1, height: "100%", position: "relative", },
+  container: { flexDirection: "column", flex: 1, alignItems: "center", justifyContent: "center", },
   item: { width: 380, },
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
   input: { width: "100%", fontSize: 14 },
   button: { color: "#ffffff", fontSize: 14 },
   link: { alignSelf: "left", fontSize: 14 }
 }));
+
 const SignIn = props => {
   const { onSignIn, onSignUp } = props;
-  const [mail, setMail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signInAccount = () => {
-    const user = { mail: mail, password: password };
-    var didSucceed = true;
-    //didSucceed = trySignIn(user);
-    if(didSucceed)
+  const [signin, { loading, error }] = useMutation(
+    SIGNIN_USER,
     {
-      sessionStorage.setItem('isSignedIn', true);
-      onSignIn();
+      onCompleted(complete) {
+        sessionStorage.setItem('isSignedIn', true)
+        onSignIn();
+      },
+      onError(error){
+        // handle error
+      }
     }
+  );
+
+  const signInAccount = () => {
+    const user = { email: email, password: password };
+    signin({ variables: user });
   };
 
   const classes = useStyles();
@@ -42,8 +59,8 @@ const SignIn = props => {
             <TextField className={classes.input}
               variant="outlined"
               label="EMAIL"
-              InputLabelProps={{ shrink: true, className: classes.input }} 
-              onChange={(event) => setMail(event.target.value)}/>
+              InputLabelProps={{ shrink: true, className: classes.input }}
+              onChange={(event) => setEmail(event.target.value)} />
           </form>
         </Grid>
         <Grid item className={classes.item}>
@@ -51,8 +68,8 @@ const SignIn = props => {
             <TextField variant="outlined" className={classes.input}
               label="PASSWORD"
               InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password" 
-              onChange={(event) => setPassword(event.target.value)}/>
+              type="password"
+              onChange={(event) => setPassword(event.target.value)} />
           </form>
         </Grid>
         <Grid item className={classes.item}>
