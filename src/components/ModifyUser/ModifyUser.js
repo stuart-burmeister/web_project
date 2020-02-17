@@ -1,12 +1,12 @@
-import { Button, Grid, TextField, Typography } from "@material-ui/core";
+import { Button, Grid, TextField, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { DeleteDialog } from "../"
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 
 const useStyles = makeStyles(() => ({
-  root: { height: "100%", position: "relative" },
-  container: { flexDirection: "column", height: "100%", alignItems: "center", justifyContent: "center" },
+  root: { display:"flex", flex:1, height:"100%", position: "relative",},
+  container: { flexDirection: "column", flex:1, alignItems: "center", justifyContent: "center",},
   item: { width: 380, },
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
   input: { width: "100%", fontSize: 14, },
@@ -19,7 +19,7 @@ const ModifyUser = props => {
   const [openDialog, setOpenDialog] = useState(false);
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <Grid className={classes.container} container direction="column" spacing={2}>
         <Grid item className={classes.item}>
           <Typography className={classes.header}>
@@ -79,7 +79,7 @@ const ModifyUser = props => {
         </Grid>
       </Grid>
       <DeleteDialog open={openDialog} onClose={() => setOpenDialog(false)} />
-    </div>
+    </Box>
   );
 }
 

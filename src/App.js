@@ -6,8 +6,6 @@ import { theme } from "./themes";
 import { NavView, SignInView } from "./views";
 
 function App() {
-
-  //let history = useHistory("/main");
   return (
     <Router>
       <ThemeProvider theme={createMuiTheme(theme)}>
@@ -17,6 +15,6 @@ function App() {
       </ThemeProvider>
     </Router>
   );
-}
+};
 
 export default App;

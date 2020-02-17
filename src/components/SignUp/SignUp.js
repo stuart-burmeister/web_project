@@ -1,11 +1,11 @@
-import { Button, Grid, TextField, Typography } from "@material-ui/core";
+import { Button, Grid, TextField, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 import React from "react";
 
 const useStyles = makeStyles(() => ({
-  root: { height: "100%", position: "relative" },
-  container: { flexDirection: "column", height: "100%", alignItems: "center", justifyContent: "center" },
+  root: { display:"flex", flex:1, height:"100%", position: "relative",},
+  container: { flex:1, flexDirection: "column", alignItems: "center", justifyContent: "center",},
   item: { width: 380, },
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
   input: { width: "100%", fontSize: 14, },
@@ -16,7 +16,7 @@ const SignUp = props => {
   const { onSignUp, onCancel } = props;
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <Grid className={classes.container} container direction="column" spacing={2}>
         <Grid item className={classes.item}>
           <Typography className={classes.header}>
@@ -56,17 +56,19 @@ const SignUp = props => {
           </form>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="primary" onClick={() => onSignUp()}>
+          <Button variant="contained" fullWidth className={classes.button}
+            color="primary" onClick={() => onSignUp()}>
             Sign Up
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="#c8c8c8" onClick={() => onCancel()}>
+          <Button variant="contained" fullWidth className={classes.button}
+            color="#c8c8c8" onClick={() => onCancel()}>
             Cancel
           </Button>
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 }
 

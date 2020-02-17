@@ -5,7 +5,7 @@ import { ModifyUser, SignUp, UserPanel } from "../";
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "row" },
   input__panel: { flex: 1 },
-  box: { height: "100%", },
+  box: { height: "100%",},
   user__panel: { flex: 2 },
 }));
 
