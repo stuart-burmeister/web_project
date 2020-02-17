@@ -15,6 +15,21 @@ const useStyles = makeStyles(() => ({
 const SignUp = props => {
   const { onSignUp, onCancel } = props;
   const classes = useStyles();
+
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  
+  const signUpUser = () => {
+    const user = {name: name, email: email, password: password};
+    if (password === confirm){
+      sessionStorage.setItem("currentUser", user);
+      sessionStorage.setItem('isSignedIn', true)
+      onSignUp()
+    }
+  }
+
   return (
     <Box className={classes.root}>
       <Grid className={classes.container} container direction="column" spacing={2}>
@@ -28,7 +43,8 @@ const SignUp = props => {
             <TextField className={classes.input}
               variant="outlined"
               label="EMAIL"
-              InputLabelProps={{ shrink: true, className: classes.input }} />
+              InputLabelProps={{ shrink: true, className: classes.input }} 
+              onChange={(event) => setEmail(event.target.value)}/>
           </form>
         </Grid>
         <Grid item className={classes.item}>
@@ -36,7 +52,8 @@ const SignUp = props => {
             <TextField className={classes.input}
               variant="outlined"
               label="NAME"
-              InputLabelProps={{ shrink: true, className: classes.input }} />
+              InputLabelProps={{ shrink: true, className: classes.input }}
+              onChange={(event) => setName(event.target.value)}/>
           </form>
         </Grid>
         <Grid item className={classes.item}>
@@ -44,7 +61,8 @@ const SignUp = props => {
             <TextField variant="outlined" className={classes.input}
               label="PASSWORD"
               InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password" />
+              type="password" 
+              onChange={(event) => setPassword(event.target.value)}/>
           </form>
         </Grid>
         <Grid item className={classes.item}>
@@ -52,12 +70,13 @@ const SignUp = props => {
             <TextField variant="outlined" className={classes.input}
               label="PASSWORD CONFIRM"
               InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password" />
+              type="password"
+              onChange={(event) => setConfirm(event.target.value)}/>
           </form>
         </Grid>
         <Grid item className={classes.item}>
           <Button variant="contained" fullWidth className={classes.button}
-            color="primary" onClick={() => onSignUp()}>
+            color="primary" onClick={() => signUpUser()}>
             Sign Up
           </Button>
         </Grid>
