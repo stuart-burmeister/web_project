@@ -5,10 +5,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import { dummyValues } from "../../../../data/DummyData";
 
-const SEARCH_USERS = gql`
-
-  query searchUser($username: String, $email: String){
-    searchUser(args: {username: $username, email: $email}){
+const SEARCH_USER = gql`
+  query searchUser($username: String, $email: String) {
+    searchUser(args: { username: $username, email: $email }) {
       username
       email
     }
@@ -40,7 +39,14 @@ const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
   const classes = useStyles();
 
-  const { data, loading, error } = useQuery(SEARCH_USERS);
+  const { data, loading, error } = useQuery(SEARCH_USER, {
+    onCompleted: data => {},
+    onError: err => {
+      alert(err);
+    },
+    fetchPolicy: "network-only"
+  });
+
   if (loading) console.log("load");
   if (error) console.log(error);
   if (!data) console.log("no data..");

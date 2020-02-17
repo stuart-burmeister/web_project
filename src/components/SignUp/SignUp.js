@@ -2,6 +2,14 @@ import { Button, Grid, TextField, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
+import gql from "graphql-tag";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+
+export const SIGNUP_USER = gql`
+  mutation signUp($email: String!, $username: String!, $password: String!) {
+    signUp(email: $email, username: $username, password: $password)
+  }
+`;
 
 const useStyles = makeStyles(() => ({
   root: { display:"flex", flex:1, height:"100%", position: "relative",},
@@ -9,12 +17,23 @@ const useStyles = makeStyles(() => ({
   item: { width: 380, },
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
   input: { width: "100%", fontSize: 14, },
-  button: { color: "#ffffff", fontSize: 14 },
+  button: { color: "#ffffff", fontSize: 14, },
 }));
 
 const SignUp = props => {
   const { onSignUp, onCancel } = props;
   const classes = useStyles();
+
+  const [login, { loading, error }] = useMutation(
+    SIGNUP_USER,
+    {
+      onCompleted({ login }) {
+        //localStorage.setItem('token', login);
+        //client.writeData({ data: { isLoggedIn: true } });
+        sessionStorage.setItem('isSignedIn', true)
+      }
+    }
+  );
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -22,11 +41,15 @@ const SignUp = props => {
   const [confirm, setConfirm] = useState("");
   
   const signUpUser = () => {
-    const user = {name: name, email: email, password: password};
+    const user = {username: name, email: email, password: password};
     if (password === confirm){
       sessionStorage.setItem("currentUser", user);
       sessionStorage.setItem('isSignedIn', true)
-      onSignUp()
+      login({variables: user});
+      //onSignUp()
+    }
+    else{
+      console.log("passwords dont match")
     }
   }
 
@@ -82,7 +105,7 @@ const SignUp = props => {
         </Grid>
         <Grid item className={classes.item}>
           <Button variant="contained" fullWidth className={classes.button}
-            color="#c8c8c8" onClick={() => onCancel()}>
+            onClick={() => onCancel()}>
             Cancel
           </Button>
         </Grid>
