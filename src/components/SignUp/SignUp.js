@@ -11,7 +11,8 @@ const useStyles = makeStyles(() => ({
   button: { color: "#ffffff", fontSize: 14 },
 }));
 
-const SignUp = () => {
+const SignUp = props => {
+  const { onSignUp, onCancel } = props;
   const classes = useStyles();
   return (
     <div className={classes.root}>
