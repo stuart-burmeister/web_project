@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
     borderColor: "#979797"
   },
   header__date: {
-    maxWidth: 250,
+    width:"30%",
     fontWeight: "bold",
     backgroundColor: "white",
     borderWidth: 1,
@@ -48,12 +48,12 @@ const useStyles = makeStyles(() => ({
 }));
 
 const MessageList = props => {
-  const { messages } = props;
+  const { messages, email } = props;
   const classes = useStyles(props);
   const [currentMessage, setCurrentMessage] = useState({ id: "", text: "", user: undefined });
   const [openDelete, setOpenDelete] = useState(false);
   const [openModify, setOpenModify] = useState(false);
-  const email = sessionStorage.getItem("currentUser");
+  //const email = sessionStorage.getItem("currentUser");
 
   const [deleteMessage] = useMutation(
     DELETE_MESSSAGE,

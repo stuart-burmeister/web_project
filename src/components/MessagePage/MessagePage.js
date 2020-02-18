@@ -77,7 +77,7 @@ const MessagePage = () => {
             <SearchBar setFilter={(newFilter) => setFilter(newFilter)} />
           </Box>
           <Box>
-            <MessageList messages={messages} maxHeight="67vh" />
+            <MessageList messages={messages} email={email} maxHeight="67vh" />
           </Box>
         </Box>
       </Grid>
