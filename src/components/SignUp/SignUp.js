@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { SEARCH_USER } from "../";
 
 export const SIGNUP_USER = gql`
   mutation signUp($email: String!, $username: String!, $password: String!) {
@@ -28,9 +29,13 @@ const SignUp = props => {
     SIGNUP_USER,
     {
       onCompleted(complete) {
-        sessionStorage.setItem('isSignedIn', true)
         onSignUp();
-      }
+        setEmail("");
+        setName("");
+        setPassword("");
+        setConfirm("");
+      },
+      refetchQueries: [{ query: SEARCH_USER },],
     }
   );
 
@@ -42,8 +47,6 @@ const SignUp = props => {
   const signUpUser = () => {
     const user = { username: name, email: email, password: password };
     if (password === confirm) {
-      sessionStorage.setItem("currentUser", user);
-      sessionStorage.setItem('isSignedIn', true)
       signUp({ variables: user });
     }
     else {
@@ -63,6 +66,7 @@ const SignUp = props => {
             <TextField className={classes.input}
               variant="outlined"
               label="EMAIL"
+              value={email}
               InputLabelProps={{ shrink: true, className: classes.input }}
               onChange={(event) => setEmail(event.target.value)} />
           </form>
@@ -72,6 +76,7 @@ const SignUp = props => {
             <TextField className={classes.input}
               variant="outlined"
               label="NAME"
+              value={name}
               InputLabelProps={{ shrink: true, className: classes.input }}
               onChange={(event) => setName(event.target.value)} />
           </form>
@@ -80,6 +85,7 @@ const SignUp = props => {
           <form>
             <TextField variant="outlined" className={classes.input}
               label="PASSWORD"
+              value={password}
               InputLabelProps={{ shrink: true, className: classes.input }}
               type="password"
               onChange={(event) => setPassword(event.target.value)} />
@@ -89,6 +95,7 @@ const SignUp = props => {
           <form>
             <TextField variant="outlined" className={classes.input}
               label="PASSWORD CONFIRM"
+              value={confirm}
               InputLabelProps={{ shrink: true, className: classes.input }}
               type="password"
               onChange={(event) => setConfirm(event.target.value)} />
@@ -102,7 +109,7 @@ const SignUp = props => {
         </Grid>
         <Grid item className={classes.item}>
           <Button variant="contained" fullWidth className={classes.button}
-            onClick={() => onCancel()} color="secondary" disabled ={loading}>
+            onClick={() => onCancel()} color="secondary" disabled={loading}>
             Cancel
           </Button>
         </Grid>

@@ -39,15 +39,13 @@ const UserList = props => {
   const classes = useStyles();
   const { data, loading, error } = useQuery(SEARCH_USER, {
     onCompleted: data => { 
-      console.log("fetch")
     },
     onError: err => {
       alert(err);
     },
   });
 
-  //const users = dummyValues.filter((entry) => entry.name.toLowerCase().includes(filter.toLowerCase()));
-  const users = data ? data.searchUser : [];
+  const users = data ? data.searchUser.filter((entry) => entry.username.toLowerCase().includes(filter.toLowerCase())) : [];
 
   return (
     <Box className={classes.root}>
@@ -77,7 +75,7 @@ const UserList = props => {
                       {row.email}
                     </TableCell>
                     <TableCell className={rowStyle}>
-                      {row.name}
+                      {row.username}
                     </TableCell>
                   </TableRow>
                 )
