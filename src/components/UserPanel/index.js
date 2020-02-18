@@ -1,1 +1,2 @@
-export { default } from "./UserPanel"
+export { default } from "./UserPanel";
+export {SEARCH_USERS} from "./components"

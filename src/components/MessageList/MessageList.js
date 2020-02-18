@@ -1,10 +1,23 @@
-import { IconButton, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import { useMutation } from "@apollo/react-hooks";
+import { Box, IconButton, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { DeleteDialog, ModifyDialog } from "..";
+import { ADD_NEW_MESSAGE, DeleteDialog, GET_USER_MESSAGES, ModifyDialog } from "..";
+
+const DELETE_MESSSAGE = gql`
+  mutation deleteMessage($id: ID!) {
+    removeMessage(id: $id)
+  }
+`;
 
 const useStyles = makeStyles(() => ({
-  root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
+  root: {
+    display: "flex",
+    height: "100%",
+    width: "100%",
+    flexDirection: "column",
+  },
   container: { maxHeight: props => props.maxHeight },
   icon: {
     width: 20,
@@ -13,7 +26,7 @@ const useStyles = makeStyles(() => ({
     borderColor: "#979797"
   },
   header__date: {
-    maxWidth: 250,
+    width: "30%",
     fontWeight: "bold",
     backgroundColor: "white",
     borderWidth: 1,
@@ -25,9 +38,21 @@ const useStyles = makeStyles(() => ({
     borderWidth: 1,
     borderColor: "#979797"
   },
-  odd__row: {backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
-  even__row: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
-  selected__row: { backgroundColor: "#73bbff", fontWeight: "bold", fontSize: 14 },
+  odd__row: {
+    backgroundColor: "white",
+    fontWeight: "bold",
+    fontSize: 14
+  },
+  even__row: {
+    backgroundColor: "#979797",
+    fontWeight: "bold",
+    fontSize: 14
+  },
+  selected__row: {
+    backgroundColor: "#73bbff",
+    fontWeight: "bold",
+    fontSize: 14
+  },
   oval: {
     display: "flex",
     flexDirection: "column",
@@ -40,24 +65,64 @@ const useStyles = makeStyles(() => ({
 }));
 
 const MessageList = props => {
-  const { messages } = props;
+  const { messages, email } = props;
+
   const classes = useStyles(props);
-  const [currentMessage, setCurrentMessage] = useState({id:0,text:""});
+  
+  const [currentMessage, setCurrentMessage] = useState({ id: "", text: "", user: undefined });
   const [openDelete, setOpenDelete] = useState(false);
   const [openModify, setOpenModify] = useState(false);
 
-  const onDelete = () => {
+  const [deleteMessage] = useMutation(
+    DELETE_MESSSAGE,
+    {
+      onCompleted(complete) {
+        setOpenDelete(false);
+        setOpenModify(false);
+        setCurrentMessage({ id: "", text: "", user: undefined });
+      },
+      onError(error) {
+        alert("Error when deleting: " + error.message);
+      },
+      refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } },],
+    }
+  );
+
+  const [createMessage] = useMutation(
+    ADD_NEW_MESSAGE,
+    {
+      onCompleted(complete) {
+      },
+      onError(error) {
+        alert("Error when modifying: " + error.message);
+      },
+      refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } },],
+    }
+  )
+
+  const onDelete = (shouldDelete) => {
+    if (shouldDelete) {
+      deleteMessage({ variables: { id: currentMessage.id } });
+    } else {
+      setCurrentMessage({ id: "", text: "", user: undefined });
+    }
     setOpenDelete(false);
-    setCurrentMessage({id:0,text:""});
   };
 
-  const onModify = (newText) => {
+  const onModify = (shouldModify, newText) => {
+    if (shouldModify) {
+      deleteMessage({ variables: { id: currentMessage.id } }).then(() => {
+        createMessage({ variables: { user: email, text: newText } });
+      })
+    }
+    else {
+      setCurrentMessage({ id: "", text: "", user: undefined });
+    }
     setOpenModify(false);
-    setCurrentMessage({id:0,text:""});
   }
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader>
           <TableHead >
@@ -75,7 +140,7 @@ const MessageList = props => {
             {
               messages.map((row, index) => {
                 var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
-                if (currentMessage && currentMessage.id === row.id){
+                if (currentMessage && currentMessage.id === row.id) {
                   rowStyle = classes.selected__row;
                 }
                 return (
@@ -85,18 +150,18 @@ const MessageList = props => {
                         setCurrentMessage(row);
                         setOpenDelete(true);
                       }} >
-                        <div >
+                        <Box >
                           X
-                        </div>
+                        </Box>
                       </IconButton>
                     </TableCell>
                     <TableCell className={rowStyle}>
-                      {row.date}
+                      {FORMAT_DATE(row.date)}
                     </TableCell>
                     <TableCell className={rowStyle} onClick={() => {
                       setCurrentMessage(row);
                       setOpenModify(true);
-                      }}>
+                    }}>
                       {row.text}
                     </TableCell>
                   </TableRow>
@@ -106,19 +171,28 @@ const MessageList = props => {
           </TableBody>
         </Table>
       </TableContainer>
-      <ModifyDialog open={openModify} onClose={(newText) => onModify(newText)} message={currentMessage}/>
-      <DeleteDialog open={openDelete} onClose={() => onDelete()} />
-    </div>
+      <ModifyDialog open={openModify} onClose={(shouldModify, newText) => onModify(shouldModify, newText)} message={currentMessage} />
+      <DeleteDialog open={openDelete} onClose={(shouldDelete) => onDelete(shouldDelete)} />
+    </Box>
   );
+};
+
+const FORMAT_DATE = (date) => {
+  var formattedDate = new Date(date)
+  const year = formattedDate.getFullYear();
+  const month = formattedDate.getMonth() + 1;
+  const day = formattedDate.getDate();
+  return (year + "/" + ((month < 10) ? ("0" + month) : month) + "/" + ((day < 10) ? ("0" + day) : day));
 };
 
 MessageList.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.any.isRequired,
     text: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     user: PropTypes.any,
   })),
+  email: PropTypes.string.isRequired,
   maxHeight: PropTypes.string,
 };
 

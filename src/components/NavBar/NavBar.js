@@ -29,14 +29,13 @@ const useStyles = makeStyles(() => ({
   active__tab: { flex: 1, paddingLeft: 25, paddingTop: 25 },
 }));
 
-const linkPaths = [
-  "/main",
-  "/user",
-  "/message",
-]
-
 const NavBar = props => {
   const { children, tabIndex } = props;
+  const linkPaths = [
+    "/main",
+    "/user",
+    "/message",
+  ]
   let history = useHistory();
   const classes = useStyles();
   return (

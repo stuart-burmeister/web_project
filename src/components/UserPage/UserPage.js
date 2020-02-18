@@ -5,27 +5,26 @@ import { ModifyUser, SignUp, UserPanel } from "../";
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "row" },
   input__panel: { flex: 1 },
-  box: { height: "100%",},
+  box: { height: "100%", },
   user__panel: { flex: 2 },
 }));
 
 const UserPage = () => {
+  const classes = useStyle();
+
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentName, setCurrentName] = useState("");
   const [currentEmail, setCurrentEmail] = useState("");
-  const classes = useStyle();
 
   const changeUser = (newUser) => {
     setSelectedUser(newUser);
-    setCurrentName(newUser.name);
+    setCurrentName(newUser.username);
     setCurrentEmail(newUser.email);
   };
 
   var inputClass = (<SignUp onCancel={() => { }} onSignUp={() => { }} />);
   if (selectedUser !== null) {
     inputClass = <ModifyUser name={currentName} email={currentEmail}
-      onChangeName={(newName) => setCurrentName(newName)}
-      onChangeEmail={(newEmail) => setCurrentEmail(newEmail)}
       onCancel={() => setSelectedUser(null)} />
   }
 

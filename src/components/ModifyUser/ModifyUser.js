@@ -1,23 +1,89 @@
-import { Button, Grid, TextField, Typography, Box } from "@material-ui/core";
+import { useMutation } from "@apollo/react-hooks";
+import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { DeleteDialog } from "../"
+import gql from "graphql-tag";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { DeleteDialog, SEARCH_USERS } from "../";
+
+const DELETE_USER = gql`
+  mutation deleteUser($email: String!){
+    removeUser(email: $email)
+  }
+`;
+
+const CREATE_USER = gql`
+  mutation createUser($email: String!, $username: String!, $password: String!){
+    createUser(email: $email, username: $username, password: $password)
+  }
+`;
 
 const useStyles = makeStyles(() => ({
-  root: { display:"flex", flex:1, height:"100%", position: "relative",},
-  container: { flexDirection: "column", flex:1, alignItems: "center", justifyContent: "center",},
+  root: { display: "flex", flex: 1, height: "100%", position: "relative", },
+  container: { flexDirection: "column", flex: 1, alignItems: "center", justifyContent: "center", },
   item: { width: 380, },
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
   input: { width: "100%", fontSize: 14, },
   button: { color: "#ffffff", fontSize: 14 },
-  cancel__button: { color: "#ffffff", fontSize: 14, backgroundColor: "#c8c8c8" },
 }));
 
 const ModifyUser = props => {
-  const { name, email, onChangeName, onChangeEmail, onCancel } = props;
-  const [openDialog, setOpenDialog] = useState(false);
+  const { name, email, onCancel } = props;
+
   const classes = useStyles();
+  
+  const [openDialog, setOpenDialog] = useState(false);
+  const [inputName, setInputName] = useState(name);
+  const [inputEmail, setInputEmail] = useState(email);
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+
+  const [deleteUser] = useMutation(
+    DELETE_USER,
+    {
+      onCompleted() {
+        setOpenDialog(false);
+        onCancel()
+      },
+      onError(error) {
+        alert("Could not delete user: " + error.message);
+      },
+      refetchQueries: [{ query: SEARCH_USERS },],
+    }
+  );
+  const [createUser] = useMutation(
+    CREATE_USER,
+    {
+      onCompleted() {
+      },
+      onError(error) {
+        alert("Could not update user: " + error.message)
+      },
+      refetchQueries: [{ query: SEARCH_USERS },],
+    }
+  );
+
+  const onDelete = (shouldDelete) => {
+    if (shouldDelete) {
+      deleteUser({ variables: { email: email } });
+    }
+    else {
+      setOpenDialog(false);
+    }
+  };
+  const onModify = () => {
+    if (password === confirm) {
+      deleteUser({ variables: { email: email } }).then(() => {
+        createUser({ variables: { email: inputEmail, username: inputName, password: password } })
+      });
+    }
+  };
+
+  useEffect(() => {
+    setInputName(name);
+    setInputEmail(email);
+  }, [name, email])
+
   return (
     <Box className={classes.root}>
       <Grid className={classes.container} container direction="column" spacing={2}>
@@ -31,8 +97,8 @@ const ModifyUser = props => {
             <TextField className={classes.input}
               variant="outlined"
               label="EMAIL"
-              value={email}
-              onChange={(event) => onChangeEmail(event.target.value)}
+              value={inputEmail}
+              onChange={(event) => setInputEmail(event.target.value)}
               InputLabelProps={{ shrink: true, className: classes.input }} />
           </form>
         </Grid>
@@ -41,8 +107,8 @@ const ModifyUser = props => {
             <TextField className={classes.input}
               variant="outlined"
               label="NAME"
-              value={name}
-              onChange={(event) => onChangeName(event.target.value)}
+              value={inputName}
+              onChange={(event) => setInputName(event.target.value)}
               InputLabelProps={{ shrink: true, className: classes.input }} />
           </form>
         </Grid>
@@ -50,6 +116,7 @@ const ModifyUser = props => {
           <form>
             <TextField variant="outlined" className={classes.input}
               label="PASSWORD"
+              onChange={(event) => setPassword(event.target.value)}
               InputLabelProps={{ shrink: true, className: classes.input }}
               type="password" />
           </form>
@@ -58,36 +125,35 @@ const ModifyUser = props => {
           <form>
             <TextField variant="outlined" className={classes.input}
               label="PASSWORD CONFIRM"
+              onChange={(event) => setConfirm(event.target.value)}
               InputLabelProps={{ shrink: true, className: classes.input }}
               type="password" />
           </form>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="primary">
+          <Button variant="contained" fullWidth className={classes.button} color="primary" onClick={() => onModify()}>
             Save
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.cancel__button} onClick={() => setOpenDialog(true)}>
+          <Button variant="contained" fullWidth className={classes.button} color="secondary" onClick={() => setOpenDialog(true)}>
             Delete
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.cancel__button} onClick={() => onCancel()}>
+          <Button variant="contained" fullWidth className={classes.button} color="secondary" onClick={() => onCancel()}>
             Cancel
           </Button>
         </Grid>
       </Grid>
-      <DeleteDialog open={openDialog} onClose={() => setOpenDialog(false)} />
+      <DeleteDialog open={openDialog} onClose={(shouldDelete) => onDelete(shouldDelete)} />
     </Box>
   );
 }
 
 ModifyUser.propTypes = {
-  name: PropTypes.string,
-  email: PropTypes.string,
-  onChangeName: PropTypes.func.isRequired,
-  onChangeEmail: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
 }
 

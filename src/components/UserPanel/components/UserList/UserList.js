@@ -1,7 +1,17 @@
-import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import { useQuery } from "@apollo/react-hooks";
+import { Box, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React from "react";
-import { dummyValues } from "../../../../data/DummyData";
+
+const SEARCH_USERS = gql`
+  query searchUser($username: String, $email: String) {
+    searchUser(args: { username: $username, email: $email }) {
+      username
+      email
+    }
+  }
+`;
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
@@ -26,10 +36,21 @@ const useStyles = makeStyles(() => ({
 
 const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
+
   const classes = useStyles();
-  const users = dummyValues.filter((entry) => entry.name.toLowerCase().includes(filter.toLowerCase()));
+
+  const { data, loading } = useQuery(SEARCH_USERS, {
+    onCompleted: () => {
+    },
+    onError: error => {
+      alert("Search failed: " + error.message);
+    },
+  });
+
+  const users = data ? data.searchUser.filter((entry) => entry.username.toLowerCase().includes(filter.toLowerCase())) : [];
+
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader>
           <TableHead >
@@ -46,7 +67,7 @@ const UserList = props => {
             {
               users.map((row, index) => {
                 var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
-                const isRowSelected = selectedUser && row.name === selectedUser.name;
+                const isRowSelected = selectedUser && row.username === selectedUser.username;
                 if (isRowSelected) {
                   rowStyle = classes.selected__row;
                 }
@@ -56,7 +77,7 @@ const UserList = props => {
                       {row.email}
                     </TableCell>
                     <TableCell className={rowStyle}>
-                      {row.name}
+                      {row.username}
                     </TableCell>
                   </TableRow>
                 )
@@ -65,12 +86,12 @@ const UserList = props => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   );
 };
 
 UserList.propTypes = {
-  filter: PropTypes.string,
+  filter: PropTypes.string.isRequired,
   selectedUser: PropTypes.shape({
     email: PropTypes.string,
     name: PropTypes.string,
@@ -79,3 +100,4 @@ UserList.propTypes = {
 }
 
 export default UserList;
+export { SEARCH_USERS };

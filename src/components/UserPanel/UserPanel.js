@@ -14,8 +14,11 @@ const useStyle = makeStyles(() => ({
 
 const UserPanel = props => {
   const { title, selectedUser, onSelect } = props;
-  const [userFilter, setUserFilter] = useState("");
+
   const classes = useStyle();
+
+  const [userFilter, setUserFilter] = useState("");
+
   return (
     <Grid className={classes.root} container>
       <Grid className={classes.item} item>

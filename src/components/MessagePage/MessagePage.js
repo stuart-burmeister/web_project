@@ -1,25 +1,27 @@
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Box, Grid, makeStyles } from "@material-ui/core";
+import gql from "graphql-tag";
 import React, { useState } from "react";
 import { MessageList, SearchBar } from "../";
 import { MessageInput } from "./components";
 
-const messageDummy = [
-  { id: 1, date: "2020/03/03", text: "Hello. this message is from the future." },
-  { id: 2, date: "1066/11/02", text: "Salutations! This message is from the past." },
-  { id: 3, date: "2020/02/13", text: "G'day! This message is from Aus!" },
-  { id: 4, date: "2020/03/03", text: "Hello. this message is from the future." },
-  { id: 5, date: "1066/11/02", text: "Salutations! This message is from the past." },
-  { id: 6, date: "2020/02/13", text: "G'day! This message is from Aus!" },
-  { id: 7, date: "2020/03/03", text: "Hello. this message is from the future." },
-  { id: 8, date: "1066/11/02", text: "Salutations! This message is from the past." },
-  { id: 9, date: "2020/02/13", text: "G'day! This message is from Aus!" },
-  { id: 10, date: "2020/03/03", text: "Hello. this message is from the future." },
-  { id: 11, date: "1066/11/02", text: "Salutations! This message is from the past." },
-  { id: 12, date: "2020/02/13", text: "G'day! This message is from Aus!" },
-  { id: 13, date: "2020/03/03", text: "Hello. this message is from the future." },
-  { id: 14, date: "1066/11/02", text: "Salutations! This message is from the past." },
-  { id: 15, date: "2020/02/13", text: "G'day! This message is from Aus!" }
-];
+const GET_USER_MESSAGES = gql`
+query getMessages($email: String!) {
+  getUser(email: $email) {
+    messages{
+      text
+      date
+      id
+    }
+  }
+}
+`;
+
+const ADD_NEW_MESSAGE = gql`
+mutation createMessage($user: String!, $text: String!) {
+  createMessage(user: $user, text: $text)
+}
+`;
 
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "row" },
@@ -30,20 +32,50 @@ const useStyle = makeStyles(() => ({
 
 const MessagePage = () => {
   const classes = useStyle();
+
   const [filter, setFilter] = useState("");
-  const messages = messageDummy.filter((entry) => entry.text.toLowerCase().includes(filter.toLowerCase()));
+  const email = sessionStorage.getItem("currentUser");
+
+  const { data, loading } = useQuery(GET_USER_MESSAGES, {
+    variables: { email: email },
+    onCompleted: data => {
+
+    },
+    onError: error => {
+      alert(error)
+    }
+  });
+
+  const [addMessage] = useMutation(
+    ADD_NEW_MESSAGE,
+    {
+      onCompleted(complete) {
+      },
+      onError: error => {
+        alert(error)
+      },
+      refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } }]
+    }
+  );
+
+  const fetchedMessages = data && data.getUser ? data.getUser.messages : [];
+  const messages = fetchedMessages.filter((element) => element.text.toLowerCase().includes(filter.toLowerCase()));
+
   return (
     <Grid className={classes.root} container spacing={3}>
       <Grid className={classes.panel} item>
         <Box className={classes.box} border={1} borderColor={"#979797"}>
           <Box className={classes.input__panel} borderBottom={1}>
-            <MessageInput setMessage={() => { }} />
+            <MessageInput setMessage={(msg) => {
+              const newMessage = { user: email, text: msg };
+              addMessage({ variables: newMessage });
+            }} />
           </Box>
           <Box className={classes.input__panel} borderBottom={1}>
             <SearchBar setFilter={(newFilter) => setFilter(newFilter)} />
           </Box>
           <Box>
-            <MessageList messages={messages} maxHeight="67vh" />
+            <MessageList messages={messages} email={email} maxHeight="67vh" />
           </Box>
         </Box>
       </Grid>
@@ -53,3 +85,5 @@ const MessagePage = () => {
 };
 
 export default MessagePage;
+export { ADD_NEW_MESSAGE, GET_USER_MESSAGES };
+
