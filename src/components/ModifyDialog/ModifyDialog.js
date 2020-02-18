@@ -24,10 +24,10 @@ const ModifyDialog = props => {
         </DialogTitle>
         <TextField className={classes.text__field} variant="outlined" value={currentText} onChange={(event) => setCurrentText(event.target.value)} />
         <DialogActions>
-          <Button className={classes.button} variant="contained" color="primary" onClick={() => onClose(true)}>
+          <Button className={classes.button} variant="contained" color="primary" onClick={() => onClose(true, currentText)}>
             Yes
         </Button>
-          <Button className={classes.cancel__button} variant="contained" onClick={() => onClose(false)}>
+          <Button className={classes.cancel__button} variant="contained" onClick={() => onClose(false,"")}>
             No
         </Button>
         </DialogActions>

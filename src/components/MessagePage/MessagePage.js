@@ -1,9 +1,9 @@
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Box, Grid, makeStyles } from "@material-ui/core";
+import gql from "graphql-tag";
 import React, { useState } from "react";
 import { MessageList, SearchBar } from "../";
 import { MessageInput } from "./components";
-import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
 
 const GET_USER_MESSAGES = gql`
 query getMessages($email: String!) {
@@ -12,6 +12,9 @@ query getMessages($email: String!) {
       text
       date
       id
+      user {
+        email
+      }
     }
   }
 }
@@ -83,3 +86,4 @@ const MessagePage = () => {
 };
 
 export default MessagePage;
+export {ADD_NEW_MESSAGE};

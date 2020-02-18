@@ -1,7 +1,15 @@
-import { IconButton, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import { IconButton, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { DeleteDialog, ModifyDialog } from "..";
+import { DeleteDialog, ModifyDialog, ADD_NEW_MESSAGE } from "..";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
+
+const DELETE_MESSSAGE = gql`
+mutation deleteMessage($id: ID!) {
+  removeMessage(id: $id)
+}
+`;
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
@@ -42,22 +50,54 @@ const useStyles = makeStyles(() => ({
 const MessageList = props => {
   const { messages } = props;
   const classes = useStyles(props);
-  const [currentMessage, setCurrentMessage] = useState({id:0,text:""});
+  const [currentMessage, setCurrentMessage] = useState({id:"",text:"", user:undefined});
   const [openDelete, setOpenDelete] = useState(false);
   const [openModify, setOpenModify] = useState(false);
 
-  const onDelete = () => {
+  const [deleteMessage] = useMutation(
+    DELETE_MESSSAGE,
+    {
+      onCompleted(complete){
+      },
+      onError(error){
+        alert(error);
+      }
+    }
+  );
+
+  const [createMessage] = useMutation(
+    ADD_NEW_MESSAGE,
+    {
+      onCompleted(complete){
+
+      },
+      onError(error){
+        alert(error);
+      }
+    }
+  )
+
+  const onDelete = (shouldDelete) => {
+    if (shouldDelete){
+      console.log(currentMessage.id)
+      deleteMessage(currentMessage);
+    }
     setOpenDelete(false);
-    setCurrentMessage({id:0,text:""});
+    setCurrentMessage({id:"",text:""});
   };
 
-  const onModify = (newText) => {
+  const onModify = (shouldModify, newText) => {
+    if (shouldModify)
+    {
+      deleteMessage({id: currentMessage.id})
+      createMessage({user: currentMessage.user.email, text: newText});
+    }
     setOpenModify(false);
-    setCurrentMessage({id:0,text:""});
+    setCurrentMessage({id:"",text:""});
   }
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader>
           <TableHead >
@@ -94,6 +134,7 @@ const MessageList = props => {
                       {row.date}
                     </TableCell>
                     <TableCell className={rowStyle} onClick={() => {
+                      console.log(row)
                       setCurrentMessage(row);
                       setOpenModify(true);
                       }}>
@@ -106,17 +147,18 @@ const MessageList = props => {
           </TableBody>
         </Table>
       </TableContainer>
-      <ModifyDialog open={openModify} onClose={(newText) => onModify(newText)} message={currentMessage}/>
-      <DeleteDialog open={openDelete} onClose={() => onDelete()} />
-    </div>
+      <ModifyDialog open={openModify} onClose={(shouldModify,newText) => onModify(shouldModify,newText)} message={currentMessage}/>
+      <DeleteDialog open={openDelete} onClose={(shouldDelete) => onDelete(shouldDelete)} />
+    </Box>
   );
 };
 
 MessageList.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.any.isRequired,
     text: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
+    user: PropTypes.any,
   })),
   maxHeight: PropTypes.string,
 };
