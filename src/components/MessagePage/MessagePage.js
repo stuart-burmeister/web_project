@@ -58,7 +58,8 @@ const MessagePage = () => {
       },
       onError: error => {
         alert(error)
-      }
+      },
+      refetchQueries: [{query: GET_USER_MESSAGES, variables:{email: email}}]
     }
   );
 
@@ -86,4 +87,4 @@ const MessagePage = () => {
 };
 
 export default MessagePage;
-export {ADD_NEW_MESSAGE};
+export { ADD_NEW_MESSAGE, GET_USER_MESSAGES };

@@ -15,7 +15,9 @@ const MessageInput = props => {
   return (
     <div className={classes.root}>
       <TextField className={classes.input__field} variant="outlined" label="Text" onChange={({ target }) => setInputVal(target.value)} value={inputVal}/>
-      <Button className={classes.button} onClick={() => setMessage(inputVal)}>
+      <Button className={classes.button} onClick={() => {
+        setMessage(inputVal)
+        setInputVal("")}}>
         Save
       </Button>
     </div>
