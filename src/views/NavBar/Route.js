@@ -1,10 +1,15 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { MainPage, MessagePage, NavBar, UserPage } from "../../components";
 
 const NavRoute = () => {
+  const isSignedIn = sessionStorage.getItem('isSignedIn');
   return (
     <Switch>
+      {
+        !isSignedIn &&
+        <Redirect to="/signin" />
+      }
       <Route path="/main">
         <NavBar tabIndex={0}>
           <MainPage />
