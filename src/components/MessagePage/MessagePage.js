@@ -46,6 +46,7 @@ const MessagePage = () => {
       alert(error)
     }
   });
+  
   const fetchedMessages = data && data.getUser ? data.getUser.messages : [];
   const messages = fetchedMessages.filter((element) => element.text.toLowerCase().includes(filter.toLowerCase()));
 
@@ -53,8 +54,6 @@ const MessagePage = () => {
     ADD_NEW_MESSAGE,
     {
       onCompleted(complete) {
-        //sessionStorage.setItem('isSignedIn', true)
-        //onSignUp();
       },
       onError: error => {
         alert(error)

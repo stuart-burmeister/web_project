@@ -1,7 +1,8 @@
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { MessageList } from "../../../";
+import { MessageList, GET_USER_MESSAGES } from "../../../";
 import PropTypes from "prop-types";
+import {useQuery} from "@apollo/react-hooks";
 
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "column" },
@@ -12,8 +13,18 @@ const useStyle = makeStyles(() => ({
 }))
 
 const MessagePanel = props => {
-  const { title, messages } = props;
+  const { title, email } = props;
   const classes = useStyle();
+
+  const { data, loading } = useQuery(GET_USER_MESSAGES, {
+    variables: { email: email },
+    onCompleted: data => {
+    },
+    onError: error => {
+      alert(error)
+    }
+  });
+  const messages = data && data.getUser ? data.getUser.messages : [];
 
   return (
     <Grid className={classes.root} container>
@@ -27,7 +38,7 @@ const MessagePanel = props => {
           }
         </Box>
         <Grid className={classes.message__list} item>
-          <MessageList messages={messages} maxHeight="84vh"/>
+          <MessageList messages={messages} email={email} maxHeight="84vh"/>
         </Grid>
       </Grid>
 
@@ -38,7 +49,7 @@ const MessagePanel = props => {
 MessagePanel.propTypes ={
   title: PropTypes.bool,
   messages : PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
   }))

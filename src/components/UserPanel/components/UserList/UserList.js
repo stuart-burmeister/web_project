@@ -3,7 +3,6 @@ import { Box, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React from "react";
-import { dummyValues } from "../../../../data/DummyData";
 
 const SEARCH_USER = gql`
   query searchUser($username: String, $email: String) {
@@ -39,14 +38,17 @@ const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
   const classes = useStyles();
   const { data, loading, error } = useQuery(SEARCH_USER, {
-    onCompleted: data => { },
+    onCompleted: data => { 
+      console.log("fetch")
+    },
     onError: err => {
       alert(err);
     },
-    fetchPolicy: "network-only"
   });
 
-  const users = dummyValues.filter((entry) => entry.name.toLowerCase().includes(filter.toLowerCase()));
+  //const users = dummyValues.filter((entry) => entry.name.toLowerCase().includes(filter.toLowerCase()));
+  const users = data ? data.searchUser : [];
+
   return (
     <Box className={classes.root}>
       <TableContainer className={classes.container}>
@@ -65,7 +67,7 @@ const UserList = props => {
             {
               users.map((row, index) => {
                 var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
-                const isRowSelected = selectedUser && row.name === selectedUser.name;
+                const isRowSelected = selectedUser && row.username === selectedUser.username;
                 if (isRowSelected) {
                   rowStyle = classes.selected__row;
                 }
@@ -98,3 +100,4 @@ UserList.propTypes = {
 }
 
 export default UserList;
+export { SEARCH_USER };

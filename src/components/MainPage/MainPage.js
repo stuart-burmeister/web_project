@@ -26,7 +26,7 @@ const MainPage = () => {
         <Box className={classes.box} border={1} borderColor={"#979797"}>
           {
             currentUser ?
-            <MessagePanel title messages={currentUser.messages} /> :
+            <MessagePanel title email={currentUser.email} /> :
             <Box className={classes.empty__panel}>
               <Typography className={classes.message} color="primary">
                 Select an item on the left.

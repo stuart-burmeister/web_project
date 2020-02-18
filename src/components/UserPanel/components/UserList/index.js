@@ -1,1 +1,1 @@
-export { default } from "./UserList"
+export { default, SEARCH_USER } from "./UserList"

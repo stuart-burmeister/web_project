@@ -3,7 +3,7 @@ import { Box, IconButton, makeStyles, Table, TableBody, TableCell, TableContaine
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { ADD_NEW_MESSAGE, DeleteDialog, GET_USER_MESSAGES, ModifyDialog } from "..";
+import { ADD_NEW_MESSAGE, DeleteDialog, GET_USER_MESSAGES, ModifyDialog, SEARCH_USER } from "..";
 
 const DELETE_MESSSAGE = gql`
 mutation deleteMessage($id: ID!) {
@@ -53,7 +53,6 @@ const MessageList = props => {
   const [currentMessage, setCurrentMessage] = useState({ id: "", text: "", user: undefined });
   const [openDelete, setOpenDelete] = useState(false);
   const [openModify, setOpenModify] = useState(false);
-  //const email = sessionStorage.getItem("currentUser");
 
   const [deleteMessage] = useMutation(
     DELETE_MESSSAGE,
@@ -65,7 +64,7 @@ const MessageList = props => {
       onError(error) {
         alert(error);
       },
-      refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } }],
+      refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } },],
     }
   );
 
