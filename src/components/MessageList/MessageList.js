@@ -114,10 +114,9 @@ const MessageList = props => {
 
 MessageList.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
-    user: PropTypes.any,
   })),
   maxHeight: PropTypes.string,
 };
