@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React from "react";
 
-const SEARCH_USER = gql`
+const SEARCH_USERS = gql`
   query searchUser($username: String, $email: String) {
     searchUser(args: { username: $username, email: $email }) {
       username
@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
 const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
   const classes = useStyles();
-  const { data, loading, error } = useQuery(SEARCH_USER, {
+  const { data, loading, error } = useQuery(SEARCH_USERS, {
     onCompleted: data => { 
     },
     onError: err => {
@@ -98,4 +98,4 @@ UserList.propTypes = {
 }
 
 export default UserList;
-export { SEARCH_USER };
+export { SEARCH_USERS };

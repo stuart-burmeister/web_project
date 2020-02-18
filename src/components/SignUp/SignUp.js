@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { SEARCH_USER } from "../";
+import { SEARCH_USERS } from "../";
 
 export const SIGNUP_USER = gql`
   mutation signUp($email: String!, $username: String!, $password: String!) {
@@ -35,7 +35,10 @@ const SignUp = props => {
         setPassword("");
         setConfirm("");
       },
-      refetchQueries: [{ query: SEARCH_USER },],
+      onError(error) {
+        alert(error)
+      },
+      refetchQueries: [{ query: SEARCH_USERS },],
     }
   );
 

@@ -3,7 +3,7 @@ import { Box, IconButton, makeStyles, Table, TableBody, TableCell, TableContaine
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { ADD_NEW_MESSAGE, DeleteDialog, GET_USER_MESSAGES, ModifyDialog, SEARCH_USER } from "..";
+import { ADD_NEW_MESSAGE, DeleteDialog, GET_USER_MESSAGES, ModifyDialog, SEARCH_USERS } from "..";
 
 const DELETE_MESSSAGE = gql`
 mutation deleteMessage($id: ID!) {
@@ -59,10 +59,11 @@ const MessageList = props => {
     {
       onCompleted(complete) {
         setOpenDelete(false);
+        setOpenModify(false);
         setCurrentMessage({ id: "", text: "", user: undefined });
       },
       onError(error) {
-        alert(error);
+        alert("Error when deleting: " + error.message);
       },
       refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } },],
     }
@@ -72,13 +73,14 @@ const MessageList = props => {
     ADD_NEW_MESSAGE,
     {
       onCompleted(complete) {
-        setOpenModify(false);
-        setCurrentMessage({ id: "", text: "", user: undefined });
+        //setOpenModify(false);
+        //setCurrentMessage({ id: "", text: "", user: undefined });
+        deleteMessage({ variables: { id: currentMessage.id } });
       },
       onError(error) {
-        alert(error);
+        alert("Error when modifying: " + error.message);
       },
-      refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } }],
+      //refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } }],
     }
   )
 
@@ -93,7 +95,7 @@ const MessageList = props => {
 
   const onModify = (shouldModify, newText) => {
     if (shouldModify) {
-      deleteMessage({ variables: { id: currentMessage.id } })
+      //deleteMessage({ variables: { id: currentMessage.id } })
       createMessage({ variables: { user: email, text: newText } });
     }
     else {

@@ -9,5 +9,5 @@ export { default as SearchBar } from "./SearchBar";
 export { default as SignIn } from "./SignIn";
 export { default as SignUp } from "./SignUp";
 export { default as UserPage } from "./UserPage";
-export { default as UserPanel, SEARCH_USER } from "./UserPanel";
+export { default as UserPanel, SEARCH_USERS } from "./UserPanel";
 
