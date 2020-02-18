@@ -38,7 +38,6 @@ const useStyles = makeStyles(() => ({
 const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
   const classes = useStyles();
-
   const { data, loading, error } = useQuery(SEARCH_USER, {
     onCompleted: data => {},
     onError: err => {
@@ -46,13 +45,6 @@ const UserList = props => {
     },
     fetchPolicy: "network-only"
   });
-
-  if (loading) console.log("load");
-  if (error) console.log(error);
-  if (!data) console.log("no data..");
-  else{
-    console.log(data);
-  }
 
   const users = dummyValues.filter((entry) => entry.name.toLowerCase().includes(filter.toLowerCase()));
   return (

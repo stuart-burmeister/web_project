@@ -10,7 +10,7 @@ const SigninRoute = props => {
     <Switch>
       <Route path="/signin">
         <Box style={{display: "flex", height: "100vh"}}>
-          <SignIn onSignIn={() => history.push("/main")} onSignUp={() => history.push("/signup")} />
+          <SignIn onSignIn={() => history.push("/main")} onSignUpClick={() => history.push("/signup")} />
         </Box>
       </Route>
       <Route path="/signup">

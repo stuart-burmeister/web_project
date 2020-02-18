@@ -5,7 +5,6 @@ import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 
-
 export const SIGNIN_USER = gql`
   mutation signIn($email: String!, $password: String!) {
     signIn(email: $email, password: $password)
@@ -23,7 +22,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const SignIn = props => {
-  const { onSignIn, onSignUp } = props;
+  const { onSignIn, onSignUpClick } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,10 +30,11 @@ const SignIn = props => {
     SIGNIN_USER,
     {
       onCompleted(complete) {
-        sessionStorage.setItem('isSignedIn', true)
+        sessionStorage.setItem('isSignedIn', true);
+        sessionStorage.setItem('currentUser',email);
         onSignIn();
       },
-      onError(error){
+      onError(error) {
         // handle error
       }
     }
@@ -78,7 +78,7 @@ const SignIn = props => {
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button className={classes.link} onClick={() => onSignUp()}>
+          <Button className={classes.link} onClick={() => onSignUpClick()} disabled={loading}>
             Sign up
           </Button>
         </Grid>
@@ -89,7 +89,7 @@ const SignIn = props => {
 
 SignIn.propTypes = {
   onSignIn: PropTypes.func.isRequired,
-  onSignUp: PropTypes.func.isRequired,
+  onSignUpClick: PropTypes.func.isRequired,
 }
 
 export default SignIn;

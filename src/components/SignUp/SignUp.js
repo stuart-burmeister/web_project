@@ -96,13 +96,13 @@ const SignUp = props => {
         </Grid>
         <Grid item className={classes.item}>
           <Button variant="contained" fullWidth className={classes.button}
-            color="primary" onClick={() => signUpUser()}>
+            color="primary" onClick={() => signUpUser()} disabled={loading}>
             Sign Up
           </Button>
         </Grid>
         <Grid item className={classes.item}>
           <Button variant="contained" fullWidth className={classes.button}
-            onClick={() => onCancel()}>
+            onClick={() => onCancel()} disabled ={loading}>
             Cancel
           </Button>
         </Grid>

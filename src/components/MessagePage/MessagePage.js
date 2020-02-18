@@ -2,6 +2,8 @@ import { Box, Grid, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { MessageList, SearchBar } from "../";
 import { MessageInput } from "./components";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
 
 const messageDummy = [
   { id: 1, date: "2020/03/03", text: "Hello. this message is from the future." },
@@ -21,6 +23,17 @@ const messageDummy = [
   { id: 15, date: "2020/02/13", text: "G'day! This message is from Aus!" }
 ];
 
+const GET_USER_MESSAGES = gql`
+query getMessages($email: String!) {
+  getUser(email: $email) {
+    messages{
+      text
+      date
+    }
+  }
+}
+`;
+
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "row" },
   box: { height: "100%", },
@@ -31,7 +44,19 @@ const useStyle = makeStyles(() => ({
 const MessagePage = () => {
   const classes = useStyle();
   const [filter, setFilter] = useState("");
-  const messages = messageDummy.filter((entry) => entry.text.toLowerCase().includes(filter.toLowerCase()));
+  const email = sessionStorage.getItem("currentUser");
+  console.log(email);
+  const {data, loading} = useQuery(GET_USER_MESSAGES,{
+    variables: {email: email},
+    onCompleted: data => {
+      
+    },
+    onError: error =>{
+      alert(error)
+    }
+  });
+  const messages = data && data.messages ? data.messages : [];
+
   return (
     <Grid className={classes.root} container spacing={3}>
       <Grid className={classes.panel} item>
