@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import { Box, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React from "react";
@@ -39,7 +39,7 @@ const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
   const classes = useStyles();
   const { data, loading, error } = useQuery(SEARCH_USER, {
-    onCompleted: data => {},
+    onCompleted: data => { },
     onError: err => {
       alert(err);
     },
@@ -48,7 +48,7 @@ const UserList = props => {
 
   const users = dummyValues.filter((entry) => entry.name.toLowerCase().includes(filter.toLowerCase()));
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader>
           <TableHead >
@@ -84,7 +84,7 @@ const UserList = props => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   );
 };
 

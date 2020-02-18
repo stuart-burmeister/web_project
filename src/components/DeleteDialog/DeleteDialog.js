@@ -7,7 +7,6 @@ const useStyles = makeStyles(() => ({
   container: { flexDirection: "column", width: 400, height: 150 },
   title: { fontSize:24, fontWeight:"bold", },
   button: { color: "#ffffff", fontSize: 14, padding:20 },
-  cancel__button: { color: "#ffffff", fontSize: 14, backgroundColor: "#c8c8c8", padding:20 },
 }));
 
 const DeleteDialog = props => {
@@ -23,7 +22,7 @@ const DeleteDialog = props => {
           <Button className={classes.button} variant="contained" color="primary" onClick={() => onClose(true)}>
             Yes
           </Button>
-          <Button className={classes.cancel__button} onClick={() => onClose(false)}>
+          <Button className={classes.button} variant="contained" color="secondary" onClick={() => onClose(false)}>
             No
           </Button>
         </DialogActions>

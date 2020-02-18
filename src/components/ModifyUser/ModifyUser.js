@@ -11,7 +11,6 @@ const useStyles = makeStyles(() => ({
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
   input: { width: "100%", fontSize: 14, },
   button: { color: "#ffffff", fontSize: 14 },
-  cancel__button: { color: "#ffffff", fontSize: 14, backgroundColor: "#c8c8c8" },
 }));
 
 const ModifyUser = props => {
@@ -68,12 +67,12 @@ const ModifyUser = props => {
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.cancel__button} onClick={() => setOpenDialog(true)}>
+          <Button variant="contained" fullWidth className={classes.button} color="secondary" onClick={() => setOpenDialog(true)}>
             Delete
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.cancel__button} onClick={() => onCancel()}>
+          <Button variant="contained" fullWidth className={classes.button} color="secondary" onClick={() => onCancel()}>
             Cancel
           </Button>
         </Grid>

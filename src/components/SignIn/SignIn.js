@@ -31,7 +31,7 @@ const SignIn = props => {
     {
       onCompleted(complete) {
         sessionStorage.setItem('isSignedIn', true);
-        sessionStorage.setItem('currentUser',email);
+        sessionStorage.setItem('currentUser', email);
         onSignIn();
       },
       onError(error) {

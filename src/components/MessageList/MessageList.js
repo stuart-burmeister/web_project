@@ -132,9 +132,9 @@ const MessageList = props => {
                         setCurrentMessage(row);
                         setOpenDelete(true);
                       }} >
-                        <div >
+                        <Box >
                           X
-                        </div>
+                        </Box>
                       </IconButton>
                     </TableCell>
                     <TableCell className={rowStyle}>

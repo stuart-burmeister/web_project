@@ -8,7 +8,6 @@ const useStyles = makeStyles(() => ({
   title: { fontSize: 24, fontWeight: "bold", },
   text__field: {margin:20},
   button: { color: "#ffffff", fontSize: 14, padding: 20 },
-  cancel__button: { color: "#ffffff", fontSize: 14, backgroundColor: "#c8c8c8", padding: 20 },
 }));
 
 const ModifyDialog = props => {
@@ -27,7 +26,7 @@ const ModifyDialog = props => {
           <Button className={classes.button} variant="contained" color="primary" onClick={() => onClose(true, currentText)}>
             Yes
         </Button>
-          <Button className={classes.cancel__button} variant="contained" onClick={() => onClose(false,"")}>
+          <Button className={classes.button} variant="contained" color="secondary" onClick={() => onClose(false,"")}>
             No
         </Button>
         </DialogActions>
