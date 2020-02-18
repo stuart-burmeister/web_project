@@ -36,12 +36,14 @@ const useStyles = makeStyles(() => ({
 
 const UserList = props => {
   const { filter, selectedUser, onSelect } = props;
+
   const classes = useStyles();
-  const { data, loading, error } = useQuery(SEARCH_USERS, {
-    onCompleted: data => { 
+
+  const { data, loading } = useQuery(SEARCH_USERS, {
+    onCompleted: () => {
     },
-    onError: err => {
-      alert(err);
+    onError: error => {
+      alert("Search failed: " + error.message);
     },
   });
 
@@ -89,7 +91,7 @@ const UserList = props => {
 };
 
 UserList.propTypes = {
-  filter: PropTypes.string,
+  filter: PropTypes.string.isRequired,
   selectedUser: PropTypes.shape({
     email: PropTypes.string,
     name: PropTypes.string,

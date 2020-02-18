@@ -8,7 +8,7 @@ const NavRoute = () => {
     <Switch>
       {
         !isSignedIn &&
-        <Redirect to="/signin" />
+        <Route path="/" render={() =>  <Redirect to="/signin" />}/>
       }
       <Route path="/main">
         <NavBar tabIndex={0}>

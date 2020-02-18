@@ -11,8 +11,10 @@ const useStyles = makeStyles(() => ({
 
 const SearchBar = (props) => {
   const { setFilter } = props;
-  const [inputVal, setInputVal] = useState("");
+  
   const classes = useStyles();
+
+  const [inputVal, setInputVal] = useState("");
   return (
     <Box className={classes.root}>
       <TextField className={classes.input__field} variant="outlined" label="Search" onChange={({ target }) => setInputVal(target.value)} value={inputVal}>

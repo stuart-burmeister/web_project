@@ -1,12 +1,12 @@
-import React from "react";
-import { Dialog, DialogTitle, Button, makeStyles, Box, DialogActions } from "@material-ui/core";
+import { Box, Button, Dialog, DialogActions, DialogTitle, makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
+import React from "react";
 
 const useStyles = makeStyles(() => ({
   root: { display: "flex", flex: 1, alignContent: "center", justifyContent: "center" },
   container: { flexDirection: "column", width: 400, height: 150 },
-  title: { fontSize:24, fontWeight:"bold", },
-  button: { color: "#ffffff", fontSize: 14, padding:20 },
+  title: { fontSize: 24, fontWeight: "bold", },
+  button: { color: "#ffffff", fontSize: 14, padding: 20 },
 }));
 
 const DeleteDialog = props => {
@@ -26,15 +26,14 @@ const DeleteDialog = props => {
             No
           </Button>
         </DialogActions>
-
       </Box>
     </Dialog>
   );
 };
 
 DeleteDialog.propTypes = {
-  open: PropTypes.bool,
-  onClose: PropTypes.func
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 }
 
 export default DeleteDialog;

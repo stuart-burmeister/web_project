@@ -3,16 +3,21 @@ import { Box, IconButton, makeStyles, Table, TableBody, TableCell, TableContaine
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { ADD_NEW_MESSAGE, DeleteDialog, GET_USER_MESSAGES, ModifyDialog, SEARCH_USERS } from "..";
+import { ADD_NEW_MESSAGE, DeleteDialog, GET_USER_MESSAGES, ModifyDialog } from "..";
 
 const DELETE_MESSSAGE = gql`
-mutation deleteMessage($id: ID!) {
-  removeMessage(id: $id)
-}
+  mutation deleteMessage($id: ID!) {
+    removeMessage(id: $id)
+  }
 `;
 
 const useStyles = makeStyles(() => ({
-  root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
+  root: {
+    display: "flex",
+    height: "100%",
+    width: "100%",
+    flexDirection: "column",
+  },
   container: { maxHeight: props => props.maxHeight },
   icon: {
     width: 20,
@@ -21,7 +26,7 @@ const useStyles = makeStyles(() => ({
     borderColor: "#979797"
   },
   header__date: {
-    width:"30%",
+    width: "30%",
     fontWeight: "bold",
     backgroundColor: "white",
     borderWidth: 1,
@@ -33,9 +38,21 @@ const useStyles = makeStyles(() => ({
     borderWidth: 1,
     borderColor: "#979797"
   },
-  odd__row: { backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
-  even__row: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
-  selected__row: { backgroundColor: "#73bbff", fontWeight: "bold", fontSize: 14 },
+  odd__row: {
+    backgroundColor: "white",
+    fontWeight: "bold",
+    fontSize: 14
+  },
+  even__row: {
+    backgroundColor: "#979797",
+    fontWeight: "bold",
+    fontSize: 14
+  },
+  selected__row: {
+    backgroundColor: "#73bbff",
+    fontWeight: "bold",
+    fontSize: 14
+  },
   oval: {
     display: "flex",
     flexDirection: "column",
@@ -49,7 +66,9 @@ const useStyles = makeStyles(() => ({
 
 const MessageList = props => {
   const { messages, email } = props;
+
   const classes = useStyles(props);
+  
   const [currentMessage, setCurrentMessage] = useState({ id: "", text: "", user: undefined });
   const [openDelete, setOpenDelete] = useState(false);
   const [openModify, setOpenModify] = useState(false);
@@ -73,14 +92,11 @@ const MessageList = props => {
     ADD_NEW_MESSAGE,
     {
       onCompleted(complete) {
-        //setOpenModify(false);
-        //setCurrentMessage({ id: "", text: "", user: undefined });
-        deleteMessage({ variables: { id: currentMessage.id } });
       },
       onError(error) {
         alert("Error when modifying: " + error.message);
       },
-      //refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } }],
+      refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } },],
     }
   )
 
@@ -95,8 +111,9 @@ const MessageList = props => {
 
   const onModify = (shouldModify, newText) => {
     if (shouldModify) {
-      //deleteMessage({ variables: { id: currentMessage.id } })
-      createMessage({ variables: { user: email, text: newText } });
+      deleteMessage({ variables: { id: currentMessage.id } }).then(() => {
+        createMessage({ variables: { user: email, text: newText } });
+      })
     }
     else {
       setCurrentMessage({ id: "", text: "", user: undefined });
@@ -175,6 +192,7 @@ MessageList.propTypes = {
     date: PropTypes.string.isRequired,
     user: PropTypes.any,
   })),
+  email: PropTypes.string.isRequired,
   maxHeight: PropTypes.string,
 };
 

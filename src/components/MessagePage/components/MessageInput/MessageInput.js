@@ -10,8 +10,11 @@ const useStyles = makeStyles((theme) => ({
 
 const MessageInput = props => {
   const { setMessage } = props;
-  const [inputVal, setInputVal] = useState("");
+
   const classes = useStyles();
+
+  const [inputVal, setInputVal] = useState("");
+  
   return (
     <Box className={classes.root}>
       <TextField className={classes.input__field} variant="outlined" label="Text" onChange={({ target }) => setInputVal(target.value)} value={inputVal} />

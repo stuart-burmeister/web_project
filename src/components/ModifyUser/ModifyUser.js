@@ -1,10 +1,10 @@
-import { Button, Grid, TextField, Typography, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import { DeleteDialog, SEARCH_USERS } from "../"
-import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
-import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
+import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import gql from "graphql-tag";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { DeleteDialog, SEARCH_USERS } from "../";
 
 const DELETE_USER = gql`
   mutation deleteUser($email: String!){
@@ -19,8 +19,8 @@ const CREATE_USER = gql`
 `;
 
 const useStyles = makeStyles(() => ({
-  root: { display:"flex", flex:1, height:"100%", position: "relative",},
-  container: { flexDirection: "column", flex:1, alignItems: "center", justifyContent: "center",},
+  root: { display: "flex", flex: 1, height: "100%", position: "relative", },
+  container: { flexDirection: "column", flex: 1, alignItems: "center", justifyContent: "center", },
   item: { width: 380, },
   header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
   input: { width: "100%", fontSize: 14, },
@@ -29,65 +29,60 @@ const useStyles = makeStyles(() => ({
 
 const ModifyUser = props => {
   const { name, email, onCancel } = props;
+
+  const classes = useStyles();
+  
   const [openDialog, setOpenDialog] = useState(false);
   const [inputName, setInputName] = useState(name);
   const [inputEmail, setInputEmail] = useState(email);
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
-  useEffect(() => {
-    setInputName(name);
-    setInputEmail(email);
-  },[name, email])
-
-  const classes = useStyles();
-
   const [deleteUser] = useMutation(
     DELETE_USER,
     {
-      onCompleted(){
+      onCompleted() {
         setOpenDialog(false);
         onCancel()
       },
-      onError(error){
+      onError(error) {
         alert("Could not delete user: " + error.message);
       },
-      refetchQueries: [{ query: SEARCH_USERS},],
+      refetchQueries: [{ query: SEARCH_USERS },],
     }
   );
-
   const [createUser] = useMutation(
     CREATE_USER,
     {
-      onCompleted(){
+      onCompleted() {
       },
-      onError(error){
+      onError(error) {
         alert("Could not update user: " + error.message)
       },
-      refetchQueries: [{ query: SEARCH_USERS},],
+      refetchQueries: [{ query: SEARCH_USERS },],
     }
   );
 
   const onDelete = (shouldDelete) => {
-    if (shouldDelete)
-    {
+    if (shouldDelete) {
       deleteUser({ variables: { email: email } });
     }
-    else{
+    else {
       setOpenDialog(false);
     }
   };
-
   const onModify = () => {
-    if(password == confirm){
-      deleteUser({ variables: { email: email } }).then(() =>{
-        createUser({variables: { email: inputEmail, username: inputName, password: password}})
+    if (password === confirm) {
+      deleteUser({ variables: { email: email } }).then(() => {
+        createUser({ variables: { email: inputEmail, username: inputName, password: password } })
       });
     }
-    else{
-
-    }
   };
+
+  useEffect(() => {
+    setInputName(name);
+    setInputEmail(email);
+  }, [name, email])
 
   return (
     <Box className={classes.root}>

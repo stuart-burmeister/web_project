@@ -12,9 +12,6 @@ query getMessages($email: String!) {
       text
       date
       id
-      user {
-        email
-      }
     }
   }
 }
@@ -35,8 +32,10 @@ const useStyle = makeStyles(() => ({
 
 const MessagePage = () => {
   const classes = useStyle();
+
   const [filter, setFilter] = useState("");
   const email = sessionStorage.getItem("currentUser");
+
   const { data, loading } = useQuery(GET_USER_MESSAGES, {
     variables: { email: email },
     onCompleted: data => {
@@ -46,9 +45,6 @@ const MessagePage = () => {
       alert(error)
     }
   });
-  
-  const fetchedMessages = data && data.getUser ? data.getUser.messages : [];
-  const messages = fetchedMessages.filter((element) => element.text.toLowerCase().includes(filter.toLowerCase()));
 
   const [addMessage] = useMutation(
     ADD_NEW_MESSAGE,
@@ -58,9 +54,12 @@ const MessagePage = () => {
       onError: error => {
         alert(error)
       },
-      refetchQueries: [{query: GET_USER_MESSAGES, variables:{email: email}}]
+      refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } }]
     }
   );
+
+  const fetchedMessages = data && data.getUser ? data.getUser.messages : [];
+  const messages = fetchedMessages.filter((element) => element.text.toLowerCase().includes(filter.toLowerCase()));
 
   return (
     <Grid className={classes.root} container spacing={3}>
@@ -87,3 +86,4 @@ const MessagePage = () => {
 
 export default MessagePage;
 export { ADD_NEW_MESSAGE, GET_USER_MESSAGES };
+

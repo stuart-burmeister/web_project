@@ -23,19 +23,22 @@ const useStyles = makeStyles(() => ({
 
 const SignIn = props => {
   const { onSignIn, onSignUpClick } = props;
+
+  const classes = useStyles();
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [signin, { loading, error }] = useMutation(
+  const [signin, { loading }] = useMutation(
     SIGNIN_USER,
     {
-      onCompleted(complete) {
+      onCompleted() {
         sessionStorage.setItem('isSignedIn', true);
         sessionStorage.setItem('currentUser', email);
         onSignIn();
       },
       onError(error) {
-        // handle error
+        alert("Sigin failed: " + error.message);
       }
     }
   );
@@ -45,7 +48,6 @@ const SignIn = props => {
     signin({ variables: user });
   };
 
-  const classes = useStyles();
   return (
     <Box className={classes.root}>
       <Grid className={classes.container} container direction="column" spacing={2}>

@@ -10,7 +10,7 @@ const SigninRoute = () => {
     <Switch>
       {
         isSignedIn &&
-        <Redirect to="/main" />
+        <Route path="/" render={() =>  <Redirect to="/main" />}/>
       }
       <Route exact path="/" render={() => <Redirect to="/signin" />} />
       <Route path="/signin">

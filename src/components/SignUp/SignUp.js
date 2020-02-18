@@ -23,9 +23,15 @@ const useStyles = makeStyles(() => ({
 
 const SignUp = props => {
   const { onSignUp, onCancel } = props;
+
   const classes = useStyles();
 
-  const [signUp, { loading, error }] = useMutation(
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+
+  const [signUp, { loading }] = useMutation(
     SIGNUP_USER,
     {
       onCompleted(complete) {
@@ -42,17 +48,10 @@ const SignUp = props => {
     }
   );
 
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
-
   const signUpUser = () => {
     const user = { username: name, email: email, password: password };
     if (password === confirm) {
       signUp({ variables: user });
-    }
-    else {
     }
   }
 
