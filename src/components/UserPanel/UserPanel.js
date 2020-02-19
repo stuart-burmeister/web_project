@@ -5,10 +5,27 @@ import { SearchBar } from "../";
 import { UserList } from "./components";
 
 const useStyle = makeStyles(() => ({
-  root: { display: "flex", width: "100%", height: "100%", flexDirection: "column" },
-  item: { display: "flex", flexDirection: "column", flex: 1, width: "100%", },
-  box: { flex: 1, padding: 20, },
-  heading: { fontFamily: "AppleSDGothicNeo-Bold", fontWeight: "bold", fontSize: 24, color: 'black' },
+  root: {
+    display: "flex",
+    width: "100%",
+    height: "100%",
+    flexDirection: "column"
+  },
+  item: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    width: "100%",
+  },
+  box: {
+    flex: 1,
+    padding: 20,
+  },
+  heading: {
+    fontWeight: "bold",
+    fontSize: 24,
+    color: 'black'
+  },
   user__list: { flex: 9, },
 }))
 
@@ -20,25 +37,31 @@ const UserPanel = props => {
   const [userFilter, setUserFilter] = useState("");
 
   return (
-    <Grid className={classes.root} container>
-      <Grid className={classes.item} item>
-        <Box className={classes.box} color={"#979797"} borderBottom={1} >
-          {
-            title && (
-              <Typography className={classes.heading}>
-                User List
-              </Typography>)
-          }
-          <SearchBar setFilter={(newFilter) => {
-            setUserFilter(newFilter.toLowerCase());
-            onSelect(null);
-            }} />
-        </Box>
-        <Grid className={classes.user__list} >
-          <UserList filter={userFilter} selectedUser={selectedUser} onSelect={(user) => onSelect(user)} />
+    <Box>
+      <Grid className={classes.root} container>
+        <Grid className={classes.item} item>
+          <Box className={classes.box}
+            color={"#979797"}
+            borderBottom={1} >
+            {
+              title && (
+                <Typography className={classes.heading}>
+                  User List
+                </Typography>)
+            }
+            <SearchBar setFilter={(newFilter) => {
+              setUserFilter(newFilter.toLowerCase());
+              onSelect(null);
+              }} />
+          </Box>
+          <Grid className={classes.user__list} >
+            <UserList filter={userFilter}
+              selectedUser={selectedUser}
+              onSelect={(user) => onSelect(user)} />
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </Box>
   );
 }
 
