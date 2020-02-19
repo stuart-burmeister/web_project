@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Box, IconButton, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ADD_NEW_MESSAGE, DeleteDialog, ModifyDialog } from "..";
 
 const GET_USER_MESSAGES = gql`
@@ -77,7 +77,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const MessageList = props => {
-  const { email, filter ="", onQuery = ()=>{}} = props;
+  const { email, filter = "", onQueryUpdate = () => { } } = props;
 
   const classes = useStyles(props);
 
@@ -95,7 +95,7 @@ const MessageList = props => {
     onError: error => {
       alert(error)
     },
-    fetchPolicy:"network-only",
+    fetchPolicy: "network-only",
   });
 
   const [deleteMessage] = useMutation(
@@ -141,14 +141,14 @@ const MessageList = props => {
     }
   );
 
-  useEffect(() =>{
-    if (data && data.getUser){
+  useEffect(() => {
+    if (data && data.getUser) {
       const messageList = data.getUser.messages.filter((element) => element.text.toLowerCase().includes(filter.toLowerCase()))
       messageList.sort((a, b) => (new Date(a.date) < new Date(b.date)) ? -1 : 1);
       setMessages(messageList);
-      onQuery(messageList);
+      onQueryUpdate(messageList);
     }
-  }, [data, filter]);
+  }, [data, filter, onQueryUpdate]);
 
   const onDelete = (shouldDelete) => {
     if (shouldDelete) {
@@ -204,7 +204,7 @@ const MessageList = props => {
                         </Box>
                       </IconButton>
                     </TableCell>
-                    <TableCell className={rowStyle}onClick={() => {
+                    <TableCell className={rowStyle} onClick={() => {
                       setCurrentMessage(row);
                       setOpenModify(true);
                     }}>
@@ -245,4 +245,5 @@ MessageList.propTypes = {
 };
 
 export default MessageList;
-export {GET_USER_MESSAGES};
+export { GET_USER_MESSAGES };
+

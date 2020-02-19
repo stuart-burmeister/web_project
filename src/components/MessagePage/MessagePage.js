@@ -1,8 +1,8 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { Box, Grid, makeStyles } from "@material-ui/core";
 import gql from "graphql-tag";
-import React, { useState, useEffect } from "react";
-import { MessageList, SearchBar, GET_USER_MESSAGES } from "../";
+import React, { useState } from "react";
+import { GET_USER_MESSAGES, MessageList, SearchBar } from "../";
 import { MessageInput } from "./components";
 
 const ADD_NEW_MESSAGE = gql`
@@ -12,9 +12,9 @@ mutation createMessage($user: String!, $text: String!) {
 `;
 
 const useStyle = makeStyles(() => ({
-  root: { width: "100%", height: "100%", flexDirection: "row",},
-  panel: {  flex: 1, },
-  box: { flex:1,},
+  root: { width: "100%", height: "100%", flexDirection: "row", },
+  panel: { flex: 1, },
+  box: { flex: 1, },
   input__panel: { flex: 1, padding: 20, color: "#979797" },
 }))
 
@@ -25,7 +25,7 @@ const MessagePage = () => {
 
   const email = sessionStorage.getItem("currentUser");
 
-  const [addMessage, { loading: msgLoading}] = useMutation(
+  const [addMessage, { loading: msgLoading }] = useMutation(
     ADD_NEW_MESSAGE,
     {
       onCompleted: data => {

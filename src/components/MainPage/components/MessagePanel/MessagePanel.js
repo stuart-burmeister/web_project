@@ -1,7 +1,6 @@
-import { useQuery } from "@apollo/react-hooks";
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MessageList } from "../../../";
 
 const useStyle = makeStyles(() => ({
@@ -31,7 +30,7 @@ const MessagePanel = props => {
           }
         </Box>
         <Grid className={classes.message__list} item>
-          <MessageList email={email} onQuery={messages => setSize(messages.length)} maxHeight="84vh" />
+          <MessageList email={email} onQueryUpdate={messages => setSize(messages.length)} maxHeight="84vh" />
         </Grid>
       </Grid>
     </Box>
