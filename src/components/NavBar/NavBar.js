@@ -23,10 +23,30 @@ const MenuTab = withStyles(theme => ({
 }))(Tab);
 
 const useStyles = makeStyles(() => ({
-  root: { width: "100vw", height: "100vh", flexDirection: "row" },
-  container: { flexDirection: "column", height: "100%", width: 80, alignItems: "center", justifyContent: "flex-start", },
-  menu__item: { minWidth: 80, width: 80, height: 80, fontSize: 14, fontWeight: "bold", },
-  active__tab: { flex: 1, paddingLeft: 25, paddingTop: 25 },
+  root: {
+    width: "100vw",
+    height: "100vh",
+    flexDirection: "row"
+  },
+  container: {
+    flexDirection: "column",
+    height: "100%",
+    width: 80,
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  menu__item: {
+    minWidth: 80,
+    width: 80,
+    height: 80,
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  active__tab: {
+    flex: 1,
+    paddingLeft: 25,
+    paddingTop: 25
+  },
 }));
 
 const NavBar = props => {
