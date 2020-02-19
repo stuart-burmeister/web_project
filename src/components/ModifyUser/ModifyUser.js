@@ -31,14 +31,14 @@ const ModifyUser = props => {
   const { name, email, onCancel } = props;
 
   const classes = useStyles();
-  
+
   const [openDialog, setOpenDialog] = useState(false);
   const [inputName, setInputName] = useState(name);
   const [inputEmail, setInputEmail] = useState(email);
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
-  const [deleteUser, {loading: deleteLoading}] = useMutation(
+  const [deleteUser, { loading: deleteLoading }] = useMutation(
     DELETE_USER,
     {
       onCompleted: data => {
@@ -51,7 +51,7 @@ const ModifyUser = props => {
       refetchQueries: [{ query: SEARCH_USERS },],
     }
   );
-  const [createUser, {loading : createLoading}] = useMutation(
+  const [createUser, { loading: createLoading }] = useMutation(
     CREATE_USER,
     {
       onCompleted: data => {
@@ -64,7 +64,7 @@ const ModifyUser = props => {
       awaitRefetchQueries: true,
     }
   );
-  
+
   const [updateUser] = useMutation(
     DELETE_USER,
     {

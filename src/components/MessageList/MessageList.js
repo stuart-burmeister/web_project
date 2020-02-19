@@ -77,7 +77,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const MessageList = props => {
-  const { email, filter = "", onQueryUpdate = () => { } } = props;
+  const { email, filter = "", onQuery = () => { } } = props;
 
   const classes = useStyles(props);
 
@@ -143,12 +143,13 @@ const MessageList = props => {
 
   useEffect(() => {
     if (data && data.getUser) {
-      const messageList = data.getUser.messages.filter((element) => element.text.toLowerCase().includes(filter.toLowerCase()))
+      const messageList = data.getUser.messages.filter(({ text }) => text.toLowerCase().includes(filter.toLowerCase()))
       messageList.sort((a, b) => (new Date(a.date) < new Date(b.date)) ? -1 : 1);
       setMessages(messageList);
-      onQueryUpdate(messageList);
     }
-  }, [data, filter, onQueryUpdate]);
+  }, [data, filter]);
+  onQuery(messages);
+
 
   const onDelete = (shouldDelete) => {
     if (shouldDelete) {
@@ -246,4 +247,3 @@ MessageList.propTypes = {
 
 export default MessageList;
 export { GET_USER_MESSAGES };
-
