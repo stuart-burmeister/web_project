@@ -12,10 +12,18 @@ mutation createMessage($user: String!, $text: String!) {
 `;
 
 const useStyle = makeStyles(() => ({
-  root: { width: "100%", height: "100%", flexDirection: "row", },
+  root: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "row",
+  },
   panel: { flex: 1, },
-  box: { flex: 1, },
-  input__panel: { flex: 1, padding: 20, color: "#979797" },
+  box: { height: "100%", },
+  input__panel: {
+    flex: 1,
+    padding: 20,
+    color: "#979797"
+  },
 }))
 
 const MessagePage = () => {
@@ -41,29 +49,30 @@ const MessagePage = () => {
   const isLoading = msgLoading;
 
   return (
-    <Grid className={classes.root} container spacing={3}>
-      <Grid className={classes.panel} item>
-        <Box className={classes.box} border={1} borderColor={"#979797"}>
-          <Box className={classes.input__panel} borderBottom={1}>
-            <MessageInput isLoading={isLoading} setMessage={(msg) => {
-              const newMessage = { user: email, text: msg };
-              if (!msg){
-                return;
-              }
-              addMessage({ variables: newMessage });
-            }} />
+    <Box className={classes.root}>
+      <Grid className={classes.root} container spacing={3}>
+        <Grid className={classes.panel} item>
+          <Box className={classes.box} border={1} borderColor={"#979797"}>
+            <Box className={classes.input__panel} borderBottom={1}>
+              <MessageInput isLoading={isLoading} setMessage={(msg) => {
+                const newMessage = { user: email, text: msg };
+                if (!msg) {
+                  return;
+                }
+                addMessage({ variables: newMessage });
+              }} />
+            </Box>
+            <Box className={classes.input__panel} borderBottom={1}>
+              <SearchBar setFilter={(newFilter) => setFilter(newFilter)} />
+            </Box>
+            <Box>
+              <MessageList email={email} filter={filter} maxHeight="67vh" />
+            </Box>
           </Box>
-          <Box className={classes.input__panel} borderBottom={1}>
-            <SearchBar setFilter={(newFilter) => setFilter(newFilter)} />
-          </Box>
-          <Box>
-            <MessageList email={email} filter={filter} maxHeight="67vh" />
-          </Box>
-        </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    </Box>
   );
-
 };
 
 export default MessagePage;
