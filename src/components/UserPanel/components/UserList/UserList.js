@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Box, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const SEARCH_USERS = gql`
   query searchUser($username: String, $email: String) {
@@ -39,6 +39,8 @@ const UserList = props => {
 
   const classes = useStyles();
 
+  const [users, setUsers] = useState([]);
+
   const { data, loading } = useQuery(SEARCH_USERS, {
     onCompleted: () => {
     },
@@ -47,7 +49,15 @@ const UserList = props => {
     },
   });
 
-  const users = data ? data.searchUser.filter((entry) => entry.username.toLowerCase().includes(filter.toLowerCase())) : [];
+  useEffect(() =>{
+    if (data && data.searchUser){
+      setUsers(data.searchUser.filter((entry) => entry.username.toLowerCase().includes(filter.toLowerCase()))); 
+    }
+  }, [data, filter]);
+
+  users.sort((a, b) => {
+    return (a.email.toLowerCase() < b.email.toLowerCase()) ? -1 : 1;
+  });
 
   return (
     <Box className={classes.root}>

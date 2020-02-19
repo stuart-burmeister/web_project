@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Box, Grid, makeStyles } from "@material-ui/core";
 import gql from "graphql-tag";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MessageList, SearchBar } from "../";
 import { MessageInput } from "./components";
 
@@ -24,9 +24,9 @@ mutation createMessage($user: String!, $text: String!) {
 `;
 
 const useStyle = makeStyles(() => ({
-  root: { display: "flex", width: "100%", height: "100%", flexDirection: "row" },
-  box: { height: "100%", },
-  panel: { flex: 1 },
+  root: { width: "100%", height: "100%", flexDirection: "row",},
+  panel: {  flex: 1, backgroundColor:"blue" },
+  box: { flex:1, backgroundColor:"green" },
   input__panel: { flex: 1, padding: 20, color: "#979797" },
 }))
 
@@ -34,12 +34,13 @@ const MessagePage = () => {
   const classes = useStyle();
 
   const [filter, setFilter] = useState("");
+  const [messages, setMessages] = useState([]);
+
   const email = sessionStorage.getItem("currentUser");
 
   const { data, loading } = useQuery(GET_USER_MESSAGES, {
     variables: { email: email },
     onCompleted: data => {
-
     },
     onError: error => {
       alert(error)
@@ -49,7 +50,7 @@ const MessagePage = () => {
   const [addMessage] = useMutation(
     ADD_NEW_MESSAGE,
     {
-      onCompleted(complete) {
+      onCompleted: data => {
       },
       onError: error => {
         alert(error)
@@ -58,8 +59,11 @@ const MessagePage = () => {
     }
   );
 
-  const fetchedMessages = data && data.getUser ? data.getUser.messages : [];
-  const messages = fetchedMessages.filter((element) => element.text.toLowerCase().includes(filter.toLowerCase()));
+  useEffect(() =>{
+    if (data && data.getUser){
+      setMessages(data.getUser.messages.filter((element) => element.text.toLowerCase().includes(filter.toLowerCase())));
+    }
+  }, [data, filter]);
 
   return (
     <Grid className={classes.root} container spacing={3}>
