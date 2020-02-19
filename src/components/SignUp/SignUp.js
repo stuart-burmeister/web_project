@@ -1,11 +1,11 @@
 import { useMutation } from "@apollo/react-hooks";
 import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import clsx from "clsx";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { SEARCH_USERS } from "../";
-import clsx from "clsx";
 
 export const SIGNUP_USER = gql`
   mutation signUp($email: String!, $username: String!, $password: String!) {
@@ -134,7 +134,7 @@ const SignUp = props => {
         <Grid className={classes.item} item>
           <Button className={classes.button}
             variant="contained"
-            fullWidth 
+            fullWidth
             color="primary"
             onClick={() => signUpUser()}
             disabled={loading}>
@@ -142,9 +142,9 @@ const SignUp = props => {
           </Button>
         </Grid>
         <Grid className={classes.item} item>
-          <Button className={clsx(classes.button,classes.input)}
+          <Button className={clsx(classes.button, classes.input)}
             variant="contained"
-            fullWidth 
+            fullWidth
             onClick={() => onCancel()}
             color="secondary"
             disabled={loading}>
