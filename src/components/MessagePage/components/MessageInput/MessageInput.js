@@ -2,10 +2,26 @@ import { Box, Button, makeStyles, TextField } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 
+const fixedHeight = 56;
 const useStyles = makeStyles((theme) => ({
-  root: { display: "flex", width: "100%", height: "100%", paddingTop: 10 },
-  input__field: { maxWidth: 330, height: 56, flex: 1 },
-  button: { width: 56, height: 56, color: "white", backgroundColor: theme.palette.primary.main, marginLeft: 10 }
+  root: {
+    display: "flex",
+    width: "100%",
+    height: "100%",
+    paddingTop: 10
+  },
+  input__field: {
+    maxWidth: 330,
+    height: fixedHeight,
+    flex: 1
+  },
+  button: {
+    width: fixedHeight,
+    height: fixedHeight,
+    color: "white",
+    backgroundColor: theme.palette.primary.main,
+    marginLeft: 10
+  }
 }));
 
 const MessageInput = props => {
