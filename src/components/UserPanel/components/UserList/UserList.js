@@ -75,6 +75,7 @@ const UserList = props => {
           </TableHead>
           <TableBody>
             {
+              !loading &&
               users.map((row, index) => {
                 var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
                 const isRowSelected = selectedUser && row.username === selectedUser.username;

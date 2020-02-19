@@ -38,12 +38,14 @@ const MessagePage = () => {
     }
   );
 
+  const isLoading = msgLoading;
+
   return (
     <Grid className={classes.root} container spacing={3}>
       <Grid className={classes.panel} item>
         <Box className={classes.box} border={1} borderColor={"#979797"}>
           <Box className={classes.input__panel} borderBottom={1}>
-            <MessageInput setMessage={(msg) => {
+            <MessageInput isLoading={isLoading} setMessage={(msg) => {
               const newMessage = { user: email, text: msg };
               if (!msg){
                 return;

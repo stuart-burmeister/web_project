@@ -17,7 +17,8 @@ const useStyle = makeStyles(() => ({
 
 const MainPage = () => {
   const classes = useStyle();
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null);
+  
   return (
     <Grid className={classes.root} container spacing={3}>
       <Grid className={classes.user__panel} item>

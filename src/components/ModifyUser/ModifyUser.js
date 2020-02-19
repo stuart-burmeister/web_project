@@ -64,8 +64,7 @@ const ModifyUser = props => {
       awaitRefetchQueries: true,
     }
   );
-
-  const [updateUser] = useMutation(
+  const [updateUser, {loading: updateLoading}] = useMutation(
     DELETE_USER,
     {
       onCompleted: data => {
@@ -94,6 +93,8 @@ const ModifyUser = props => {
     }
   };
 
+  const isLoading = deleteLoading || createLoading || updateLoading;
+
   useEffect(() => {
     setInputName(name);
     setInputEmail(email);
@@ -112,6 +113,7 @@ const ModifyUser = props => {
             <TextField className={classes.input}
               variant="outlined"
               label="EMAIL"
+              disabled={isLoading}
               value={inputEmail}
               onChange={(event) => setInputEmail(event.target.value)}
               InputLabelProps={{ shrink: true, className: classes.input }} />
@@ -122,6 +124,7 @@ const ModifyUser = props => {
             <TextField className={classes.input}
               variant="outlined"
               label="NAME"
+              disabled={isLoading}
               value={inputName}
               onChange={(event) => setInputName(event.target.value)}
               InputLabelProps={{ shrink: true, className: classes.input }} />
@@ -131,6 +134,7 @@ const ModifyUser = props => {
           <form>
             <TextField variant="outlined" className={classes.input}
               label="PASSWORD"
+              disabled={isLoading}
               onChange={(event) => setPassword(event.target.value)}
               InputLabelProps={{ shrink: true, className: classes.input }}
               type="password" />
@@ -140,23 +144,24 @@ const ModifyUser = props => {
           <form>
             <TextField variant="outlined" className={classes.input}
               label="PASSWORD CONFIRM"
+              disabled={isLoading}
               onChange={(event) => setConfirm(event.target.value)}
               InputLabelProps={{ shrink: true, className: classes.input }}
               type="password" />
           </form>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="primary" onClick={() => onModify()}>
+          <Button variant="contained" fullWidth className={classes.button} color="primary" disabled={isLoading} onClick={() => onModify()}>
             Save
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="secondary" onClick={() => setOpenDialog(true)}>
+          <Button variant="contained" fullWidth className={classes.button} color="secondary" disabled={isLoading} onClick={() => setOpenDialog(true)}>
             Delete
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="secondary" onClick={() => onCancel()}>
+          <Button variant="contained" fullWidth className={classes.button} color="secondary" disabled={isLoading} onClick={() => onCancel()}>
             Cancel
           </Button>
         </Grid>

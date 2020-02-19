@@ -9,18 +9,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MessageInput = props => {
-  const { setMessage } = props;
+  const { setMessage, isLoading } = props;
 
   const classes = useStyles();
 
   const [inputVal, setInputVal] = useState("");
-  
+
   return (
     <Box className={classes.root}>
-      <TextField className={classes.input__field} variant="outlined" label="Text" onChange={({ target }) => setInputVal(target.value)} value={inputVal} />
-      <Button className={classes.button} onClick={() => {
-        setMessage(inputVal)
-        setInputVal("")
+      <TextField className={classes.input__field} variant="outlined" label="Text" disabled={isLoading} onChange={({ target }) => setInputVal(target.value)} value={inputVal} />
+      <Button className={classes.button} disabled={isLoading} onClick={() => {
+        setMessage(inputVal);
+        setInputVal("");
       }}>
         Save
       </Button>
@@ -30,6 +30,7 @@ const MessageInput = props => {
 
 MessageInput.propTypes = {
   setMessage: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
 };
 
 export default MessageInput;

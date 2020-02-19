@@ -17,6 +17,7 @@ const MessagePanel = props => {
   const classes = useStyle();
 
   const [size, setSize] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <Box className={classes.root} >
@@ -25,12 +26,15 @@ const MessagePanel = props => {
           {
             title && (
               <Typography className={classes.heading}>
-                Total: {size}
+                Total: {!isLoading && size}
               </Typography>)
           }
         </Box>
         <Grid className={classes.message__list} item>
-          <MessageList email={email} onQuery={messages => setSize(messages.length)} maxHeight="84vh" />
+          <MessageList email={email} onQuery={(messages, loading) => {
+            setSize(messages.length);
+            setIsLoading(loading);
+            }} maxHeight="84vh" />
         </Grid>
       </Grid>
     </Box>
@@ -40,6 +44,7 @@ const MessagePanel = props => {
 MessagePanel.propTypes = {
   title: PropTypes.bool,
   email: PropTypes.string.isRequired,
+  setIsLoading: PropTypes.func,
 };
 
 export default MessagePanel;

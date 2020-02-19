@@ -146,8 +146,10 @@ const MessageList = props => {
       setMessages(messageList);
     }
   }, [data, filter]);
-  onQuery(messages);
 
+  useEffect(() => {
+    onQuery(messages, loading);
+  }, [loading, messages, onQuery]);
 
   const onDelete = (shouldDelete) => {
     if (shouldDelete) {
@@ -194,6 +196,7 @@ const MessageList = props => {
           </TableHead>
           <TableBody>
             {
+              !loading &&
               messages.map((row, index) => {
                 var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
                 if (currentMessage && currentMessage.id === row.id) {
