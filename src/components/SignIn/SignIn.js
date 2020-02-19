@@ -12,13 +12,37 @@ export const SIGNIN_USER = gql`
 `;
 
 const useStyles = makeStyles(() => ({
-  root: { display: "flex", flex: 1, height: "100%", position: "relative", },
-  container: { flexDirection: "column", flex: 1, alignItems: "center", justifyContent: "center", },
+  root: {
+    display: "flex",
+    flex: 1,
+    height: "100%",
+    position: "relative",
+  },
+  container: {
+    flexDirection: "column",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   item: { width: 380, },
-  header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
-  input: { width: "100%", fontSize: 14 },
-  button: { color: "#ffffff", fontSize: 14 },
-  link: { alignSelf: "left", fontSize: 14 }
+  header: {
+    textAlign: "center",
+    color: "#00897b",
+    fontSize: 24,
+    fontWeight: "bold"
+  },
+  input: {
+    width: "100%",
+    fontSize: 14
+  },
+  button: {
+    color: "#ffffff",
+    fontSize: 14
+  },
+  link: {
+    alignSelf: "left",
+    fontSize: 14
+  }
 }));
 
 const SignIn = props => {
@@ -53,7 +77,10 @@ const SignIn = props => {
 
   return (
     <Box className={classes.root}>
-      <Grid className={classes.container} container direction="column" spacing={2}>
+      <Grid className={classes.container}
+        container
+        direction="column"
+        spacing={2}>
         <Grid item className={classes.item}>
           <Typography className={classes.header}>
             Sign In
@@ -78,13 +105,19 @@ const SignIn = props => {
           </form>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="primary"
-          onClick={() => signInAccount()} disabled={loading}>
+          <Button variant="contained"
+            fullWidth
+            className={classes.button}
+            color="primary"
+            onClick={() => signInAccount()}
+            disabled={loading}>
             Sign In
           </Button>
         </Grid>
         <Grid item className={classes.item}>
-          <Button className={classes.link} onClick={() => onSignUpClick()} disabled={loading}>
+          <Button className={classes.link}
+            onClick={() => onSignUpClick()}
+            disabled={loading}>
             Sign up
           </Button>
         </Grid>
