@@ -29,7 +29,7 @@ const UserPage = () => {
     }
   };
 
-  var inputClass = (<SignUp onCancel={() => { }} onSignUp={() => { }} />);
+  var inputClass = (<SignUp onCancel={() => { }} onSignUp={() => { }} useBackdrop={true} />);
   if (selectedUser !== null) {
     inputClass = <ModifyUser name={currentName} email={currentEmail}
       onCancel={() => changeUser(null)} />

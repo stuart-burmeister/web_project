@@ -5,7 +5,7 @@ import clsx from "clsx";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { SEARCH_USERS } from "../";
+import { Backdrop, SEARCH_USERS } from "../";
 
 export const SIGNUP_USER = gql`
   mutation signUp($email: String!, $username: String!, $password: String!) {
@@ -41,10 +41,11 @@ const useStyles = makeStyles(() => ({
 }));
 
 const SignUp = props => {
-  const { onSignUp, onCancel } = props;
+  const { onSignUp, useBackdrop = false, onCancel } = props;
 
   const classes = useStyles();
 
+  const [openBackdrop, setOpenBackdrop] = useState(useBackdrop);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -80,6 +81,9 @@ const SignUp = props => {
 
   return (
     <Box className={classes.root}>
+      <Backdrop open={openBackdrop}
+        title="Welcome to Vatech!"
+        onClick={() => setOpenBackdrop(false)}/>
       <Grid className={classes.container}
         container
         direction="column"
@@ -145,7 +149,7 @@ const SignUp = props => {
           <Button className={clsx(classes.button, classes.input)}
             variant="contained"
             fullWidth
-            onClick={() => onCancel()}
+            onClick={() => useBackdrop ? setOpenBackdrop(true) : onCancel()}
             color="secondary"
             disabled={loading}>
             Cancel
@@ -158,7 +162,7 @@ const SignUp = props => {
 
 SignUp.propTypes = {
   onSignUp: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  openBackdrop: PropTypes.bool,
 }
 
 export default SignUp;
