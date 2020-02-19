@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { GET_USER_MESSAGES, MessageList } from "../../../";
+import { MessageList } from "../../../";
 
 const useStyle = makeStyles(() => ({
   root: { display: "flex", width: "100%", height: "100%", flexDirection: "column" },
@@ -17,23 +17,7 @@ const MessagePanel = props => {
 
   const classes = useStyle();
 
-  const [messages, setMessages] = useState([]);
-
-  const { data, loading } = useQuery(GET_USER_MESSAGES, {
-    variables: { email: email },
-    onCompleted: data => {
-    },
-    onError: error => {
-      alert(error)
-    },
-    fetchPolicy: "network-only",
-  });
-  
-  useEffect(() => {
-    if (data && data.getUser) {
-      setMessages(data.getUser.messages);
-    }
-  }, [data]);
+  const [size, setSize] = useState(0);
 
   return (
     <Box className={classes.root} >
@@ -42,12 +26,12 @@ const MessagePanel = props => {
           {
             title && (
               <Typography className={classes.heading}>
-                Total: {messages.length}
+                Total: {size}
               </Typography>)
           }
         </Box>
         <Grid className={classes.message__list} item>
-          <MessageList messages={messages} email={email} maxHeight="84vh" />
+          <MessageList email={email} onQuery={messages => setSize(messages.length)} maxHeight="84vh" />
         </Grid>
       </Grid>
     </Box>

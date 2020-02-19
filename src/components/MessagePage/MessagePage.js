@@ -2,20 +2,8 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Box, Grid, makeStyles } from "@material-ui/core";
 import gql from "graphql-tag";
 import React, { useState, useEffect } from "react";
-import { MessageList, SearchBar } from "../";
+import { MessageList, SearchBar, GET_USER_MESSAGES } from "../";
 import { MessageInput } from "./components";
-
-const GET_USER_MESSAGES = gql`
-query getMessages($email: String!) {
-  getUser(email: $email) {
-    messages{
-      text
-      date
-      id
-    }
-  }
-}
-`;
 
 const ADD_NEW_MESSAGE = gql`
 mutation createMessage($user: String!, $text: String!) {
@@ -25,8 +13,8 @@ mutation createMessage($user: String!, $text: String!) {
 
 const useStyle = makeStyles(() => ({
   root: { width: "100%", height: "100%", flexDirection: "row",},
-  panel: {  flex: 1, backgroundColor:"blue" },
-  box: { flex:1, backgroundColor:"green" },
+  panel: {  flex: 1, },
+  box: { flex:1,},
   input__panel: { flex: 1, padding: 20, color: "#979797" },
 }))
 
@@ -34,20 +22,10 @@ const MessagePage = () => {
   const classes = useStyle();
 
   const [filter, setFilter] = useState("");
-  const [messages, setMessages] = useState([]);
 
   const email = sessionStorage.getItem("currentUser");
 
-  const { data, loading } = useQuery(GET_USER_MESSAGES, {
-    variables: { email: email },
-    onCompleted: data => {
-    },
-    onError: error => {
-      alert(error)
-    }
-  });
-
-  const [addMessage] = useMutation(
+  const [addMessage, { loading: msgLoading}] = useMutation(
     ADD_NEW_MESSAGE,
     {
       onCompleted: data => {
@@ -55,15 +33,10 @@ const MessagePage = () => {
       onError: error => {
         alert(error)
       },
-      refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } }]
+      refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } }],
+      awaitRefetchQueries: true,
     }
   );
-
-  useEffect(() =>{
-    if (data && data.getUser){
-      setMessages(data.getUser.messages.filter((element) => element.text.toLowerCase().includes(filter.toLowerCase())));
-    }
-  }, [data, filter]);
 
   return (
     <Grid className={classes.root} container spacing={3}>
@@ -79,7 +52,7 @@ const MessagePage = () => {
             <SearchBar setFilter={(newFilter) => setFilter(newFilter)} />
           </Box>
           <Box>
-            <MessageList messages={messages} email={email} maxHeight="67vh" />
+            <MessageList email={email} filter={filter} maxHeight="67vh" />
           </Box>
         </Box>
       </Grid>
@@ -89,5 +62,5 @@ const MessagePage = () => {
 };
 
 export default MessagePage;
-export { ADD_NEW_MESSAGE, GET_USER_MESSAGES };
+export { ADD_NEW_MESSAGE };
 

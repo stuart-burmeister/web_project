@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ModifyDialog = props => {
-  const { open, message, onClose } = props;
+  const { open, message, onClose, onChange } = props;
   
   const classes = useStyles();
 
@@ -23,7 +23,10 @@ const ModifyDialog = props => {
         <DialogTitle disableTypography className={classes.title}>
           Modify
         </DialogTitle>
-        <TextField className={classes.text__field} variant="outlined" value={currentText} onChange={(event) => setCurrentText(event.target.value)} />
+        <TextField className={classes.text__field} variant="outlined" value={currentText}
+          onChange={(event) => {
+            setCurrentText(event.target.value);
+            }} />
         <DialogActions>
           <Button className={classes.button} variant="contained" color="primary" onClick={() => onClose(true, currentText)}>
             Yes

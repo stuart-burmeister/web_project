@@ -1,1 +1,1 @@
-export { default } from "./MessageList";
+export { default, GET_USER_MESSAGES } from "./MessageList";

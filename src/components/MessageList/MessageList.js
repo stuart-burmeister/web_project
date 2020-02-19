@@ -1,9 +1,21 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Box, IconButton, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
-import { ADD_NEW_MESSAGE, DeleteDialog, GET_USER_MESSAGES, ModifyDialog } from "..";
+import React, { useState, useEffect } from "react";
+import { ADD_NEW_MESSAGE, DeleteDialog, ModifyDialog } from "..";
+
+const GET_USER_MESSAGES = gql`
+query getMessages($email: String!) {
+  getUser(email: $email) {
+    messages{
+      text
+      date
+      id
+    }
+  }
+}
+`;
 
 const DELETE_MESSSAGE = gql`
   mutation deleteMessage($id: ID!) {
@@ -65,40 +77,78 @@ const useStyles = makeStyles(() => ({
 }));
 
 const MessageList = props => {
-  const { messages, email } = props;
+  const { email, filter ="", onQuery = ()=>{}} = props;
 
   const classes = useStyles(props);
-  
+
+  const [messages, setMessages] = useState([]);
   const [currentMessage, setCurrentMessage] = useState({ id: "", text: "", user: undefined });
   const [openDelete, setOpenDelete] = useState(false);
   const [openModify, setOpenModify] = useState(false);
+  const [newMessage, setNewMessage] = useState("");
+
+
+  const { data, loading } = useQuery(GET_USER_MESSAGES, {
+    variables: { email: email },
+    onCompleted: data => {
+    },
+    onError: error => {
+      alert(error)
+    },
+    fetchPolicy:"network-only",
+  });
 
   const [deleteMessage] = useMutation(
     DELETE_MESSSAGE,
     {
-      onCompleted(complete) {
+      onCompleted: complete => {
         setOpenDelete(false);
         setOpenModify(false);
         setCurrentMessage({ id: "", text: "", user: undefined });
       },
-      onError(error) {
+      onError: error => {
         alert("Error when deleting: " + error.message);
       },
       refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } },],
+      awaitRefetchQueries: true,
     }
   );
 
   const [createMessage] = useMutation(
     ADD_NEW_MESSAGE,
     {
-      onCompleted(complete) {
+      onCompleted: data => {
+        setOpenModify(false);
+        setCurrentMessage({ id: "", text: "", user: undefined });
       },
-      onError(error) {
-        alert("Error when modifying: " + error.message);
+      onError: error => {
+        alert("Error when overwriting: " + error.message);
       },
       refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } },],
+      awaitRefetchQueries: true,
     }
-  )
+  );
+
+  const [updateMessage] = useMutation(
+    DELETE_MESSSAGE,
+    {
+      onCompleted: data => {
+        createMessage({ variables: { user: email, text: newMessage } });
+      },
+      onError: error => {
+        alert("Error when updating,: " + error.message);
+      },
+    }
+  );
+
+  useEffect(() =>{
+    if (data && data.getUser){
+      const messageList = data.getUser.messages.filter((element) => element.text.toLowerCase().includes(filter.toLowerCase()))
+      messageList.sort((a, b) => (new Date(a.date) < new Date(b.date)) ? -1 : 1);
+      setMessages(messageList);
+      onQuery(messageList);
+    }
+  }, [data, filter]);
 
   const onDelete = (shouldDelete) => {
     if (shouldDelete) {
@@ -111,9 +161,8 @@ const MessageList = props => {
 
   const onModify = (shouldModify, newText) => {
     if (shouldModify) {
-      deleteMessage({ variables: { id: currentMessage.id } }).then(() => {
-        createMessage({ variables: { user: email, text: newText } });
-      })
+      setNewMessage(newText);
+      updateMessage({ variables: { id: currentMessage.id } });
     }
     else {
       setCurrentMessage({ id: "", text: "", user: undefined });
@@ -186,14 +235,11 @@ const FORMAT_DATE = (date) => {
 };
 
 MessageList.propTypes = {
-  messages: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.any.isRequired,
-    text: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    user: PropTypes.any,
-  })),
   email: PropTypes.string.isRequired,
+  filter: PropTypes.string,
+  onQuery: PropTypes.func,
   maxHeight: PropTypes.string,
 };
 
 export default MessageList;
+export {GET_USER_MESSAGES};

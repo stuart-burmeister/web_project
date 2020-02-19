@@ -1,7 +1,7 @@
 export { default as DeleteDialog } from "./DeleteDialog";
 export { default as MainPage } from "./MainPage";
-export { default as MessageList } from "./MessageList";
-export { ADD_NEW_MESSAGE, default as MessagePage, GET_USER_MESSAGES } from "./MessagePage";
+export { default as MessageList, GET_USER_MESSAGES } from "./MessageList";
+export { ADD_NEW_MESSAGE, default as MessagePage } from "./MessagePage";
 export { default as ModifyDialog } from "./ModifyDialog";
 export { default as ModifyUser } from "./ModifyUser";
 export { default as NavBar } from "./NavBar";
