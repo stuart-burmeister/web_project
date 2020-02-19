@@ -30,7 +30,7 @@ const MessagePanel = props => {
           }
         </Box>
         <Grid className={classes.message__list} item>
-          <MessageList email={email} onQueryUpdate={messages => setSize(messages.length)} maxHeight="84vh" />
+          <MessageList email={email} onQuery={messages => setSize(messages.length)} maxHeight="84vh" />
         </Grid>
       </Grid>
     </Box>
