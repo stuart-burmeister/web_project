@@ -82,7 +82,7 @@ const UserList = props => {
                   rowStyle = classes.selected__row;
                 }
                 return (
-                  <TableRow key={"row-" + index} selected={isRowSelected} hover onClick={() => onSelect(row)}>
+                  <TableRow key={"row-" + index} selected={isRowSelected} hover onClick={() => onSelect(isRowSelected ? null : row)}>
                     <TableCell className={rowStyle}>
                       {row.email}
                     </TableCell>

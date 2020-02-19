@@ -159,9 +159,8 @@ const MessageList = props => {
   };
 
   const onModify = (shouldModify, newText) => {
-
-    if (shouldModify) {
-      if (!newText){
+    if (shouldModify && newText !== currentMessage.text) {
+      if (!newText) {
         return;
       }
       setNewMessage(newText);
@@ -171,6 +170,11 @@ const MessageList = props => {
       setCurrentMessage({ id: "", text: "", user: undefined });
     }
     setOpenModify(false);
+  }
+
+  const onClick = (message, setOpenDialog) => {
+    setCurrentMessage(message);
+    setOpenDialog(true);
   }
 
   return (
@@ -198,25 +202,16 @@ const MessageList = props => {
                 return (
                   <TableRow key={"row-" + index} >
                     <TableCell className={rowStyle}>
-                      <IconButton className={classes.oval} onClick={() => {
-                        setCurrentMessage(row);
-                        setOpenDelete(true);
-                      }} >
+                      <IconButton className={classes.oval} onClick={() => onClick(row, setOpenDelete)} >
                         <Box >
                           X
                         </Box>
                       </IconButton>
                     </TableCell>
-                    <TableCell className={rowStyle} onClick={() => {
-                      setCurrentMessage(row);
-                      setOpenModify(true);
-                    }}>
+                    <TableCell className={rowStyle} onClick={() => onClick(row, setOpenModify)}>
                       {FORMAT_DATE(row.date)}
                     </TableCell>
-                    <TableCell className={rowStyle} onClick={() => {
-                      setCurrentMessage(row);
-                      setOpenModify(true);
-                    }}>
+                    <TableCell className={rowStyle} onClick={() => onClick(row, setOpenModify)}>
                       {row.text}
                     </TableCell>
                   </TableRow>
