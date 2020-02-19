@@ -1,7 +1,6 @@
-import { useQuery } from "@apollo/react-hooks";
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MessageList } from "../../../";
 
 const useStyle = makeStyles(() => ({
