@@ -31,7 +31,7 @@ const MessagePage = () => {
       onCompleted: data => {
       },
       onError: error => {
-        alert(error)
+        alert(`Adding message failed: ${error.message}`)
       },
       refetchQueries: [{ query: GET_USER_MESSAGES, variables: { email: email } }],
       awaitRefetchQueries: true,

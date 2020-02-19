@@ -1,30 +1,39 @@
 import { Box } from "@material-ui/core";
+import PropTypes from "prop-types";
 import React from "react";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { SignIn, SignUp } from "../../components";
 
-const SigninRoute = () => {
+const SigninRoute = props => {
+  const { isSignedIn, onSignIn } = props;
   let history = useHistory();
-  const isSignedIn = sessionStorage.getItem('isSignedIn');
   return (
     <Switch>
       {
         isSignedIn &&
-        <Route path="/" render={() =>  <Redirect to="/main" />}/>
+        <Route path="/" render={() => <Redirect to="/main" />} />
       }
       <Route exact path="/" render={() => <Redirect to="/signin" />} />
       <Route path="/signin">
-        <Box style={{display: "flex", height: "100vh"}}>
-          <SignIn onSignIn={() => history.push("/main")} onSignUpClick={() => history.push("/signup")} />
+        <Box style={{ display: "flex", height: "100vh" }}>
+          <SignIn onSignIn={() => {
+            history.push("/main");
+            onSignIn();
+            }} onSignUpClick={() => history.push("/signup")} />
         </Box>
       </Route>
       <Route path="/signup">
-        <Box style={{display: "flex", height: "100vh"}}>
+        <Box style={{ display: "flex", height: "100vh" }}>
           <SignUp onSignUp={() => history.push("/signin")} onCancel={() => history.push("/signin")} />
         </Box>
       </Route>
     </Switch>
   );
+};
+
+SigninRoute.propTypes = {
+  isSignedIn: PropTypes.string.isRequired,
+  onSignIn: PropTypes.func.isRequired,
 };
 
 export default SigninRoute;

@@ -1,14 +1,15 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { MainPage, MessagePage, NavBar, UserPage } from "../../components";
 
-const NavRoute = () => {
-  const isSignedIn = sessionStorage.getItem('isSignedIn');
+const NavRoute = props => {
+  const { isSignedIn } = props;
   return (
     <Switch>
       {
         !isSignedIn &&
-        <Route path="/" render={() =>  <Redirect to="/signin" />}/>
+        <Route path="/" render={() => <Redirect to="/signin" />} />
       }
       <Route path="/main">
         <NavBar tabIndex={0}>
@@ -28,5 +29,9 @@ const NavRoute = () => {
     </Switch>
   );
 }
+
+NavRoute.propTypes = {
+  isSignedIn: PropTypes.string.isRequired,
+};
 
 export default NavRoute;

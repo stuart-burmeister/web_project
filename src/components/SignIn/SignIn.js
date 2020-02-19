@@ -38,7 +38,7 @@ const SignIn = props => {
         onSignIn();
       },
       onError: error => {
-        alert("Sigin failed: " + error.message);
+        alert("Signin failed: " + error.message);
       }
     }
   );

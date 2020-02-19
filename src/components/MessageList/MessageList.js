@@ -93,7 +93,7 @@ const MessageList = props => {
     onCompleted: data => {
     },
     onError: error => {
-      alert(error)
+      alert(`Fetching message failed for ${email}: ${error.message}`);
     },
     fetchPolicy: "network-only",
   });
