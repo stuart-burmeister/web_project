@@ -4,10 +4,20 @@ import React, { useState } from "react";
 import { MessageList } from "../../../";
 
 const useStyle = makeStyles(() => ({
-  root: { display: "flex", width: "100%", height: "100%", flexDirection: "column" },
-  container: { display: "flex", flexDirection: "column", flex: 0.5, width: "100%", },
-  box: { flex: 1, padding: 20, },
-  heading: { fontFamily: "AppleSDGothicNeo-Bold", fontWeight: "bold", fontSize: 24, color: 'black' },
+  root: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  box: {
+    flex: 1,
+    padding: 20,
+  },
+  heading: {
+    fontFamily: "AppleSDGothicNeo-Bold",
+    fontWeight: "bold",
+    fontSize: 24,
+    color: 'black'
+  },
   message__list: { flex: 9, },
 }));
 
@@ -17,20 +27,24 @@ const MessagePanel = props => {
   const classes = useStyle();
 
   const [size, setSize] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <Box className={classes.root} >
-      <Grid className={classes.container} container>
+    <Box>
+      <Grid className={classes.root} container>
         <Box className={classes.box} color={"#979797"} borderBottom={1} >
           {
             title && (
               <Typography className={classes.heading}>
-                Total: {size}
+                Total: {!isLoading && size}
               </Typography>)
           }
         </Box>
         <Grid className={classes.message__list} item>
-          <MessageList email={email} onQueryUpdate={messages => setSize(messages.length)} maxHeight="84vh" />
+          <MessageList email={email} onQuery={(messages, loading) => {
+            setSize(messages.length);
+            setIsLoading(loading);
+          }} maxHeight="84vh" />
         </Grid>
       </Grid>
     </Box>
@@ -40,6 +54,7 @@ const MessagePanel = props => {
 MessagePanel.propTypes = {
   title: PropTypes.bool,
   email: PropTypes.string.isRequired,
+  setIsLoading: PropTypes.func,
 };
 
 export default MessagePanel;

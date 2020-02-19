@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { ADD_NEW_MESSAGE, DeleteDialog, ModifyDialog } from "..";
+import clsx from "clsx";
 
 const GET_USER_MESSAGES = gql`
 query getMessages($email: String!) {
@@ -31,41 +32,24 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
   },
   container: { maxHeight: props => props.maxHeight },
-  icon: {
-    width: 20,
+  header: {
     backgroundColor: "white",
     borderWidth: 1,
-    borderColor: "#979797"
+    borderColor: "#979797",
+  },
+  header__icon: {
+    width: 20,
   },
   header__date: {
     width: "30%",
-    fontWeight: "bold",
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "#979797"
   },
-  header__name: {
-    fontWeight: "bold",
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "#979797"
-  },
-  odd__row: {
-    backgroundColor: "white",
+  font: {
     fontWeight: "bold",
     fontSize: 14
   },
-  even__row: {
-    backgroundColor: "#979797",
-    fontWeight: "bold",
-    fontSize: 14
-  },
-  selected__row: {
-    backgroundColor: "#73bbff",
-    fontWeight: "bold",
-    fontSize: 14
-  },
-  oval: {
+  even__row: { backgroundColor: "#979797", },
+  selected__row: { backgroundColor: "#73bbff", },
+  delete__icon: {
     display: "flex",
     flexDirection: "column",
     width: "16px",
@@ -93,7 +77,7 @@ const MessageList = props => {
     onCompleted: data => {
     },
     onError: error => {
-      alert(error)
+      alert(`Fetching message failed for ${email}: ${error.message}`);
     },
     fetchPolicy: "network-only",
   });
@@ -113,7 +97,6 @@ const MessageList = props => {
       awaitRefetchQueries: true,
     }
   );
-
   const [createMessage] = useMutation(
     ADD_NEW_MESSAGE,
     {
@@ -128,7 +111,6 @@ const MessageList = props => {
       awaitRefetchQueries: true,
     }
   );
-
   const [updateMessage] = useMutation(
     DELETE_MESSSAGE,
     {
@@ -148,8 +130,10 @@ const MessageList = props => {
       setMessages(messageList);
     }
   }, [data, filter]);
-  onQuery(messages);
 
+  useEffect(() => {
+    onQuery(messages, loading);
+  }, [loading, messages, onQuery]);
 
   const onDelete = (shouldDelete) => {
     if (shouldDelete) {
@@ -161,7 +145,10 @@ const MessageList = props => {
   };
 
   const onModify = (shouldModify, newText) => {
-    if (shouldModify) {
+    if (shouldModify && newText !== currentMessage.text) {
+      if (!newText) {
+        return;
+      }
       setNewMessage(newText);
       updateMessage({ variables: { id: currentMessage.id } });
     }
@@ -171,23 +158,29 @@ const MessageList = props => {
     setOpenModify(false);
   }
 
+  const onClick = (message, setOpenDialog) => {
+    setCurrentMessage(message);
+    setOpenDialog(true);
+  }
+
   return (
     <Box className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader>
           <TableHead >
             <TableRow>
-              <TableCell className={classes.icon} />
-              <TableCell className={classes.header__date}>
+              <TableCell className={clsx(classes.header, classes.header__icon)} />
+              <TableCell className={clsx(classes.header, classes.header__date, classes.font)}>
                 DATE
               </TableCell>
-              <TableCell className={classes.header__name}>
+              <TableCell className={clsx(classes.header, classes.font)}>
                 TEXT
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {
+              !loading &&
               messages.map((row, index) => {
                 var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
                 if (currentMessage && currentMessage.id === row.id) {
@@ -195,26 +188,17 @@ const MessageList = props => {
                 }
                 return (
                   <TableRow key={"row-" + index} >
-                    <TableCell className={rowStyle}>
-                      <IconButton className={classes.oval} onClick={() => {
-                        setCurrentMessage(row);
-                        setOpenDelete(true);
-                      }} >
+                    <TableCell className={clsx(classes.font, rowStyle)}>
+                      <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
                         <Box >
                           X
                         </Box>
                       </IconButton>
                     </TableCell>
-                    <TableCell className={rowStyle} onClick={() => {
-                      setCurrentMessage(row);
-                      setOpenModify(true);
-                    }}>
+                    <TableCell className={clsx(classes.font, rowStyle)} onClick={() => onClick(row, setOpenModify)}>
                       {FORMAT_DATE(row.date)}
                     </TableCell>
-                    <TableCell className={rowStyle} onClick={() => {
-                      setCurrentMessage(row);
-                      setOpenModify(true);
-                    }}>
+                    <TableCell className={clsx(classes.font, rowStyle)} onClick={() => onClick(row, setOpenModify)}>
                       {row.text}
                     </TableCell>
                   </TableRow>

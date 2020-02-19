@@ -3,10 +3,26 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const useStyles = makeStyles(() => ({
-  root: { display: "flex", flex: 1, alignContent: "center", justifyContent: "center" },
-  container: { flexDirection: "column", width: 400, height: 150 },
-  title: { fontSize: 24, fontWeight: "bold", },
-  button: { color: "#ffffff", fontSize: 14, padding: 20 },
+  root: {
+    display: "flex",
+    flex: 1,
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  container: {
+    width: 400,
+    height: 150,
+    flexDirection: "column",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  button: {
+    color: "#ffffff",
+    fontSize: 14,
+    padding: 20,
+  },
 }));
 
 const DeleteDialog = props => {

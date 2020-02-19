@@ -3,6 +3,7 @@ import { Box, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
+import clsx from "clsx";
 
 const SEARCH_USERS = gql`
   query searchUser($username: String, $email: String) {
@@ -14,24 +15,29 @@ const SEARCH_USERS = gql`
 `;
 
 const useStyles = makeStyles(() => ({
-  root: { display: "flex", height: "100%", width: "100%", flexDirection: "column", },
+  root: {
+    display: "flex",
+    height: "100%",
+    width: "100%",
+    flexDirection: "column",
+  },
   container: { maxHeight: "76vh" },
+  header: {
+    fontWeight: "bold",
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: "#979797"
+  },
   header__mail: {
-    maxWidth: 250,
-    fontWeight: "bold",
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "#979797"
+    width: "30%",
   },
-  header__name: {
+  font: {
     fontWeight: "bold",
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "#979797"
+    fontSize: 14,
   },
-  odd__row: { backgroundColor: "white", fontWeight: "bold", fontSize: 14 },
-  even__row: { backgroundColor: "#979797", fontWeight: "bold", fontSize: 14 },
-  selected__row: { backgroundColor: "#73bbff", fontWeight: "bold", fontSize: 14 }
+  odd__row: { backgroundColor: "white", },
+  even__row: { backgroundColor: "#979797", },
+  selected__row: { backgroundColor: "#73bbff", }
 }));
 
 const UserList = props => {
@@ -49,13 +55,13 @@ const UserList = props => {
     },
   });
 
-  useEffect(() =>{
-    if (data && data.searchUser){
+  useEffect(() => {
+    if (data && data.searchUser) {
       const userList = data.searchUser.filter((entry) => entry.username.toLowerCase().includes(filter.toLowerCase()))
       userList.sort((a, b) => {
         return (a.email.toLowerCase() < b.email.toLowerCase()) ? -1 : 1;
       });
-      setUsers(userList); 
+      setUsers(userList);
     }
   }, [data, filter]);
 
@@ -65,16 +71,17 @@ const UserList = props => {
         <Table stickyHeader>
           <TableHead >
             <TableRow>
-              <TableCell className={classes.header__mail}>
+              <TableCell className={clsx(classes.header, classes.header__mail)}>
                 EMAIL
               </TableCell>
-              <TableCell className={classes.header__name}>
+              <TableCell className={classes.header}>
                 NAME
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {
+              !loading &&
               users.map((row, index) => {
                 var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
                 const isRowSelected = selectedUser && row.username === selectedUser.username;
@@ -82,11 +89,11 @@ const UserList = props => {
                   rowStyle = classes.selected__row;
                 }
                 return (
-                  <TableRow key={"row-" + index} selected={isRowSelected} hover onClick={() => onSelect(row)}>
-                    <TableCell className={rowStyle}>
+                  <TableRow key={"row-" + index} selected={isRowSelected} hover onClick={() => onSelect(isRowSelected ? null : row)}>
+                    <TableCell className={clsx(classes.font,rowStyle)}>
                       {row.email}
                     </TableCell>
-                    <TableCell className={rowStyle}>
+                    <TableCell className={clsx(classes.font,rowStyle)}>
                       {row.username}
                     </TableCell>
                   </TableRow>

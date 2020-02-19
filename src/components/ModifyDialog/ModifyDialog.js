@@ -3,11 +3,28 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 
 const useStyles = makeStyles(() => ({
-  root: { display: "flex", flex: 1, alignContent: "center", justifyContent: "center" },
-  container: { display: "flex", flex: 1, flexDirection: "column", width: 400, height: 200 },
-  title: { fontSize: 24, fontWeight: "bold", },
+  root: {
+    display: "flex",
+    flex: 1,
+    alignContent: "center",
+    justifyContent: "center"
+  },
+  container: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    width: 400,
+    height: 200 },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
   text__field: { margin: 20 },
-  button: { color: "#ffffff", fontSize: 14, padding: 20 },
+  button: {
+    color: "#ffffff",
+    fontSize: 14,
+    padding: 20
+  },
 }));
 
 const ModifyDialog = props => {
