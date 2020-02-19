@@ -18,14 +18,16 @@ const UserPage = () => {
 
   const changeUser = (newUser) => {
     setSelectedUser(newUser);
-    setCurrentName(newUser.username);
-    setCurrentEmail(newUser.email);
+    if(newUser){
+      setCurrentName(newUser.username);
+      setCurrentEmail(newUser.email);
+    }
   };
 
   var inputClass = (<SignUp onCancel={() => { }} onSignUp={() => { }} />);
   if (selectedUser !== null) {
     inputClass = <ModifyUser name={currentName} email={currentEmail}
-      onCancel={() => setSelectedUser(null)} />
+      onCancel={() => changeUser(null)} />
   }
 
   return (

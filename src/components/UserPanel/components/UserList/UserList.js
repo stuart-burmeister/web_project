@@ -51,13 +51,13 @@ const UserList = props => {
 
   useEffect(() =>{
     if (data && data.searchUser){
-      setUsers(data.searchUser.filter((entry) => entry.username.toLowerCase().includes(filter.toLowerCase()))); 
+      const userList = data.searchUser.filter((entry) => entry.username.toLowerCase().includes(filter.toLowerCase()))
+      userList.sort((a, b) => {
+        return (a.email.toLowerCase() < b.email.toLowerCase()) ? -1 : 1;
+      });
+      setUsers(userList); 
     }
   }, [data, filter]);
-
-  users.sort((a, b) => {
-    return (a.email.toLowerCase() < b.email.toLowerCase()) ? -1 : 1;
-  });
 
   return (
     <Box className={classes.root}>

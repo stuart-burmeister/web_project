@@ -204,7 +204,10 @@ const MessageList = props => {
                         </Box>
                       </IconButton>
                     </TableCell>
-                    <TableCell className={rowStyle}>
+                    <TableCell className={rowStyle}onClick={() => {
+                      setCurrentMessage(row);
+                      setOpenModify(true);
+                    }}>
                       {FORMAT_DATE(row.date)}
                     </TableCell>
                     <TableCell className={rowStyle} onClick={() => {
