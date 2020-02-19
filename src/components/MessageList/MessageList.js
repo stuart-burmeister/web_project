@@ -113,7 +113,6 @@ const MessageList = props => {
       awaitRefetchQueries: true,
     }
   );
-
   const [createMessage] = useMutation(
     ADD_NEW_MESSAGE,
     {
@@ -128,7 +127,6 @@ const MessageList = props => {
       awaitRefetchQueries: true,
     }
   );
-
   const [updateMessage] = useMutation(
     DELETE_MESSSAGE,
     {
@@ -161,7 +159,11 @@ const MessageList = props => {
   };
 
   const onModify = (shouldModify, newText) => {
+
     if (shouldModify) {
+      if (!newText){
+        return;
+      }
       setNewMessage(newText);
       updateMessage({ variables: { id: currentMessage.id } });
     }

@@ -45,6 +45,9 @@ const MessagePage = () => {
           <Box className={classes.input__panel} borderBottom={1}>
             <MessageInput setMessage={(msg) => {
               const newMessage = { user: email, text: msg };
+              if (!msg){
+                return;
+              }
               addMessage({ variables: newMessage });
             }} />
           </Box>

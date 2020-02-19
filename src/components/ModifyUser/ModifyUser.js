@@ -86,7 +86,10 @@ const ModifyUser = props => {
     }
   };
   const onModify = () => {
-    if (password === confirm) {
+    if (!inputEmail || !inputName || !password){
+      return;
+    }
+    if (password === confirm && password.length >0) {
       updateUser({ variables: { email: email } });
     }
   };

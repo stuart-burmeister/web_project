@@ -51,6 +51,9 @@ const SignUp = props => {
 
   const signUpUser = () => {
     const user = { username: name, email: email, password: password };
+    if (!name || !email || !password){
+      return;
+    }
     if (password === confirm) {
       signUp({ variables: user });
     }

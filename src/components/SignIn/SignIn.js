@@ -45,6 +45,9 @@ const SignIn = props => {
 
   const signInAccount = () => {
     const user = { email: email, password: password };
+    if (!email && !password){
+      return;
+    }
     signin({ variables: user });
   };
 
@@ -62,7 +65,7 @@ const SignIn = props => {
               variant="outlined"
               label="EMAIL"
               InputLabelProps={{ shrink: true, className: classes.input }}
-              onChange={(event) => setEmail(event.target.value)} />
+              onChange={(event) => setEmail(event.target.value + "")} />
           </form>
         </Grid>
         <Grid item className={classes.item}>
@@ -71,7 +74,7 @@ const SignIn = props => {
               label="PASSWORD"
               InputLabelProps={{ shrink: true, className: classes.input }}
               type="password"
-              onChange={(event) => setPassword(event.target.value)} />
+              onChange={(event) => setPassword(event.target.value + "")} />
           </form>
         </Grid>
         <Grid item className={classes.item}>
