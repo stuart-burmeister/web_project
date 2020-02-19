@@ -19,12 +19,33 @@ const CREATE_USER = gql`
 `;
 
 const useStyles = makeStyles(() => ({
-  root: { display: "flex", flex: 1, height: "100%", position: "relative", },
-  container: { flexDirection: "column", flex: 1, alignItems: "center", justifyContent: "center", },
+  root: {
+    position: "relative",
+    display: "flex",
+    flex: 1,
+    height: "100%",
+  },
+  container: {
+    flexDirection: "column",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   item: { width: 380, },
-  header: { textAlign: "center", color: "#00897b", fontSize: 24, fontWeight: "bold" },
-  input: { width: "100%", fontSize: 14, },
-  button: { color: "#ffffff", fontSize: 14 },
+  header: {
+    textAlign: "center",
+    color: "#00897b",
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  input: {
+    width: "100%",
+    fontSize: 14,
+  },
+  button: {
+    color: "#ffffff",
+    fontSize: 14,
+  },
 }));
 
 const ModifyUser = props => {
