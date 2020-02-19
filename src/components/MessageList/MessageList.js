@@ -101,7 +101,7 @@ const MessageList = props => {
   const [deleteMessage] = useMutation(
     DELETE_MESSSAGE,
     {
-      onCompleted: complete => {
+      onCompleted: data => {
         setOpenDelete(false);
         setOpenModify(false);
         setCurrentMessage({ id: "", text: "", user: undefined });

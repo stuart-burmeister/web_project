@@ -32,12 +32,12 @@ const SignIn = props => {
   const [signin, { loading }] = useMutation(
     SIGNIN_USER,
     {
-      onCompleted() {
+      onCompleted: data => {
         sessionStorage.setItem('isSignedIn', true);
         sessionStorage.setItem('currentUser', email);
         onSignIn();
       },
-      onError(error) {
+      onError: error => {
         alert("Sigin failed: " + error.message);
       }
     }
@@ -75,7 +75,8 @@ const SignIn = props => {
           </form>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="primary" onClick={() => signInAccount()}>
+          <Button variant="contained" fullWidth className={classes.button} color="primary"
+          onClick={() => signInAccount()} disabled={loading}>
             Sign In
           </Button>
         </Grid>

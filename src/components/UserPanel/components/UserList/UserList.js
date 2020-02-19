@@ -42,7 +42,7 @@ const UserList = props => {
   const [users, setUsers] = useState([]);
 
   const { data, loading } = useQuery(SEARCH_USERS, {
-    onCompleted: () => {
+    onCompleted: data => {
     },
     onError: error => {
       alert("Search failed: " + error.message);

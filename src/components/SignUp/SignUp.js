@@ -34,17 +34,18 @@ const SignUp = props => {
   const [signUp, { loading }] = useMutation(
     SIGNUP_USER,
     {
-      onCompleted(complete) {
+      onCompleted: data => {
         onSignUp();
         setEmail("");
         setName("");
         setPassword("");
         setConfirm("");
       },
-      onError(error) {
-        alert(error)
+      onError: error => {
+        alert("Sign Up failed: " + error.message);
       },
       refetchQueries: [{ query: SEARCH_USERS },],
+      awaitRefetchQueries: true,
     }
   );
 

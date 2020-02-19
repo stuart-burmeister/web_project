@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ModifyDialog = props => {
-  const { open, message, onClose, onChange } = props;
+  const { open, message, onClose, } = props;
   
   const classes = useStyles();
 

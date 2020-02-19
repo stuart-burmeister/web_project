@@ -38,28 +38,42 @@ const ModifyUser = props => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
-  const [deleteUser] = useMutation(
+  const [deleteUser, {loading: deleteLoading}] = useMutation(
     DELETE_USER,
     {
-      onCompleted() {
+      onCompleted: data => {
         setOpenDialog(false);
         onCancel()
       },
-      onError(error) {
+      onError: error => {
         alert("Could not delete user: " + error.message);
       },
       refetchQueries: [{ query: SEARCH_USERS },],
     }
   );
-  const [createUser] = useMutation(
+  const [createUser, {loading : createLoading}] = useMutation(
     CREATE_USER,
     {
-      onCompleted() {
+      onCompleted: data => {
+        onCancel()
       },
-      onError(error) {
+      onError: error => {
         alert("Could not update user: " + error.message)
       },
       refetchQueries: [{ query: SEARCH_USERS },],
+      awaitRefetchQueries: true,
+    }
+  );
+  
+  const [updateUser] = useMutation(
+    DELETE_USER,
+    {
+      onCompleted: data => {
+        createUser({ variables: { email: inputEmail, username: inputName, password: password } })
+      },
+      onError: error => {
+        alert("Could not update user: " + error.message);
+      },
     }
   );
 
@@ -73,9 +87,7 @@ const ModifyUser = props => {
   };
   const onModify = () => {
     if (password === confirm) {
-      deleteUser({ variables: { email: email } }).then(() => {
-        createUser({ variables: { email: inputEmail, username: inputName, password: password } })
-      });
+      updateUser({ variables: { email: email } });
     }
   };
 
