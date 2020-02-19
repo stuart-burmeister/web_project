@@ -143,7 +143,7 @@ const MessageList = props => {
 
   useEffect(() => {
     if (data && data.getUser) {
-      const messageList = data.getUser.messages.filter(({ text }) => text ? text.toLowerCase().includes(filter.toLowerCase()) : true)
+      const messageList = data.getUser.messages.filter(({ text }) => text.toLowerCase().includes(filter.toLowerCase()))
       messageList.sort((a, b) => (new Date(a.date) < new Date(b.date)) ? -1 : 1);
       setMessages(messageList);
     }
