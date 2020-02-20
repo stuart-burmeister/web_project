@@ -7,7 +7,10 @@ const theme = {
     secondary: { main: "#c8c8c8" },
     select: { main: "#73bbff" },
     info: { main: "#73bbff" },
-    text: { primary: "#000000", secondary: "#c8c8c8" },
+    text: {
+      primary: "#000000",
+      secondary: "#c8c8c8",
+    },
     divider: "#c8c8c8",
   },
   overrides: {
