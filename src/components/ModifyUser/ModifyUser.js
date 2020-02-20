@@ -130,46 +130,38 @@ const ModifyUser = props => {
           </Typography>
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="EMAIL"
-              disabled={isLoading}
-              value={inputEmail}
-              onChange={(event) => setInputEmail(event.target.value)}
-              InputLabelProps={{ shrink: true, className: classes.input }} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="EMAIL"
+            disabled={isLoading}
+            value={inputEmail}
+            onChange={(event) => setInputEmail(event.target.value)}
+            InputLabelProps={{ shrink: true, className: classes.input }} />
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="NAME"
-              disabled={isLoading}
-              value={inputName}
-              onChange={(event) => setInputName(event.target.value)}
-              InputLabelProps={{ shrink: true, className: classes.input }} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="NAME"
+            disabled={isLoading}
+            value={inputName}
+            onChange={(event) => setInputName(event.target.value)}
+            InputLabelProps={{ shrink: true, className: classes.input }} />
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField variant="outlined" className={classes.input}
-              label="PASSWORD"
-              disabled={isLoading}
-              onChange={(event) => setPassword(event.target.value)}
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password" />
-          </form>
+          <TextField variant="outlined" className={classes.input}
+            label="PASSWORD"
+            disabled={isLoading}
+            onChange={(event) => setPassword(event.target.value)}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            type="password" />
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField variant="outlined" className={classes.input}
-              label="PASSWORD CONFIRM"
-              disabled={isLoading}
-              onChange={(event) => setConfirm(event.target.value)}
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password" />
-          </form>
+          <TextField variant="outlined" className={classes.input}
+            label="PASSWORD CONFIRM"
+            disabled={isLoading}
+            onChange={(event) => setConfirm(event.target.value)}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            type="password" />
         </Grid>
         <Grid item className={classes.item}>
           <Button variant="contained" fullWidth className={classes.button} color="primary" disabled={isLoading} onClick={() => onModify()}>

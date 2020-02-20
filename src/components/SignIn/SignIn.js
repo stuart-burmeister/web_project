@@ -87,22 +87,18 @@ const SignIn = props => {
           </Typography>
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="EMAIL"
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              onChange={(event) => setEmail(event.target.value + "")} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="EMAIL"
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            onChange={(event) => setEmail(event.target.value + "")} />
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField variant="outlined" className={classes.input}
-              label="PASSWORD"
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password"
-              onChange={(event) => setPassword(event.target.value + "")} />
-          </form>
+          <TextField variant="outlined" className={classes.input}
+            label="PASSWORD"
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            type="password"
+            onChange={(event) => setPassword(event.target.value + "")} />
         </Grid>
         <Grid item className={classes.item}>
           <Button variant="contained"

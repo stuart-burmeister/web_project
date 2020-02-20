@@ -94,46 +94,38 @@ const SignUp = props => {
           </Typography>
         </Grid>
         <Grid className={classes.item} item>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="EMAIL"
-              value={email}
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              onChange={(event) => setEmail(event.target.value)} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="EMAIL"
+            value={email}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            onChange={(event) => setEmail(event.target.value)} />
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="NAME"
-              value={name}
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              onChange={(event) => setName(event.target.value)} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="NAME"
+            value={name}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            onChange={(event) => setName(event.target.value)} />
         </Grid>
         <Grid className={classes.item} item>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="PASSWORD"
-              value={password}
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password"
-              onChange={(event) => setPassword(event.target.value)} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="PASSWORD"
+            value={password}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            type="password"
+            onChange={(event) => setPassword(event.target.value)} />
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="PASSWORD CONFIRM"
-              value={confirm}
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password"
-              onChange={(event) => setConfirm(event.target.value)} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="PASSWORD CONFIRM"
+            value={confirm}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            type="password"
+            onChange={(event) => setConfirm(event.target.value)} />
         </Grid>
         <Grid className={classes.item} item>
           <Button className={classes.button}
