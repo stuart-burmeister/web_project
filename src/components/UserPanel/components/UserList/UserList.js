@@ -53,6 +53,8 @@ const UserList = props => {
     onError: error => {
       alert("Search failed: " + error.message);
     },
+    fetchPolicy:"network-only",
+    pollInterval: 5000,
   });
 
   useEffect(() => {
