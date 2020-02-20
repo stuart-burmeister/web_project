@@ -57,8 +57,8 @@ const CustomBackdrop = props => {
 
 Backdrop.propTypes ={
   open: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default CustomBackdrop;

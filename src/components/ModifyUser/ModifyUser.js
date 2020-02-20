@@ -59,6 +59,11 @@ const ModifyUser = props => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
+  const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmError, setConfirmError] = useState("");
+
   const [deleteUser, { loading: deleteLoading }] = useMutation(
     DELETE_USER,
     {
@@ -107,10 +112,20 @@ const ModifyUser = props => {
   };
   const onModify = () => {
     if (!inputEmail || !inputName || !password){
+      setEmailError(!inputEmail ? "Enter valid email" : "");
+      setNameError(!inputName ? "Enter valid name" : "");
+      setPasswordError(!password ? "Enter password" : "");
+      setConfirmError("");
       return;
     }
     if (password === confirm && password.length >0) {
       updateUser({ variables: { email: email } });
+    }
+    else {
+      setEmailError("");
+      setNameError("");
+      setPasswordError("");
+      setConfirmError("Passwords do not match");
     }
   };
 
@@ -134,6 +149,8 @@ const ModifyUser = props => {
             variant="outlined"
             label="EMAIL"
             disabled={isLoading}
+            error={emailError !== ""}
+            helperText={emailError}
             value={inputEmail}
             onChange={(event) => setInputEmail(event.target.value)}
             InputLabelProps={{ shrink: true, className: classes.input }} />
@@ -143,6 +160,8 @@ const ModifyUser = props => {
             variant="outlined"
             label="NAME"
             disabled={isLoading}
+            error={nameError !== ""}
+            helperText={nameError}
             value={inputName}
             onChange={(event) => setInputName(event.target.value)}
             InputLabelProps={{ shrink: true, className: classes.input }} />
@@ -151,6 +170,8 @@ const ModifyUser = props => {
           <TextField variant="outlined" className={classes.input}
             label="PASSWORD"
             disabled={isLoading}
+            error={passwordError !== ""}
+            helperText={passwordError}
             onChange={(event) => setPassword(event.target.value)}
             InputLabelProps={{ shrink: true, className: classes.input }}
             type="password" />
@@ -159,6 +180,8 @@ const ModifyUser = props => {
           <TextField variant="outlined" className={classes.input}
             label="PASSWORD CONFIRM"
             disabled={isLoading}
+            error={confirmError !== ""}
+            helperText={confirmError}
             onChange={(event) => setConfirm(event.target.value)}
             InputLabelProps={{ shrink: true, className: classes.input }}
             type="password" />
