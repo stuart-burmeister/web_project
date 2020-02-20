@@ -32,7 +32,7 @@ const SigninRoute = props => {
 };
 
 SigninRoute.propTypes = {
-  isSignedIn: PropTypes.string.isRequired,
+  isSignedIn: PropTypes.bool.isRequired,
   onSignIn: PropTypes.func.isRequired,
 };
 

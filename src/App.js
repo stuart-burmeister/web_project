@@ -7,7 +7,7 @@ import { theme } from "./themes";
 import { NavView, SignInView } from "./views";
 
 function App() {
-  const [isSignedIn, setSignedIn] = useState(sessionStorage.getItem("isSignedIn"))
+  const [isSignedIn, setSignedIn] = useState(sessionStorage.getItem("currentUser") !== null);
   return (
     <ApolloProvider>
       <Router>

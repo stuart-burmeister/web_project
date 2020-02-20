@@ -31,7 +31,7 @@ const NavRoute = props => {
 }
 
 NavRoute.propTypes = {
-  isSignedIn: PropTypes.string.isRequired,
+  isSignedIn: PropTypes.bool.isRequired,
 };
 
 export default NavRoute;
