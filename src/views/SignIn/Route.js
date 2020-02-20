@@ -11,7 +11,7 @@ const SigninRoute = props => {
     <Switch>
       {
         isSignedIn &&
-        <Route path="/" render={() => <Redirect to="/main" />} />
+        <Route exact path="/" render={() => <Redirect to="/main" />} />
       }
       <Route exact path="/" render={() => <Redirect to="/signin" />} />
       <Route path="/signin">
