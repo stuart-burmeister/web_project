@@ -13,7 +13,7 @@ function App() {
       <Router>
         <ThemeProvider theme={createMuiTheme(theme)}>
           <SignInView isSignedIn={isSignedIn} onSignIn={() =>setSignedIn(true)}/>
-          <NavView isSignedIn={isSignedIn}/>
+          <NavView isSignedIn={isSignedIn} onSignOut={() => setSignedIn(false)}/>
         </ThemeProvider>
       </Router>
     </ApolloProvider>

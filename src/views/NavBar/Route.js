@@ -4,13 +4,13 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { MainPage, MessagePage, NavBar, UserPage } from "../../components";
 
 const NavRoute = props => {
-  const { isSignedIn } = props;
+  const { isSignedIn, onSignOut } = props;
   return (
     <Switch>
-      {
+      {/* {
         !isSignedIn &&
         <Route exact path="/" render={() => <Redirect to="/signin" />} />
-      }
+      } */}
       <Route path="/main">
         <NavBar tabIndex={0}>
           <MainPage />
@@ -26,12 +26,18 @@ const NavRoute = props => {
           <MessagePage />
         </NavBar>
       </Route>
+      <Route path="/signout" render={() => {
+        sessionStorage.setItem('currentUser', null);
+        onSignOut();
+        return (<Redirect to="/signin" />);
+      }} />
     </Switch>
   );
 }
 
 NavRoute.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
+  onSignOut: PropTypes.func.isRequired,
 };
 
 export default NavRoute;

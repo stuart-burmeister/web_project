@@ -9,17 +9,18 @@ const SigninRoute = props => {
   let history = useHistory();
   return (
     <Switch>
-      {
+      {/* {
         isSignedIn &&
         <Route exact path="/" render={() => <Redirect to="/main" />} />
-      }
+      } */}
       <Route exact path="/" render={() => <Redirect to="/signin" />} />
       <Route path="/signin">
         <Box style={{ display: "flex", height: "100vh" }}>
           <SignIn onSignIn={() => {
             history.push("/main");
             onSignIn();
-            }} onSignUpClick={() => history.push("/signup")} />
+            }}
+            onSignUpClick={() => history.push("/signup")} />
         </Box>
       </Route>
       <Route path="/signup">

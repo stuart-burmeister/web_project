@@ -55,6 +55,7 @@ const NavBar = props => {
     "/main",
     "/user",
     "/message",
+    "/signin",
   ]
   let history = useHistory();
   const classes = useStyles();
@@ -70,6 +71,7 @@ const NavBar = props => {
             <MenuTab className={classes.menu__item} label="Main" />
             <MenuTab className={classes.menu__item} label="User" />
             <MenuTab className={classes.menu__item} label="Message" />
+            <MenuTab className={classes.menu__item} label="Sign Out"/>
           </VerticalTabs>
         </AppBar>
       </Grid>

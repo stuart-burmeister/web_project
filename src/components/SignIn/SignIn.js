@@ -60,7 +60,6 @@ const SignIn = props => {
     SIGNIN_USER,
     {
       onCompleted: data => {
-        sessionStorage.setItem('isSignedIn', true);
         sessionStorage.setItem('currentUser', email);
         onSignIn();
       },
