@@ -9,11 +9,6 @@ const SigninRoute = props => {
   let history = useHistory();
   return (
     <Switch>
-      {/* {
-        isSignedIn &&
-        <Route exact path="/" render={() => <Redirect to="/main" />} />
-      } */}
-      <Route exact path="/" render={() => <Redirect to="/signin" />} />
       <Route path="/signin">
         <Box style={{ display: "flex", height: "100vh" }}>
           <SignIn onSignIn={() => {
@@ -27,6 +22,9 @@ const SigninRoute = props => {
         <Box style={{ display: "flex", height: "100vh" }}>
           <SignUp onSignUp={() => history.push("/signin")} onCancel={() => history.push("/signin")} />
         </Box>
+      </Route>
+      <Route path="/">
+        <Redirect to="/signin"/>
       </Route>
     </Switch>
   );

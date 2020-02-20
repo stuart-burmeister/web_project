@@ -55,7 +55,7 @@ const NavBar = props => {
     "/main",
     "/user",
     "/message",
-    "/signin",
+    "/signout",
   ]
   let history = useHistory();
   const classes = useStyles();
