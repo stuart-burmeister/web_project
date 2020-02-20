@@ -18,10 +18,9 @@ const useStyles = makeStyles(() => ({
   button: {
     width: 56,
     height: 56,
-    color: "white",
     marginLeft: 10,
-    backgroundColor: "#c8c8c8",
   },
+  icon: { color:"white" }
 }));
 
 const SearchBar = (props) => {
@@ -40,9 +39,10 @@ const SearchBar = (props) => {
         value={inputVal}/>
       <Button
         className={classes.button}
+        variant="contained"
         color="secondary"
         onClick={() => setFilter(inputVal)}>
-        <SearchIcon fontSize="large" />
+        <SearchIcon className={classes.icon} fontSize="large" />
       </Button>
     </Box>
   );

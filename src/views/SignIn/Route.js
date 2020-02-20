@@ -11,7 +11,7 @@ const SigninRoute = props => {
     <Switch>
       {
         isSignedIn &&
-        <Route path="/" render={() => <Redirect to="/main" />} />
+        <Route exact path="/" render={() => <Redirect to="/main" />} />
       }
       <Route exact path="/" render={() => <Redirect to="/signin" />} />
       <Route path="/signin">
@@ -32,7 +32,7 @@ const SigninRoute = props => {
 };
 
 SigninRoute.propTypes = {
-  isSignedIn: PropTypes.string.isRequired,
+  isSignedIn: PropTypes.bool.isRequired,
   onSignIn: PropTypes.func.isRequired,
 };
 

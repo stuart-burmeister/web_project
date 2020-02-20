@@ -53,6 +53,9 @@ const SignIn = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const [signin, { loading }] = useMutation(
     SIGNIN_USER,
     {
@@ -69,10 +72,14 @@ const SignIn = props => {
 
   const signInAccount = () => {
     const user = { email: email, password: password };
-    if (!email && !password){
+    if (!email || !password){
+      setEmailError(!email ? "Enter valid email" : "");
+      setPasswordError(!password ? "Enter password" : "");
       return;
     }
     signin({ variables: user });
+    setEmailError("");
+    setPasswordError("");
   };
 
   return (
@@ -87,22 +94,23 @@ const SignIn = props => {
           </Typography>
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="EMAIL"
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              onChange={(event) => setEmail(event.target.value + "")} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="EMAIL"
+            value={email}
+            error={emailError !== ""}
+            helperText={emailError}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            onChange={(event) => setEmail(event.target.value + "")} />
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField variant="outlined" className={classes.input}
-              label="PASSWORD"
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password"
-              onChange={(event) => setPassword(event.target.value + "")} />
-          </form>
+          <TextField variant="outlined" className={classes.input}
+            label="PASSWORD"
+            error={passwordError !== ""}
+            helperText={passwordError}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            type="password"
+            onChange={(event) => setPassword(event.target.value + "")} />
         </Grid>
         <Grid item className={classes.item}>
           <Button variant="contained"

@@ -5,7 +5,7 @@ import clsx from "clsx";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { Backdrop, SEARCH_USERS } from "../";
+import { CustomBackdrop, SEARCH_USERS } from "../";
 
 export const SIGNUP_USER = gql`
   mutation signUp($email: String!, $username: String!, $password: String!) {
@@ -51,6 +51,11 @@ const SignUp = props => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
+  const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmError, setConfirmError] = useState("");
+
   const [signUp, { loading }] = useMutation(
     SIGNUP_USER,
     {
@@ -60,6 +65,11 @@ const SignUp = props => {
         setName("");
         setPassword("");
         setConfirm("");
+
+        setEmailError("");
+        setNameError("");
+        setPasswordError("");
+        setConfirmError("");
       },
       onError: error => {
         alert("Sign Up failed: " + error.message);
@@ -72,16 +82,26 @@ const SignUp = props => {
   const signUpUser = () => {
     const user = { username: name, email: email, password: password };
     if (!name || !email || !password) {
+      setEmailError(!email ? "Enter valid email" : "");
+      setNameError(!name ? "Enter valid name" : "");
+      setPasswordError(!password ? "Enter password" : "");
+      setConfirmError("");
       return;
     }
     if (password === confirm) {
       signUp({ variables: user });
     }
+    else {
+      setEmailError("");
+      setNameError("");
+      setPasswordError("");
+      setConfirmError("Passwords do not match");
+    }
   }
 
   return (
     <Box className={classes.root}>
-      <Backdrop open={openBackdrop}
+      <CustomBackdrop open={openBackdrop}
         title="Welcome to Vatech!"
         onClick={() => setOpenBackdrop(false)}/>
       <Grid className={classes.container}
@@ -94,46 +114,46 @@ const SignUp = props => {
           </Typography>
         </Grid>
         <Grid className={classes.item} item>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="EMAIL"
-              value={email}
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              onChange={(event) => setEmail(event.target.value)} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="EMAIL"
+            value={email}
+            error={emailError !== ""}
+            helperText={emailError}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            onChange={(event) => setEmail(event.target.value)} />
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="NAME"
-              value={name}
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              onChange={(event) => setName(event.target.value)} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="NAME"
+            value={name}
+            error={nameError !== ""}
+            helperText={nameError}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            onChange={(event) => setName(event.target.value)} />
         </Grid>
         <Grid className={classes.item} item>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="PASSWORD"
-              value={password}
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password"
-              onChange={(event) => setPassword(event.target.value)} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="PASSWORD"
+            value={password}
+            error={passwordError !== ""}
+            helperText={passwordError}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            type="password"
+            onChange={(event) => setPassword(event.target.value)} />
         </Grid>
         <Grid item className={classes.item}>
-          <form>
-            <TextField className={classes.input}
-              variant="outlined"
-              label="PASSWORD CONFIRM"
-              value={confirm}
-              InputLabelProps={{ shrink: true, className: classes.input }}
-              type="password"
-              onChange={(event) => setConfirm(event.target.value)} />
-          </form>
+          <TextField className={classes.input}
+            variant="outlined"
+            label="PASSWORD CONFIRM"
+            value={confirm}
+            error={confirmError !== ""}
+            helperText={confirmError}
+            InputLabelProps={{ shrink: true, className: classes.input }}
+            type="password"
+            onChange={(event) => setConfirm(event.target.value)} />
         </Grid>
         <Grid className={classes.item} item>
           <Button className={classes.button}

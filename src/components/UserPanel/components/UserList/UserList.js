@@ -53,6 +53,8 @@ const UserList = props => {
     onError: error => {
       alert("Search failed: " + error.message);
     },
+    fetchPolicy:"network-only",
+    pollInterval: 5000,
   });
 
   useEffect(() => {
@@ -84,7 +86,7 @@ const UserList = props => {
               !loading &&
               users.map((row, index) => {
                 var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
-                const isRowSelected = selectedUser && row.username === selectedUser.username;
+                const isRowSelected = selectedUser && row.email === selectedUser.email;
                 if (isRowSelected) {
                   rowStyle = classes.selected__row;
                 }
