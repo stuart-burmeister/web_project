@@ -22,36 +22,9 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     flexDirection: "column",
   },
-  container: {
-    maxHeight: "76vh",
-    '&::-webkit-scrollbar': {
-      width: '0.4em'
-    },
-    '&::-webkit-scrollbar-track': {
-      boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-      webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)'
-    },
-    '&::-webkit-scrollbar-thumb': {
-      backgroundColor: 'rgba(0,0,0,.1)',
-      outline: '1px solid slategrey'
-    }
-  },
-  header: {
-    fontWeight: "bold",
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "#979797"
-  },
   header__mail: {
     width: "30%",
   },
-  font: {
-    fontWeight: "bold",
-    fontSize: 14,
-  },
-  odd__row: { backgroundColor: "white", },
-  even__row: { backgroundColor: "#979797", },
-  selected__row: { backgroundColor: "#73bbff", }
 }));
 
 const UserList = props => {
