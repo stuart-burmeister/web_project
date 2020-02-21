@@ -2,6 +2,7 @@ import { AppBar, Grid, makeStyles, Tab, Tabs } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
 import { useHistory } from "react-router-dom";
+import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -10,17 +11,23 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "row"
   },
   container: {
+    display:"flex",
     flexDirection: "column",
     height: "100%",
     width: 80,
     alignItems: "center",
     justifyContent: "flex-start",
   },
+  tabs__root:{
+    display:"flex",
+    height:"100%",
+  },
   tabs__indicator: {
     display:"none",
   },
   tabs__flexContainer:{
-    display:"grid"
+    display:"grid",
+    height:"100%",
   },
   tab__root: {
     minWidth: 80,
@@ -33,7 +40,13 @@ const useStyles = makeStyles(theme => ({
   tab__selected: {
     color: theme.palette.common.black,
     backgroundColor: theme.palette.common.white,
-    display: "grid"
+    display: "flex"
+  },
+  tab__signout: {
+    justifySelf: "flex-end",
+    justifyItems: "flex-end",
+    justifyContent: "flex-end",
+    alignSelf:"flex-end"
   },
   active__page: {
     flex: 1,
@@ -48,7 +61,6 @@ const NavBar = props => {
     "/main",
     "/user",
     "/message",
-    "/signout",
   ];
   let history = useHistory();
   const classes = useStyles();
@@ -58,8 +70,8 @@ const NavBar = props => {
         <AppBar className={classes.container} position="static">
           <Tabs
             classes={{
-              indicator:classes.tabs__indicator,
-              flexContainer: classes.tabs__flexContainer,
+              indicator: classes.tabs__indicator,
+              flexContainerVertical: classes.tabs__flexContainer,
             }}
             orientation="vertical"
             variant="fullWidth"
@@ -76,16 +88,17 @@ const NavBar = props => {
               }}
               label="User" />
             <Tab classes={{
-              root: classes.tab__root,
+              root: clsx(classes.tab__root) ,
               selected: classes.tab__selected,
               }}
               label="Message" />
-            <Tab classes={{
-              root: classes.tab__root,
+          </Tabs>
+          <Tab classes={{
+              root: clsx(classes.tab__root, classes.tab__signout),
               selected: classes.tab__selected,
               }}
-              label="Sign Out"/>
-          </Tabs>
+              label="Sign Out"
+              onClick={() => history.push("/signout")}/>
         </AppBar>
       </Grid>
       <Grid item className={classes.active__page}>
