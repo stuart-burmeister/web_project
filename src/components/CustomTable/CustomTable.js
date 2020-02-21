@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: "bold",
     backgroundColor: theme.palette.common.white,
     borderWidth: 1,
-    borderColor: theme.palette.secondary.dark,
+    borderColor: theme.palette.secondary.main,
   },
   font: {
     fontWeight: "bold",
