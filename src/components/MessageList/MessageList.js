@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Box, IconButton, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import { Box, IconButton, makeStyles, TableCell, TableRow } from "@material-ui/core";
+import clsx from "clsx";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { ADD_NEW_MESSAGE, DeleteDialog, ModifyDialog } from "..";
-import clsx from "clsx";
+import { ADD_NEW_MESSAGE, CustomTable, DeleteDialog, ModifyDialog } from "..";
 
 const GET_USER_MESSAGES = gql`
 query getMessages($email: String!) {
@@ -24,18 +24,11 @@ const DELETE_MESSSAGE = gql`
   }
 `;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
-    height: "100%",
     width: "100%",
     flexDirection: "column",
-  },
-  container: { maxHeight: props => props.maxHeight },
-  header: {
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "#979797",
   },
   header__icon: {
     width: 20,
@@ -43,20 +36,14 @@ const useStyles = makeStyles(() => ({
   header__date: {
     width: "30%",
   },
-  font: {
-    fontWeight: "bold",
-    fontSize: 14
-  },
-  even__row: { backgroundColor: "#979797", },
-  selected__row: { backgroundColor: "#73bbff", },
   delete__icon: {
     display: "flex",
     flexDirection: "column",
     width: "16px",
     height: "16px",
-    backgroundColor: "#979797",
+    backgroundColor: theme.palette.secondary.main,
     fontSize: 14,
-    color: "white",
+    color: theme.palette.common.white,
   },
 }));
 
@@ -165,49 +152,38 @@ const MessageList = props => {
 
   return (
     <Box className={classes.root}>
-      <TableContainer className={classes.container}>
-        <Table stickyHeader>
-          <TableHead >
-            <TableRow>
-              <TableCell className={clsx(classes.header, classes.header__icon)} />
-              <TableCell className={clsx(classes.header, classes.header__date, classes.font)}>
-                DATE
+      <CustomTable heightOffset={320}
+        loading={loading}
+        list={messages}
+        selectedItem={currentMessage}
+        renderHeader={ (header) =>
+          <TableRow>
+            <TableCell className={clsx(header, classes.header__icon)} />
+            <TableCell className={clsx(header, classes.header__date)}>
+              DATE
+            </TableCell>
+            <TableCell className={header}>
+              TEXT
+            </TableCell>
+          </TableRow>
+        }
+        renderItem={(row, index, style) => 
+            <TableRow key={"row-" + index} >
+              <TableCell className={clsx(style, classes.header__icon)}>
+                <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
+                  <Box >
+                    X
+                  </Box>
+                </IconButton>
               </TableCell>
-              <TableCell className={clsx(classes.header, classes.font)}>
-                TEXT
+              <TableCell className={clsx(style, classes.header__date)} onClick={() => onClick(row, setOpenModify)}>
+                {FORMAT_DATE(row.date)}
+              </TableCell>
+              <TableCell className={style} onClick={() => onClick(row, setOpenModify)}>
+                {row.text}
               </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {
-              !loading &&
-              messages.map((row, index) => {
-                var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
-                if (currentMessage && currentMessage.id === row.id) {
-                  rowStyle = classes.selected__row;
-                }
-                return (
-                  <TableRow key={"row-" + index} >
-                    <TableCell className={clsx(classes.font, rowStyle)}>
-                      <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
-                        <Box >
-                          X
-                        </Box>
-                      </IconButton>
-                    </TableCell>
-                    <TableCell className={clsx(classes.font, rowStyle)} onClick={() => onClick(row, setOpenModify)}>
-                      {FORMAT_DATE(row.date)}
-                    </TableCell>
-                    <TableCell className={clsx(classes.font, rowStyle)} onClick={() => onClick(row, setOpenModify)}>
-                      {row.text}
-                    </TableCell>
-                  </TableRow>
-                )
-              })
-            }
-          </TableBody>
-        </Table>
-      </TableContainer>
+            } />
       <ModifyDialog open={openModify} onClose={(shouldModify, newText) => onModify(shouldModify, newText)} message={currentMessage} />
       <DeleteDialog open={openDelete} onClose={(shouldDelete) => onDelete(shouldDelete)} />
     </Box>
@@ -226,7 +202,6 @@ MessageList.propTypes = {
   email: PropTypes.string.isRequired,
   filter: PropTypes.string,
   onQuery: PropTypes.func,
-  maxHeight: PropTypes.string,
 };
 
 export default MessageList;

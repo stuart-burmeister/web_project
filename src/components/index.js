@@ -1,4 +1,5 @@
 export { default as CustomBackdrop } from "./CustomBackdrop";
+export { default as CustomTable } from "./CustomTable";
 export { default as DeleteDialog } from "./DeleteDialog";
 export { default as MainPage } from "./MainPage";
 export { default as MessageList, GET_USER_MESSAGES } from "./MessageList";

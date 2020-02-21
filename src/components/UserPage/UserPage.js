@@ -2,16 +2,23 @@ import { Box, Grid, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { ModifyUser, SignUp, UserPanel } from "../";
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles(theme => ({
   root: {
     display: "flex",
     width: "100%",
     height: "100%",
-    flexDirection: "row"
+    flexDirection: "row",
   },
-  input__panel: { flex: 1 },
-  box: { height: "100%", },
-  user__panel: { flex: 2 },
+  input__panel: {
+    flex: 1,
+   },
+  box: {
+    height: "100%",
+    borderColor: theme.palette.secondary.main,
+  },
+  user__panel: {
+    flex: 2 ,
+  },
 }));
 
 const UserPage = () => {
@@ -41,15 +48,13 @@ const UserPage = () => {
       spacing={3}>
       <Grid className={classes.input__panel} item>
         <Box className={classes.box}
-          border={1}
-          borderColor={"#979797"}>
+          border={1}>
           {inputClass}
         </Box>
       </Grid>
       <Grid className={classes.user__panel} item>
         <Box className={classes.box}
-          border={1}
-          borderColor={"#979797"}>
+          border={1}>
           <UserPanel title
             selectedUser={selectedUser}
             onSelect={(user) => changeUser(user)} />

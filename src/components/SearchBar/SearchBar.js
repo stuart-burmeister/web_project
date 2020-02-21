@@ -3,7 +3,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     width: "100%",
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
     height: 56,
     marginLeft: 10,
   },
-  icon: { color:"white" }
+  icon: { color: theme.palette.common.white }
 }));
 
 const SearchBar = (props) => {

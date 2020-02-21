@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { SearchBar } from "../";
 import { UserList } from "./components";
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles(theme => ({
   root: {
     display: "flex",
     width: "100%",
@@ -20,13 +20,16 @@ const useStyle = makeStyles(() => ({
   box: {
     flex: 1,
     padding: 20,
+    color: theme.palette.secondary.main
   },
   heading: {
     fontWeight: "bold",
     fontSize: 24,
-    color: 'black'
+    color: theme.palette.common.black,
   },
-  user__list: { flex: 9, },
+  user__list: {
+    flex: 9,
+  },
 }))
 
 const UserPanel = props => {
@@ -41,7 +44,6 @@ const UserPanel = props => {
       <Grid className={classes.root} container>
         <Grid className={classes.item} item>
           <Box className={classes.box}
-            color={"#979797"}
             borderBottom={1} >
             {
               title && (
@@ -55,7 +57,9 @@ const UserPanel = props => {
               }} />
           </Box>
           <Grid className={classes.user__list} >
-            <UserList filter={userFilter}
+            <UserList
+              heightOffset={!title ? 215 : 250}
+              filter={userFilter}
               selectedUser={selectedUser}
               onSelect={(user) => onSelect(user)} />
           </Grid>

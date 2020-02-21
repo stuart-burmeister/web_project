@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { MessageList } from "../../../";
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles(theme => ({
   root: {
     display: "flex",
     flexDirection: "column"
@@ -11,12 +11,13 @@ const useStyle = makeStyles(() => ({
   box: {
     flex: 1,
     padding: 20,
+    borderColor: theme.palette.secondary.main,
   },
   heading: {
     fontFamily: "AppleSDGothicNeo-Bold",
     fontWeight: "bold",
     fontSize: 24,
-    color: 'black'
+    color: theme.palette.common.black,
   },
   message__list: { flex: 9, },
 }));
@@ -32,7 +33,7 @@ const MessagePanel = props => {
   return (
     <Box>
       <Grid className={classes.root} container>
-        <Box className={classes.box} color={"#979797"} borderBottom={1} >
+        <Box className={classes.box} borderBottom={1} >
           {
             title && (
               <Typography className={classes.heading}>

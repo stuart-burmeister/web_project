@@ -13,7 +13,7 @@ export const SIGNUP_USER = gql`
   }
 `;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flex: 1,
@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
   item: { width: 380, },
   header: {
     textAlign: "center",
-    color: "#00897b",
+    color: theme.palette.primary.main,
     fontSize: 24,
     fontWeight: "bold"
   },
@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     fontSize: 14,
   },
-  button: { color: "#ffffff", },
+  button: { color: theme.palette.common.white, },
 }));
 
 const SignUp = props => {

@@ -18,7 +18,7 @@ const CREATE_USER = gql`
   }
 `;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     position: "relative",
     display: "flex",
@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
   item: { width: 380, },
   header: {
     textAlign: "center",
-    color: "#00897b",
+    color: theme.palette.primary.main,
     fontSize: 24,
     fontWeight: "bold",
   },
@@ -43,7 +43,7 @@ const useStyles = makeStyles(() => ({
     fontSize: 14,
   },
   button: {
-    color: "#ffffff",
+    color: theme.palette.common.white,
     fontSize: 14,
   },
 }));

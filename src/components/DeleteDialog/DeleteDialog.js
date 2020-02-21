@@ -19,7 +19,6 @@ const useStyles = makeStyles(() => ({
     fontWeight: "bold",
   },
   button: {
-    color: "#ffffff",
     fontSize: 14,
     padding: 20,
   },
@@ -31,7 +30,7 @@ const DeleteDialog = props => {
   return (
     <Dialog className={classes.root} onClose={() => onClose(false)} open={open}>
       <Box className={classes.container}>
-        <DialogTitle disableTypography className={classes.title}>
+        <DialogTitle className={classes.title} disableTypography >
           Delete!
         </DialogTitle>
         <DialogActions>
