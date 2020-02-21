@@ -21,9 +21,9 @@ const NavRoute = () => {
           <MessagePage />
         </NavBar>
       </Route>
-      <Route path="/signout" render={() => {
+      <Route path="/logout" render={() => {
         sessionStorage.setItem('currentUser', null);
-        return (<Redirect to="/signin" from="/signout"/>);
+        return (<Redirect to="/signin" from="/logout"/>);
       }} />
     </Switch>
   );

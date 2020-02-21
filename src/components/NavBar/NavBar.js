@@ -97,8 +97,8 @@ const NavBar = props => {
               root: clsx(classes.tab__root, classes.tab__signout),
               selected: classes.tab__selected,
               }}
-              label="Sign Out"
-              onClick={() => history.push("/signout")}/>
+              label="Logout"
+              onClick={() => history.push("/logout")}/>
         </AppBar>
       </Grid>
       <Grid item className={classes.active__page}>
