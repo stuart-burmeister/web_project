@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
     height: 56,
     marginLeft: 10,
   },
-  icon: { color:"white" }
+  icon: { color: theme.palette.common.white }
 }));
 
 const SearchBar = (props) => {

@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     height: "16px",
     backgroundColor: theme.palette.secondary.dark,
     fontSize: 14,
-    color: "white",
+    color: theme.palette.common.white,
   },
 }));
 

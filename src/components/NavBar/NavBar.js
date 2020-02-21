@@ -14,10 +14,10 @@ const VerticalTabs = withStyles(theme => ({
 }))(Tabs);
 
 const MenuTab = withStyles(theme => ({
-  textColorPrimary: "white",
+  textColorPrimary: theme.palette.common.white,
   selected: {
-    color: "black",
-    backgroundColor: "white",
+    color: theme.palette.common.black,
+    backgroundColor: theme.palette.common.white,
     display: "grid"
   }
 }))(Tab);
