@@ -1,4 +1,4 @@
-import { AppBar, Grid, makeStyles, Tab, Tabs } from "@material-ui/core";
+import { AppBar, Grid, makeStyles, Tab, Tabs, Box } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
 import { useHistory } from "react-router-dom";
@@ -26,10 +26,11 @@ const useStyles = makeStyles(theme => ({
     display:"none",
   },
   tabs__flexContainer:{
-    display:"grid",
+    display:"flex",
     height:"100%",
   },
   tab__root: {
+    position:"relative",
     minWidth: 80,
     width: 80,
     height: 80,
@@ -46,7 +47,12 @@ const useStyles = makeStyles(theme => ({
     justifySelf: "flex-end",
     justifyItems: "flex-end",
     justifyContent: "flex-end",
-    alignSelf:"flex-end"
+    alignSelf:"flex-end",
+    alignItems:"flex-end",
+    alignContent:"flex-end"
+  },
+  filler:{
+    flex:8
   },
   active__page: {
     flex: 1,
@@ -61,6 +67,8 @@ const NavBar = props => {
     "/main",
     "/user",
     "/message",
+    "blank",
+    "/logout",
   ];
   let history = useHistory();
   const classes = useStyles();
@@ -70,6 +78,7 @@ const NavBar = props => {
         <AppBar className={classes.container} position="static">
           <Tabs
             classes={{
+              root: classes.tabs__root,
               indicator: classes.tabs__indicator,
               flexContainerVertical: classes.tabs__flexContainer,
             }}
@@ -92,13 +101,13 @@ const NavBar = props => {
               selected: classes.tab__selected,
               }}
               label="Message" />
-          </Tabs>
-          <Tab classes={{
+            <Box className={classes.filler}/>
+            <Tab classes={{
               root: clsx(classes.tab__root, classes.tab__signout),
               selected: classes.tab__selected,
               }}
-              label="Logout"
-              onClick={() => history.push("/logout")}/>
+              label="Logout"/>
+          </Tabs>
         </AppBar>
       </Grid>
       <Grid item className={classes.active__page}>
