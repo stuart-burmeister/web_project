@@ -13,15 +13,11 @@ const useStyles = makeStyles(theme => ({
   container: {
     maxHeight: props => `calc(100vh - ${props.heightOffset}px)`,
     '&::-webkit-scrollbar': {
-      width: '0.4em'
-    },
-    '&::-webkit-scrollbar-track': {
-      boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-      webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)'
+      width: '15px',
+      borderLeft: `1px solid ${theme.palette.secondary.main}`,
     },
     '&::-webkit-scrollbar-thumb': {
-      backgroundColor: 'rgba(0,0,0,.1)',
-      outline: '1px solid slategrey'
+      backgroundColor: theme.palette.secondary.main,
     }
   },
   header: {
@@ -29,19 +25,19 @@ const useStyles = makeStyles(theme => ({
     fontWeight: "bold",
     backgroundColor: theme.palette.common.white,
     borderWidth: 1,
-    borderColor: "#979797",
+    borderColor: theme.palette.secondary.dark,
   },
   font: {
     fontWeight: "bold",
     fontSize: 14
   },
-  odd__row: { backgroundColor: "white", },
-  even__row: { backgroundColor: "#979797", },
-  selected__row: { backgroundColor: "#73bbff", },
+  odd__row: { backgroundColor: theme.palette.common.white, },
+  even__row: { backgroundColor: theme.palette.secondary.dark, },
+  selected__row: { backgroundColor: theme.palette.select.main, },
 }));
 
 const CustomTable = props => {
-  const {loading, list, selectedItem, renderHeader,  renderItem,} = props;
+  const { loading, list, selectedItem, renderHeader, renderItem, } = props;
 
   const classes = useStyles(props);
 
