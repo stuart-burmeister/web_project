@@ -12,7 +12,11 @@ const useStyle = makeStyles(theme => ({
     height: "100%",
   },
   user__panel: { flex: 1 },
-  box: { height: "100%", },
+  box: {
+    height: "100%",
+    borderWidth: "1px",
+    borderColor: theme.palette.secondary.main,
+  },
   message__panel: { flex: 2, },
   empty__panel: {
     alignItems: "center",
@@ -28,23 +32,29 @@ const MainPage = () => {
 
   return (
     <Box className={classes.root}>
-      <Grid className={classes.root} container spacing={3}>
+      <Grid className={classes.root}
+        container
+        spacing={3}>
         <Grid className={classes.user__panel} item>
-          <Box className={classes.box} border={1} borderColor={"#979797"}>
+          <Box className={classes.box}
+            border={1}
+            borderColor="secondary">
             <UserPanel maxHeight="calc(100vh - 100px)"
               selectedUser={currentUser}
               onSelect={(newUser) => setCurrentUser(newUser)} />
           </Box>
         </Grid>
         <Grid className={classes.message__panel} item>
-          <Box className={classes.box} border={1} borderColor={"#979797"}>
+          <Box className={classes.box}
+            border={1}
+            borderColor="secondary">
             {
               currentUser ?
                 <MessagePanel title email={currentUser.email} /> :
                 <Box className={clsx(classes.root, classes.empty__panel)}>
                   <Typography className={classes.message} color="primary">
                     Select an item on the left.
-                </Typography>
+                  </Typography>
                 </Box>
             }
           </Box>
