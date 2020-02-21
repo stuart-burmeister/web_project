@@ -15,20 +15,22 @@ const SigninRoute = () => {
 
   let history = useHistory();
   return (
-    <Box className={classes.root}>
       <Switch>
-        <Route path="/signin">
-          <SignIn onSignIn={() => history.push("/main") }
-            onSignUpClick={() => history.push("/signup")} />
-        </Route>
-        <Route path="/signup">
-          <SignUp onSignUp={() => history.push("/signin")} onCancel={() => history.push("/signin")} />
-        </Route>
-        <Route path="/">
-          <Redirect to="/signin" />
-        </Route>
+          <Route path="/signin">
+            <Box className={classes.root}>
+              <SignIn onSignIn={() => history.push("/main") }
+                onSignUpClick={() => history.push("/signup")} />
+            </Box>
+          </Route>
+          <Route path="/signup">
+            <Box className={classes.root}>
+              <SignUp onSignUp={() => history.push("/signin")} onCancel={() => history.push("/signin")} />
+              </Box>
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/signin" />
+          </Route>
       </Switch>
-    </Box>
 
   );
 };

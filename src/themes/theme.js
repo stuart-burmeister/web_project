@@ -10,7 +10,10 @@ const theme = {
     secondary: {
       main: "#c8c8c8",
       contrastText: "#ffffff",
-      dark: "#979797"
+    },
+    rows:{
+      even: "#ffffff",
+      odd: "#979797",
     },
     select: { main: "#73bbff" },
     info: { main: "#73bbff" },

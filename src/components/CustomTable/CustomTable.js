@@ -31,8 +31,8 @@ const useStyles = makeStyles(theme => ({
     fontWeight: "bold",
     fontSize: 14
   },
-  odd__row: { backgroundColor: theme.palette.common.white, },
-  even__row: { backgroundColor: theme.palette.secondary.dark, },
+  even__row: { backgroundColor: theme.palette.rows.odd, },
+  odd__row: { backgroundColor: theme.palette.rows.even, },
   selected__row: { backgroundColor: theme.palette.select.main, },
 }));
 
@@ -56,7 +56,7 @@ const CustomTable = props => {
             {
               !loading &&
               list.map((row, index) => {
-                var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
+                var rowStyle = (index % 2 === 0) ? classes.even__row : classes.odd__row;
                 const isRowSelected = selectedItem && row === selectedItem;
                 if (isRowSelected) {
                   rowStyle = classes.selected__row;
