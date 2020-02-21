@@ -55,7 +55,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const UserList = props => {
-  const { filter, selectedUser, onSelect } = props;
+  const { filter, selectedUser, onSelect, heightOffset } = props;
 
   const classes = useStyles();
 
@@ -83,7 +83,8 @@ const UserList = props => {
 
   return (
     <Box className={classes.root}>
-      <CustomTable loading={loading}
+      <CustomTable heightOffset={heightOffset}
+        loading={loading}
         list={users}
         selectedItem={selectedUser}
         renderHeader={(header) =>
@@ -117,7 +118,8 @@ UserList.propTypes = {
     email: PropTypes.string,
     name: PropTypes.string,
   }),
-  onSelect: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired,
+  heightOffset: PropTypes.number,
 }
 
 export default UserList;

@@ -7,11 +7,18 @@ const useStyle = makeStyles(() => ({
     display: "flex",
     width: "100%",
     height: "100%",
-    flexDirection: "row"
+    flexDirection: "row",
   },
-  input__panel: { flex: 1 },
-  box: { height: "100%", },
-  user__panel: { flex: 2 },
+  input__panel: {
+    flex: 1,
+   },
+  box: {
+    height: "100%",
+  },
+  user__panel: {
+    flex: 2 ,
+    maxHeight: 1030,
+  },
 }));
 
 const UserPage = () => {

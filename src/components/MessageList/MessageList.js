@@ -27,7 +27,7 @@ const DELETE_MESSSAGE = gql`
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
-    height: "100%",
+    height: "inherit",
     width: "100%",
     flexDirection: "column",
   },
@@ -165,7 +165,8 @@ const MessageList = props => {
 
   return (
     <Box className={classes.root}>
-      <CustomTable loading={loading}
+      <CustomTable heightOffset={320}
+        loading={loading}
         list={messages}
         selectedItem={currentMessage}
         renderHeader={ (header) =>

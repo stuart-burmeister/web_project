@@ -9,6 +9,7 @@ const useStyle = makeStyles(() => ({
     display: "flex",
     width: "100%",
     height: "100%",
+    maxHeight: "inherit",
     flexDirection: "column"
   },
   item: {
@@ -20,13 +21,17 @@ const useStyle = makeStyles(() => ({
   box: {
     flex: 1,
     padding: 20,
+    maxHeight: "inherit",
   },
   heading: {
     fontWeight: "bold",
     fontSize: 24,
     color: 'black'
   },
-  user__list: { flex: 9, },
+  user__list: {
+    flex: 9,
+    maxHeight: "inherit",
+  },
 }))
 
 const UserPanel = props => {
@@ -55,7 +60,9 @@ const UserPanel = props => {
               }} />
           </Box>
           <Grid className={classes.user__list} >
-            <UserList filter={userFilter}
+            <UserList
+              heightOffset={!title ? 215 : 250}
+              filter={userFilter}
               selectedUser={selectedUser}
               onSelect={(user) => onSelect(user)} />
           </Grid>

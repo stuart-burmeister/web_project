@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { MessageList } from "../../../";
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles(theme => ({
   root: {
     display: "flex",
     flexDirection: "column"
@@ -16,7 +16,7 @@ const useStyle = makeStyles(() => ({
     fontFamily: "AppleSDGothicNeo-Bold",
     fontWeight: "bold",
     fontSize: 24,
-    color: 'black'
+    color: theme.palette.common.black,
   },
   message__list: { flex: 9, },
 }));

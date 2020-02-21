@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   container: {
-    maxHeight: "100%",
+    maxHeight: props => `calc(100vh - ${props.heightOffset}px)`,
     '&::-webkit-scrollbar': {
       width: '0.4em'
     },
@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   header: {
+    height: "50",
     fontWeight: "bold",
     backgroundColor: theme.palette.common.white,
     borderWidth: 1,
@@ -40,9 +41,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CustomTable = props => {
-  const {loading, list, selectedItem, renderHeader,  renderItem} = props;
+  const {loading, list, selectedItem, renderHeader,  renderItem,} = props;
 
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   return (
     <Box className={classes.root}>
@@ -79,6 +80,7 @@ CustomTable.propTypes = {
   selectedItem: PropTypes.any,
   renderHeader: PropTypes.func.isRequired,
   renderItem: PropTypes.func.isRequired,
+  heightOffset: PropTypes.number.isRequired,
 };
 
 export default CustomTable;

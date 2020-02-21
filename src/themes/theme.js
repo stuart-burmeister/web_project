@@ -3,8 +3,14 @@ const theme = {
     fontFamily: "AppleSDGothicNeo-regular",
   },
   palette: {
-    primary: { main: "#00897b", },
-    secondary: { main: "#c8c8c8" },
+    primary: {
+      main: "#00897b",
+      contrastText: "#ffffff",
+    },
+    secondary: {
+      main: "#c8c8c8",
+      contrastText: "#ffffff",
+    },
     select: { main: "#73bbff" },
     info: { main: "#73bbff" },
     text: {
@@ -12,6 +18,9 @@ const theme = {
       secondary: "#c8c8c8",
     },
     divider: "#c8c8c8",
+    action: {
+      disabledBackground: "rgba(0,0,0,0.85)"
+    },
   },
   overrides: {
     MuiOutlinedInput: {
