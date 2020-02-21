@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     alignContent: "center",
     justifyContent: "center",
     flexDirection: "column",
-    backgroundColor: theme.palette.action.disabledBackground,
+    backgroundColor: theme.palette.backdrop.main,
   },
   text: {
     fontSize: 18,

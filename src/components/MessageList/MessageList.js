@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     width: "16px",
     height: "16px",
-    backgroundColor: theme.palette.secondary.dark,
+    backgroundColor: theme.palette.secondary.main,
     fontSize: 14,
     color: theme.palette.common.white,
   },
@@ -169,14 +169,14 @@ const MessageList = props => {
         }
         renderItem={(row, index, style) => 
             <TableRow key={"row-" + index} >
-              <TableCell className={style}>
+              <TableCell className={clsx(style, classes.header__icon)}>
                 <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
                   <Box >
                     X
                   </Box>
                 </IconButton>
               </TableCell>
-              <TableCell className={style} onClick={() => onClick(row, setOpenModify)}>
+              <TableCell className={clsx(style, classes.header__date)} onClick={() => onClick(row, setOpenModify)}>
                 {FORMAT_DATE(row.date)}
               </TableCell>
               <TableCell className={style} onClick={() => onClick(row, setOpenModify)}>

@@ -22,9 +22,7 @@ const theme = {
       secondary: "#c8c8c8",
     },
     divider: "#c8c8c8",
-    action: {
-      disabledBackground: "rgba(0,0,0,0.85)"
-    },
+    backdrop: {main: "rgba(0,0,0,0.85)"},
   },
   overrides: {
     MuiOutlinedInput: {

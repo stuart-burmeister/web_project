@@ -1,6 +1,6 @@
 import { Box } from "@material-ui/core";
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { MainPage, MessagePage, NavBar, UserPage } from "../../components";
 
 const NavRoute = () => {
@@ -23,7 +23,7 @@ const NavRoute = () => {
       </Route>
       <Route path="/signout" render={() => {
         sessionStorage.setItem('currentUser', null);
-        return (<Box />);
+        return (<Redirect to="/signin" from="/signout"/>);
       }} />
     </Switch>
   );

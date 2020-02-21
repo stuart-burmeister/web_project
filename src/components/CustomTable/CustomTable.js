@@ -14,10 +14,11 @@ const useStyles = makeStyles(theme => ({
     maxHeight: props => `calc(100vh - ${props.heightOffset}px)`,
     '&::-webkit-scrollbar': {
       width: '15px',
-      borderLeft: `1px solid ${theme.palette.secondary.main}`,
+      borderLeft: `1px solid ${theme.palette.secondary.dark}`,
     },
     '&::-webkit-scrollbar-thumb': {
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.secondary.light,
+      borderLeft: `1px solid ${theme.palette.secondary.dark}`,
     }
   },
   header: {
@@ -31,8 +32,8 @@ const useStyles = makeStyles(theme => ({
     fontWeight: "bold",
     fontSize: 14
   },
-  even__row: { backgroundColor: theme.palette.rows.odd, },
-  odd__row: { backgroundColor: theme.palette.rows.even, },
+  even__row: { backgroundColor: theme.palette.common.white, },
+  odd__row: { backgroundColor: theme.palette.secondary.main, },
   selected__row: { backgroundColor: theme.palette.select.main, },
 }));
 

@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
   },
   header__mail: {
-    width: "30%",
+    width: "40%",
   },
 }));
 
@@ -73,7 +73,7 @@ const UserList = props => {
         renderItem={(row, index, style) => {
           return (
             <TableRow key={"row-" + index} onClick={() => onSelect(row)}>
-              <TableCell className={style}>
+              <TableCell className={clsx(style, classes.header__mail)}>
                 {row.email}
               </TableCell>
               <TableCell className={style}>
