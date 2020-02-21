@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { MainPage, MessagePage, NavBar, UserPage } from "../../components";
+import { Box } from "@material-ui/core";
 
 const NavRoute = props => {
   const { isSignedIn, onSignOut } = props;
@@ -34,7 +35,7 @@ const NavRoute = props => {
       <Route path="/signout" render={() => {
         sessionStorage.setItem('currentUser', null);
         onSignOut();
-        return (<div />);
+        return (<Box />);
       }} />
       <Route path="/">
         <Redirect to="/main"/>

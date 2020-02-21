@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const SigninRoute = props => {
-  const { onSignIn } = props;
+  const {isSignedIn, onSignIn } = props;
 
   const classes = useStyles();
 
@@ -21,14 +21,20 @@ const SigninRoute = props => {
     <Box className={classes.root}>
       <Switch>
         <Route path="/signin">
+          {
+            isSignedIn ? <Redirect to="/signin" /> :
             <SignIn onSignIn={() => {
               history.push("/main");
               onSignIn();
               }}
               onSignUpClick={() => history.push("/signup")} />
+          }
         </Route>
         <Route path="/signup">
+          {
+            isSignedIn ? <Redirect to="/signin" /> :
             <SignUp onSignUp={() => history.push("/signin")} onCancel={() => history.push("/signin")} />
+          }
         </Route>
         <Route path="/">
           <Redirect to="/signin"/>

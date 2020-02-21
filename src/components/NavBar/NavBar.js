@@ -1,28 +1,9 @@
 import { AppBar, Grid, makeStyles, Tab, Tabs } from "@material-ui/core";
-import { withStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-const VerticalTabs = withStyles(theme => ({
-  indicator: {
-    display: 'none',
-  },
-  flexContainer: {
-    display: "grid"
-  }
-}))(Tabs);
-
-const MenuTab = withStyles(theme => ({
-  textColorPrimary: theme.palette.common.white,
-  selected: {
-    color: theme.palette.common.black,
-    backgroundColor: theme.palette.common.white,
-    display: "grid"
-  }
-}))(Tab);
-
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: "100vw",
     height: "100vh",
@@ -35,14 +16,26 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "flex-start",
   },
-  menu__item: {
+  tabs__indicator: {
+    display:"none",
+  },
+  tabs__flexContainer:{
+    display:"grid"
+  },
+  tab__root: {
     minWidth: 80,
     width: 80,
     height: 80,
     fontSize: 14,
     fontWeight: "bold",
+    color:theme.palette.common.white,
   },
-  active__tab: {
+  tab__selected: {
+    color: theme.palette.common.black,
+    backgroundColor: theme.palette.common.white,
+    display: "grid"
+  },
+  active__page: {
     flex: 1,
     paddingLeft: 25,
     paddingTop: 25
@@ -56,26 +49,46 @@ const NavBar = props => {
     "/user",
     "/message",
     "/signout",
-  ]
+  ];
   let history = useHistory();
   const classes = useStyles();
   return (
     <Grid container className={classes.root}>
       <Grid item >
         <AppBar className={classes.container} position="static">
-          <VerticalTabs
+          <Tabs
+            classes={{
+              indicator:classes.tabs__indicator,
+              flexContainer: classes.tabs__flexContainer,
+            }}
             orientation="vertical"
             variant="fullWidth"
             value={tabIndex}
             onChange={(_, newValue) => history.push(linkPaths[newValue])}>
-            <MenuTab className={classes.menu__item} label="Main" />
-            <MenuTab className={classes.menu__item} label="User" />
-            <MenuTab className={classes.menu__item} label="Message" />
-            <MenuTab className={classes.menu__item} label="Sign Out"/>
-          </VerticalTabs>
+            <Tab classes={{
+              root: classes.tab__root,
+              selected: classes.tab__selected,
+              }}
+              label="Main" />
+            <Tab classes={{
+              root: classes.tab__root,
+              selected: classes.tab__selected,
+              }}
+              label="User" />
+            <Tab classes={{
+              root: classes.tab__root,
+              selected: classes.tab__selected,
+              }}
+              label="Message" />
+            <Tab classes={{
+              root: classes.tab__root,
+              selected: classes.tab__selected,
+              }}
+              label="Sign Out"/>
+          </Tabs>
         </AppBar>
       </Grid>
-      <Grid item className={classes.active__tab}>
+      <Grid item className={classes.active__page}>
         {
           children
         }
