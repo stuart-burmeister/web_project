@@ -21,7 +21,6 @@ const useStyle = makeStyles(() => ({
   box: {
     flex: 1,
     padding: 20,
-    maxHeight: "inherit",
   },
   heading: {
     fontWeight: "bold",
@@ -30,7 +29,6 @@ const useStyle = makeStyles(() => ({
   },
   user__list: {
     flex: 9,
-    maxHeight: "inherit",
   },
 }))
 

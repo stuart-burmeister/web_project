@@ -17,7 +17,6 @@ const useStyle = makeStyles(() => ({
   },
   user__panel: {
     flex: 2 ,
-    maxHeight: 1030,
   },
 }));
 
