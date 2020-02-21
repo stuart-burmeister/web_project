@@ -31,24 +31,12 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     flexDirection: "column",
   },
-  container: { maxHeight: props => props.maxHeight },
-  header: {
-    backgroundColor: theme.palette.common.white,
-    borderWidth: 1,
-    borderColor: "#979797",
-  },
   header__icon: {
     width: 20,
   },
   header__date: {
     width: "30%",
   },
-  font: {
-    fontWeight: "bold",
-    fontSize: 14
-  },
-  even__row: { backgroundColor: "#979797", },
-  selected__row: { backgroundColor: "#73bbff", },
   delete__icon: {
     display: "flex",
     flexDirection: "column",
@@ -215,7 +203,6 @@ MessageList.propTypes = {
   email: PropTypes.string.isRequired,
   filter: PropTypes.string,
   onQuery: PropTypes.func,
-  maxHeight: PropTypes.string,
 };
 
 export default MessageList;
