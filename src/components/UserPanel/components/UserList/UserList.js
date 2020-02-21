@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Box, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import { Box, makeStyles, TableCell, TableRow } from "@material-ui/core";
+import clsx from "clsx";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import clsx from "clsx";
+import CustomTable from "../../../CustomTable";
 
 const SEARCH_USERS = gql`
   query searchUser($username: String, $email: String) {
@@ -21,7 +22,20 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     flexDirection: "column",
   },
-  container: { maxHeight: "76vh" },
+  container: {
+    maxHeight: "76vh",
+    '&::-webkit-scrollbar': {
+      width: '0.4em'
+    },
+    '&::-webkit-scrollbar-track': {
+      boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+      webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(0,0,0,.1)',
+      outline: '1px solid slategrey'
+    }
+  },
   header: {
     fontWeight: "bold",
     backgroundColor: "white",
@@ -53,7 +67,7 @@ const UserList = props => {
     onError: error => {
       alert("Search failed: " + error.message);
     },
-    fetchPolicy:"network-only",
+    fetchPolicy: "network-only",
     pollInterval: 5000,
   });
 
@@ -69,42 +83,30 @@ const UserList = props => {
 
   return (
     <Box className={classes.root}>
-      <TableContainer className={classes.container}>
-        <Table stickyHeader>
-          <TableHead >
-            <TableRow>
-              <TableCell className={clsx(classes.header, classes.header__mail)}>
-                EMAIL
+      <CustomTable loading={loading}
+        list={users}
+        selectedItem={selectedUser}
+        renderHeader={(header) =>
+          <TableRow>
+            <TableCell className={clsx(header, classes.header__mail)}>
+              EMAIL
+            </TableCell>
+            <TableCell className={header}>
+              NAME
+            </TableCell>
+          </TableRow>
+        }
+        renderItem={(row, index, style) => {
+          return (
+            <TableRow key={"row-" + index} onClick={() => onSelect(row)}>
+              <TableCell className={style}>
+                {row.email}
               </TableCell>
-              <TableCell className={classes.header}>
-                NAME
+              <TableCell className={style}>
+                {row.username}
               </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {
-              !loading &&
-              users.map((row, index) => {
-                var rowStyle = index % 2 ? classes.even__row : classes.odd__row;
-                const isRowSelected = selectedUser && row.email === selectedUser.email;
-                if (isRowSelected) {
-                  rowStyle = classes.selected__row;
-                }
-                return (
-                  <TableRow key={"row-" + index} selected={isRowSelected} hover onClick={() => onSelect(isRowSelected ? null : row)}>
-                    <TableCell className={clsx(classes.font,rowStyle)}>
-                      {row.email}
-                    </TableCell>
-                    <TableCell className={clsx(classes.font,rowStyle)}>
-                      {row.username}
-                    </TableCell>
-                  </TableRow>
-                )
-              })
-            }
-          </TableBody>
-        </Table>
-      </TableContainer>
+          )}}/>
     </Box>
   );
 };
@@ -120,3 +122,4 @@ UserList.propTypes = {
 
 export default UserList;
 export { SEARCH_USERS };
+
