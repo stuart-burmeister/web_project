@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const SigninRoute = props => {
-  const { isSignedIn, onSignIn } = props;
+  const { onSignIn } = props;
 
   const classes = useStyles();
 
