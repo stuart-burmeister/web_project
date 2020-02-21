@@ -2,7 +2,7 @@ import { Box, Button, Dialog, DialogActions, DialogTitle, makeStyles, TextField 
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flex: 1,
@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
   text__field: { margin: 20 },
   button: {
-    color: "#ffffff",
+    color: theme.palette.common.white,
     fontSize: 14,
     padding: 20
   },
