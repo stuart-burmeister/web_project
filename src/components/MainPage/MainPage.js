@@ -37,8 +37,7 @@ const MainPage = () => {
         spacing={3}>
         <Grid className={classes.user__panel} item>
           <Box className={classes.box}
-            border={1}
-            borderColor="secondary">
+            border={1}>
             <UserPanel maxHeight="calc(100vh - 100px)"
               selectedUser={currentUser}
               onSelect={(newUser) => setCurrentUser(newUser)} />
@@ -46,8 +45,7 @@ const MainPage = () => {
         </Grid>
         <Grid className={classes.message__panel} item>
           <Box className={classes.box}
-            border={1}
-            borderColor="secondary">
+            border={1}>
             {
               currentUser ?
                 <MessagePanel title email={currentUser.email} /> :

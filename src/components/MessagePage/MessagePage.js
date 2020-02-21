@@ -11,18 +11,21 @@ mutation createMessage($user: String!, $text: String!) {
 }
 `;
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles(theme => ({
   root: {
     width: "100%",
     height: "100%",
     flexDirection: "row",
   },
   panel: { flex: 1, },
-  box: { height: "100%", },
+  box: {
+    height: "100%",
+    borderColor: theme.palette.secondary.main,
+  },
   input__panel: {
     flex: 1,
     padding: 20,
-    color: "#979797"
+    color: theme.palette.secondary.main,
   },
 }))
 
@@ -52,7 +55,7 @@ const MessagePage = () => {
     <Box className={classes.root}>
       <Grid className={classes.root} container spacing={3}>
         <Grid className={classes.panel} item>
-          <Box className={classes.box} border={1} borderColor={"#979797"}>
+          <Box className={classes.box} border={1}>
             <Box className={classes.input__panel} borderBottom={1}>
               <MessageInput isLoading={isLoading} setMessage={(msg) => {
                 const newMessage = { user: email, text: msg };

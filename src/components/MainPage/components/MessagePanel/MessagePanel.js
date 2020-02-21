@@ -11,6 +11,7 @@ const useStyle = makeStyles(theme => ({
   box: {
     flex: 1,
     padding: 20,
+    borderColor: theme.palette.secondary.main,
   },
   heading: {
     fontFamily: "AppleSDGothicNeo-Bold",
@@ -32,7 +33,7 @@ const MessagePanel = props => {
   return (
     <Box>
       <Grid className={classes.root} container>
-        <Box className={classes.box} color={"#979797"} borderBottom={1} >
+        <Box className={classes.box} borderBottom={1} >
           {
             title && (
               <Typography className={classes.heading}>

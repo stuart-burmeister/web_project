@@ -27,7 +27,6 @@ const DELETE_MESSSAGE = gql`
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
-    height: "inherit",
     width: "100%",
     flexDirection: "column",
   },
@@ -42,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     width: "16px",
     height: "16px",
-    backgroundColor: "#979797",
+    backgroundColor: theme.palette.secondary.dark,
     fontSize: 14,
     color: "white",
   },
