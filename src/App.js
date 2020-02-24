@@ -4,15 +4,14 @@ import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import ApolloProvider from './api/ApolloProvider';
 import { theme } from "./themes";
-import { NavView, SignInView } from "./views";
+import { NavView, SignInView, MainView } from "./views";
 
 function App() {
   return (
     <ApolloProvider>
       <Router>
         <ThemeProvider theme={createMuiTheme(theme)}>
-          <SignInView />
-          <NavView />
+<MainView/>
         </ThemeProvider>
       </Router>
     </ApolloProvider>
