@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MessageList = props => {
-  const { email, filter = "", onQuery = () => { }, heightOffset =320 } = props;
+  const { email, filter = "", onQuery = () => { }, heightOffset } = props;
 
   const classes = useStyles(props);
 
@@ -156,7 +156,7 @@ const MessageList = props => {
         loading={loading}
         list={messages}
         selectedItem={currentMessage}
-        renderHeader={ (header) =>
+        renderHeader={(header) =>
           <TableRow>
             <TableCell className={clsx(header, classes.header__icon)} />
             <TableCell className={clsx(header, classes.header__date)}>
@@ -167,23 +167,23 @@ const MessageList = props => {
             </TableCell>
           </TableRow>
         }
-        renderItem={(row, index, style) => 
-            <TableRow key={"row-" + index}>
-              <TableCell className={clsx(style, classes.header__icon)}>
-                <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
-                  <Box >
-                    X
+        renderItem={(row, index, style) =>
+          <TableRow key={"row-" + index}>
+            <TableCell className={clsx(style, classes.header__icon)}>
+              <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
+                <Box >
+                  X
                   </Box>
-                </IconButton>
-              </TableCell>
-              <TableCell className={clsx(style, classes.header__date)} onClick={() => onClick(row, setOpenModify)}>
-                {FORMAT_DATE(row.date)}
-              </TableCell>
-              <TableCell className={style} onClick={() => onClick(row, setOpenModify)}>
-                {row.text}
-              </TableCell>
-            </TableRow>
-            } />
+              </IconButton>
+            </TableCell>
+            <TableCell className={clsx(style, classes.header__date)} onClick={() => onClick(row, setOpenModify)}>
+              {FORMAT_DATE(row.date)}
+            </TableCell>
+            <TableCell className={style} onClick={() => onClick(row, setOpenModify)}>
+              {row.text}
+            </TableCell>
+          </TableRow>
+        } />
       <ModifyDialog open={openModify} onClose={(shouldModify, newText) => onModify(shouldModify, newText)} message={currentMessage} />
       <DeleteDialog open={openDelete} onClose={(shouldDelete) => onDelete(shouldDelete)} />
     </Box>
@@ -202,7 +202,7 @@ MessageList.propTypes = {
   email: PropTypes.string.isRequired,
   filter: PropTypes.string,
   onQuery: PropTypes.func,
-  heightOffset: PropTypes.number,
+  heightOffset: PropTypes.number.isRequired,
 };
 
 export default MessageList;

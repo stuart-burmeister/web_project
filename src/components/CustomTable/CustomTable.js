@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
   font: {
     maxHeight: "20px",
     fontWeight: "bold",
-    fontSize: 14
+    fontSize: 14,
+    borderWidth: 0,
   },
   even__row: { backgroundColor: theme.palette.common.white, },
   odd__row: { backgroundColor: theme.palette.secondary.main, },
