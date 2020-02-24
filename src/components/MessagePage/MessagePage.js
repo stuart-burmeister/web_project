@@ -53,7 +53,7 @@ const MessagePage = () => {
 
   return (
     <Box className={classes.root}>
-      <Grid className={classes.root} container spacing={3}>
+      <Grid className={classes.root} container>
         <Grid className={classes.panel} item>
           <Box className={classes.box} border={1}>
             <Box className={classes.input__panel} borderBottom={1}>
@@ -69,7 +69,7 @@ const MessagePage = () => {
               <SearchBar setFilter={(newFilter) => setFilter(newFilter)} />
             </Box>
             <Box>
-              <MessageList email={email} filter={filter} maxHeight="67vh" />
+              <MessageList email={email} filter={filter} heightOffset={244}/>
             </Box>
           </Box>
         </Grid>

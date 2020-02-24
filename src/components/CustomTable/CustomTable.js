@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   container: {
-    maxHeight: props => `calc(100vh - ${props.heightOffset}px)`,
+    maxHeight: props => `calc(100vh - ${props.heightOffset}px - 57px)`,
     '&::-webkit-scrollbar': {
       width: '15px',
       borderLeft: `1px solid ${theme.palette.secondary.dark}`,
@@ -22,8 +22,6 @@ const useStyles = makeStyles(theme => ({
     }
   },
   header: {
-    minHeight: "50px",
-    maxHeight: "50px",
     fontWeight: "bold",
     backgroundColor: theme.palette.common.white,
     borderWidth: 1,

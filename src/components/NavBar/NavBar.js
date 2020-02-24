@@ -1,8 +1,8 @@
-import { AppBar, Grid, makeStyles, Tab, Tabs, Box } from "@material-ui/core";
+import { AppBar, Grid, makeStyles, Tab, Tabs } from "@material-ui/core";
+import clsx from "clsx";
 import PropTypes from "prop-types";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   root: {

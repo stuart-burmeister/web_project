@@ -11,6 +11,7 @@ const useStyle = makeStyles(theme => ({
   },
   input__panel: {
     flex: 1,
+    paddingRight: "12px",
    },
   box: {
     height: "100%",
@@ -18,6 +19,7 @@ const useStyle = makeStyles(theme => ({
   },
   user__panel: {
     flex: 2 ,
+    paddingLeft: "12px",
   },
 }));
 
@@ -44,8 +46,7 @@ const UserPage = () => {
 
   return (
     <Grid className={classes.root}
-      container
-      spacing={3}>
+      container>
       <Grid className={classes.input__panel} item>
         <Box className={classes.box}
           border={1}>

@@ -46,7 +46,7 @@ const MessagePanel = props => {
               setSize(messages.length);
               setIsLoading(loading);
             }}
-            heightOffset={184}/>
+            heightOffset={127}/>
         </Grid>
       </Grid>
     </Box>

@@ -33,8 +33,7 @@ const MainPage = () => {
   return (
     <Box className={classes.root}>
       <Grid className={classes.root}
-        container
-        >
+        container>
         <Grid className={classes.user__panel} item>
           <Box className={classes.box}
             border={1}>

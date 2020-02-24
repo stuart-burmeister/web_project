@@ -8,7 +8,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     width: "100%",
     height: "100%",
-    paddingTop: 10,
   },
   input__field: {
     maxWidth: 330,
