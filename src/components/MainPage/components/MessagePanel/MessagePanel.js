@@ -9,7 +9,6 @@ const useStyle = makeStyles(theme => ({
     flexDirection: "column"
   },
   box: {
-    flex: 1,
     padding: 20,
     borderColor: theme.palette.secondary.main,
   },
@@ -42,10 +41,12 @@ const MessagePanel = props => {
           }
         </Box>
         <Grid className={classes.message__list} item>
-          <MessageList email={email} onQuery={(messages, loading) => {
-            setSize(messages.length);
-            setIsLoading(loading);
-          }} maxHeight="84vh" />
+          <MessageList email={email}
+            onQuery={(messages, loading) => {
+              setSize(messages.length);
+              setIsLoading(loading);
+            }}
+            heightOffset={184}/>
         </Grid>
       </Grid>
     </Box>

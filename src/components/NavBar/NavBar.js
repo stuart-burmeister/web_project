@@ -56,8 +56,7 @@ const useStyles = makeStyles(theme => ({
   },
   active__page: {
     flex: 1,
-    paddingLeft: 25,
-    paddingTop: 25
+    padding: 25,
   },
 }));
 
@@ -101,7 +100,10 @@ const NavBar = props => {
               selected: classes.tab__selected,
               }}
               label="Message" />
-            <Box className={classes.filler}/>
+            <Tab classes={{
+              root: clsx(classes.tab__root, classes.filler),
+              }}
+              disabled/>
             <Tab classes={{
               root: clsx(classes.tab__root, classes.tab__signout),
               selected: classes.tab__selected,

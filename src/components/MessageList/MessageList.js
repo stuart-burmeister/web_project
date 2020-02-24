@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MessageList = props => {
-  const { email, filter = "", onQuery = () => { } } = props;
+  const { email, filter = "", onQuery = () => { }, heightOffset =320 } = props;
 
   const classes = useStyles(props);
 
@@ -152,7 +152,7 @@ const MessageList = props => {
 
   return (
     <Box className={classes.root}>
-      <CustomTable heightOffset={320}
+      <CustomTable heightOffset={heightOffset}
         loading={loading}
         list={messages}
         selectedItem={currentMessage}
@@ -168,7 +168,7 @@ const MessageList = props => {
           </TableRow>
         }
         renderItem={(row, index, style) => 
-            <TableRow key={"row-" + index} >
+            <TableRow key={"row-" + index}>
               <TableCell className={clsx(style, classes.header__icon)}>
                 <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
                   <Box >
@@ -202,6 +202,7 @@ MessageList.propTypes = {
   email: PropTypes.string.isRequired,
   filter: PropTypes.string,
   onQuery: PropTypes.func,
+  heightOffset: PropTypes.number,
 };
 
 export default MessageList;

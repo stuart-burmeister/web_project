@@ -1,6 +1,5 @@
-import { Box } from "@material-ui/core";
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { MainPage, MessagePage, NavBar, UserPage } from "../../components";
 
 const NavRoute = () => {

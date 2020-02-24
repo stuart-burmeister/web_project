@@ -22,13 +22,15 @@ const useStyles = makeStyles(theme => ({
     }
   },
   header: {
-    height: "50",
+    minHeight: "50px",
+    maxHeight: "50px",
     fontWeight: "bold",
     backgroundColor: theme.palette.common.white,
     borderWidth: 1,
     borderColor: theme.palette.secondary.main,
   },
   font: {
+    maxHeight: "20px",
     fontWeight: "bold",
     fontSize: 14
   },
