@@ -19,7 +19,8 @@ const MainRoute = () => {
   return (
     <Switch>
       <Route path="/main">
-        {isSignedIn ? (
+        {
+        isSignedIn ? (
         <NavBar tabIndex={0}>
           <MainPage />
         </NavBar>) :
@@ -38,7 +39,8 @@ const MainRoute = () => {
         )}
       </Route>
       <Route path="/message">
-        {isSignedIn ? (
+        {
+        isSignedIn ? (
         <NavBar tabIndex={2}>
           <MessagePage />
         </NavBar>) :
