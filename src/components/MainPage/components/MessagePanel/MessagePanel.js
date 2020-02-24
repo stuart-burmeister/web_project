@@ -6,7 +6,9 @@ import { MessageList } from "../../../";
 const useStyle = makeStyles(theme => ({
   root: {
     display: "flex",
-    flexDirection: "column"
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
   },
   box: {
     padding: 20,
@@ -30,7 +32,7 @@ const MessagePanel = props => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <Box>
+    <Box className={classes.root}>
       <Grid className={classes.root} container>
         <Box className={classes.box} borderBottom={1} >
           {

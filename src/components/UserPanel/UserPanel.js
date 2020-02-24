@@ -9,13 +9,14 @@ const useStyle = makeStyles(theme => ({
     display: "flex",
     width: "100%",
     height: "100%",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   item: {
     display: "flex",
     flex: 1,
     flexDirection: "column",
     width: "100%",
+    height:"100%"
   },
   box: {
     flex: 1,
@@ -40,7 +41,7 @@ const UserPanel = props => {
   const [userFilter, setUserFilter] = useState("");
 
   return (
-    <Box>
+    <Box className={classes.root}>
       <Grid className={classes.root} container>
         <Grid className={classes.item} item>
           <Box className={classes.box}
@@ -58,7 +59,7 @@ const UserPanel = props => {
           </Box>
           <Grid className={classes.user__list} >
             <UserList
-              heightOffset={!title ? 147 : 183}
+              heightOffset={!title ? 147 : 180}
               filter={userFilter}
               selectedUser={selectedUser}
               onSelect={(user) => onSelect(user)} />

@@ -11,13 +11,13 @@ const useStyle = makeStyles(theme => ({
     width: "100%",
     height: "100%",
   },
-  user__panel: { flex: 1, paddingRight: "12px" },
+  user__panel: { flex: 1, marginRight: "13px",},
   box: {
     height: "100%",
     borderWidth: "1px",
     borderColor: theme.palette.secondary.main,
   },
-  message__panel: { flex: 2, paddingLeft: "12px" },
+  message__panel: { flex: 2, marginLeft: "13px",},
   empty__panel: {
     alignItems: "center",
     justifyContent: "center",
