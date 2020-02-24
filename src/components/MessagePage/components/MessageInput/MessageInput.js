@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     width: "100%",
     height: "100%",
-    //paddingTop: 10
   },
   input__field: {
     maxWidth: 330,
@@ -33,7 +32,17 @@ const MessageInput = props => {
 
   return (
     <Box className={classes.root}>
-      <TextField className={classes.input__field} variant="outlined" label="Text" disabled={isLoading} onChange={({ target }) => setInputVal(target.value)} value={inputVal} />
+      <TextField className={classes.input__field}
+        variant="outlined"
+        label="Text"
+        disabled={isLoading}
+        onChange={({ target }) => setInputVal(target.value)} value={inputVal}
+        onKeyDown={({key}) => {
+          if (key === "Enter"){
+            setMessage(inputVal);
+            setInputVal("");
+          }
+        }}/>
       <Button className={classes.button} disabled={isLoading} onClick={() => {
         setMessage(inputVal);
         setInputVal("");

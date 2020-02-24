@@ -35,7 +35,12 @@ const SearchBar = (props) => {
         variant="outlined"
         label="Search"
         onChange={({ target }) => setInputVal(target.value)}
-        value={inputVal}/>
+        value={inputVal}
+        onKeyDown={({key}) => {
+          if(key === "Enter"){
+            setFilter(inputVal)
+          }
+        }}/>
       <Button
         className={classes.button}
         variant="contained"

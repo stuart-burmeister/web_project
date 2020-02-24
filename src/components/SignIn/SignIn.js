@@ -100,7 +100,12 @@ const SignIn = props => {
             error={emailError !== ""}
             helperText={emailError}
             InputLabelProps={{ shrink: true, className: classes.input }}
-            onChange={(event) => setEmail(event.target.value + "")} />
+            onChange={(event) => setEmail(event.target.value + "")}
+            onKeyDown={({key}) => {
+              if(key === "Enter"){
+                signInAccount()
+              }
+            }}/>
         </Grid>
         <Grid item className={classes.item}>
           <TextField variant="outlined" className={classes.input}
@@ -109,7 +114,12 @@ const SignIn = props => {
             helperText={passwordError}
             InputLabelProps={{ shrink: true, className: classes.input }}
             type="password"
-            onChange={(event) => setPassword(event.target.value + "")} />
+            onChange={(event) => setPassword(event.target.value + "")}
+            onKeyDown={({key}) => {
+              if(key === "Enter"){
+                signInAccount()
+              }
+            }}/>
         </Grid>
         <Grid item className={classes.item}>
           <Button variant="contained"

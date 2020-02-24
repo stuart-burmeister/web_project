@@ -153,6 +153,11 @@ const ModifyUser = props => {
             helperText={emailError}
             value={inputEmail}
             onChange={(event) => setInputEmail(event.target.value)}
+            onKeyDown={({key}) => {
+              if(key === "Enter"){
+                onModify()
+              }
+            }}
             InputLabelProps={{ shrink: true, className: classes.input }} />
         </Grid>
         <Grid item className={classes.item}>
@@ -164,6 +169,11 @@ const ModifyUser = props => {
             helperText={nameError}
             value={inputName}
             onChange={(event) => setInputName(event.target.value)}
+            onKeyDown={({key}) => {
+              if(key === "Enter"){
+                onModify()
+              }
+            }}
             InputLabelProps={{ shrink: true, className: classes.input }} />
         </Grid>
         <Grid item className={classes.item}>
@@ -174,6 +184,11 @@ const ModifyUser = props => {
             helperText={passwordError}
             onChange={(event) => setPassword(event.target.value)}
             InputLabelProps={{ shrink: true, className: classes.input }}
+            onKeyDown={({key}) => {
+              if(key === "Enter"){
+                onModify()
+              }
+            }}
             type="password" />
         </Grid>
         <Grid item className={classes.item}>
@@ -184,20 +199,40 @@ const ModifyUser = props => {
             helperText={confirmError}
             onChange={(event) => setConfirm(event.target.value)}
             InputLabelProps={{ shrink: true, className: classes.input }}
+            onKeyDown={({key}) => {
+              if(key === "Enter"){
+                onModify()
+              }
+            }}
             type="password" />
         </Grid>
-        <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="primary" disabled={isLoading} onClick={() => onModify()}>
+        <Grid className={classes.item} item>
+          <Button className={classes.button}
+            variant="contained" 
+            fullWidth
+            color="primary"
+            disabled={isLoading}
+            onClick={() => onModify()}>
             Save
           </Button>
         </Grid>
-        <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="secondary" disabled={isLoading} onClick={() => setOpenDialog(true)}>
+        <Grid className={classes.item} item>
+          <Button className={classes.button}
+            variant="contained"
+            fullWidth
+            color="secondary"
+            disabled={isLoading}
+            onClick={() => setOpenDialog(true)}>
             Delete
           </Button>
         </Grid>
-        <Grid item className={classes.item}>
-          <Button variant="contained" fullWidth className={classes.button} color="secondary" disabled={isLoading} onClick={() => onCancel()}>
+        <Grid className={classes.item} item>
+          <Button className={classes.button}
+            variant="contained"
+            fullWidth
+            color="secondary"
+            disabled={isLoading}
+            onClick={() => onCancel()}>
             Cancel
           </Button>
         </Grid>

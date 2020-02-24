@@ -121,7 +121,12 @@ const SignUp = props => {
             error={emailError !== ""}
             helperText={emailError}
             InputLabelProps={{ shrink: true, className: classes.input }}
-            onChange={(event) => setEmail(event.target.value)} />
+            onChange={(event) => setEmail(event.target.value)} 
+            onKeyDown={({key}) => {
+              if(key === "Enter"){
+                signUpUser()
+              }
+            }}/>
         </Grid>
         <Grid item className={classes.item}>
           <TextField className={classes.input}
@@ -131,7 +136,12 @@ const SignUp = props => {
             error={nameError !== ""}
             helperText={nameError}
             InputLabelProps={{ shrink: true, className: classes.input }}
-            onChange={(event) => setName(event.target.value)} />
+            onChange={(event) => setName(event.target.value)} 
+            onKeyDown={({key}) => {
+              if(key === "Enter"){
+                signUpUser()
+              }
+            }}/>
         </Grid>
         <Grid className={classes.item} item>
           <TextField className={classes.input}
@@ -142,7 +152,12 @@ const SignUp = props => {
             helperText={passwordError}
             InputLabelProps={{ shrink: true, className: classes.input }}
             type="password"
-            onChange={(event) => setPassword(event.target.value)} />
+            onChange={(event) => setPassword(event.target.value)} 
+            onKeyDown={({key}) => {
+              if(key === "Enter"){
+                signUpUser()
+              }
+            }}/>
         </Grid>
         <Grid item className={classes.item}>
           <TextField className={classes.input}
@@ -153,7 +168,12 @@ const SignUp = props => {
             helperText={confirmError}
             InputLabelProps={{ shrink: true, className: classes.input }}
             type="password"
-            onChange={(event) => setConfirm(event.target.value)} />
+            onChange={(event) => setConfirm(event.target.value)} 
+            onKeyDown={({key}) => {
+              if(key === "Enter"){
+                signUpUser()
+              }
+            }}/>
         </Grid>
         <Grid className={classes.item} item>
           <Button className={classes.button}
