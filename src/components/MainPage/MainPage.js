@@ -11,19 +11,28 @@ const useStyle = makeStyles(theme => ({
     width: "100%",
     height: "100%",
   },
-  user__panel: { flex: 1, marginRight: "13px",},
+  user__panel: {
+    flex: 1,
+    marginRight: "13px",
+  },
   box: {
     height: "100%",
     borderWidth: "1px",
     borderColor: theme.palette.secondary.main,
   },
-  message__panel: { flex: 2, marginLeft: "13px",},
+  message__panel: {
+    flex: 2,
+    marginLeft: "13px",
+  },
   empty__panel: {
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: theme.palette.common.black,
   },
-  message: { fontWeight: "bold" }
+  message: {
+    fontWeight: "bold",
+    textAlign:"center",
+  }
 }));
 
 const MainPage = () => {
