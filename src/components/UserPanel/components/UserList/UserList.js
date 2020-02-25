@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
   },
   header__mail: {
-    width: "40%",
+    width: "50%",
   },
 }));
 
@@ -60,27 +60,32 @@ const UserList = props => {
         loading={loading}
         list={users}
         selectedItem={selectedUser}
-        renderHeader={(header) =>
-          <TableRow>
-            <TableCell className={clsx(header, classes.header__mail)}>
+        renderHeader={(rowClass, cellClass) =>
+          <TableRow className={rowClass} component="div" >
+            <TableCell className={clsx(cellClass, classes.header__mail)}
+              component="div">
               EMAIL
             </TableCell>
-            <TableCell className={header}>
+            <TableCell className={cellClass}
+              component="div">
               NAME
             </TableCell>
           </TableRow>
         }
-        renderItem={(row, index, style) => {
-          return (
-            <TableRow key={"row-" + index} onClick={() => onSelect(row)}>
-              <TableCell className={clsx(style, classes.header__mail)}>
+        renderItem={(row, index, rowClass, cellClass) =>
+            <TableRow className={rowClass} component="div" key={"row-" + index} onClick={() => onSelect(row)}>
+              <TableCell className={clsx(cellClass, classes.header__mail)}
+                component="div"
+                variant="body">
                 {row.email}
               </TableCell>
-              <TableCell className={style}>
+              <TableCell className={cellClass}
+                component="div" 
+                variant="body">
                 {row.username}
               </TableCell>
             </TableRow>
-          )}}/>
+          }/>
     </Box>
   );
 };
@@ -97,4 +102,3 @@ UserList.propTypes = {
 
 export default UserList;
 export { SEARCH_USERS };
-

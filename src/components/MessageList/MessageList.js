@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   header__icon: {
-    width: 20,
+    width: 50,
   },
   header__date: {
     width: "30%",
@@ -157,36 +157,39 @@ const MessageList = props => {
         loading={loading}
         list={messages}
         selectedItem={currentMessage}
-        renderHeader={(header) =>
-          <TableRow>
-            <TableCell className={clsx(header, classes.header__icon)} />
-            <TableCell className={clsx(header, classes.header__date)}>
+        renderHeader={(rowClass, cellClass) =>
+          <TableRow className={rowClass} component="div">
+            <TableCell className={clsx(cellClass, classes.header__icon)} component="div"/>
+            <TableCell className={clsx(cellClass, classes.header__date)} component="div">
               DATE
             </TableCell>
-            <TableCell className={header}>
+            <TableCell className={cellClass} component="div">
               TEXT
             </TableCell>
           </TableRow>
         }
-        renderItem={(row, index, style) =>
-          <TableRow key={"row-" + index}>
-            <TableCell className={clsx(style, classes.header__icon)}>
+        renderItem={(row, index, rowClass, cellClass) =>
+          <TableRow className={rowClass} component="div" key={"row-"+index}>
+            <TableCell className={clsx(cellClass, classes.header__icon)} component="div">
               <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
                 <Box >
                   X
-                  </Box>
+                </Box>
               </IconButton>
             </TableCell>
-            <TableCell className={clsx(style, classes.header__date)} onClick={() => onClick(row, setOpenModify)}>
+            <TableCell className={clsx(cellClass, classes.header__date)} onClick={() => onClick(row, setOpenModify)} component="div">
               {FORMAT_DATE(row.date)}
             </TableCell>
-            <TableCell className={style} onClick={() => onClick(row, setOpenModify)}>
+            <TableCell className={cellClass} onClick={() => onClick(row, setOpenModify)} component="div">
               {row.text}
             </TableCell>
           </TableRow>
         } />
-      <ModifyDialog open={openModify} onClose={(shouldModify, newText) => onModify(shouldModify, newText)} message={currentMessage} />
-      <DeleteDialog open={openDelete} onClose={(shouldDelete) => onDelete(shouldDelete)} />
+      <ModifyDialog open={openModify}
+        onClose={(shouldModify, newText) => onModify(shouldModify, newText)}
+        message={currentMessage} />
+      <DeleteDialog open={openDelete}
+        onClose={(shouldDelete) => onDelete(shouldDelete)} />
     </Box>
   );
 };
