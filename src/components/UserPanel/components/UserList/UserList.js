@@ -24,9 +24,10 @@ const useStyles = makeStyles(() => ({
   },
   header__mail: {
     maxWidth: "250px",
+    minWidth: "100px",
   },
   header__name: {
-    minWidth: "calc(50% - 25px)"
+    minWidth: "100px",
   },
 }));
 

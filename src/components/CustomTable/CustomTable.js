@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     overflowX: "hidden",
     textOverflow: "ellipsis",
     width:"100%",
-    maxHeight: "20px",
+    maxHeight: "25px",
     fontWeight: "bold",
     fontSize: 14,
   },

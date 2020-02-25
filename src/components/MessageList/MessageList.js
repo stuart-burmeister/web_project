@@ -35,13 +35,19 @@ const useStyles = makeStyles(theme => ({
     width: 50,
   },
   header__date: {
-    width: "30%",
+    width: "40%",
+    maxWidth: "200px",
+  },
+  header__text: {
+
   },
   delete__icon: {
     display: "flex",
     flexDirection: "column",
-    width: "16px",
-    height: "16px",
+    width: "50%",
+    height: "50%",
+    overflowX:"hidden",
+    overflowY:"hidden",
     backgroundColor: theme.palette.secondary.main,
     fontSize: 14,
     color: theme.palette.common.white,
