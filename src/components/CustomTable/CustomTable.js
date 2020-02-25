@@ -14,11 +14,11 @@ const useStyles = makeStyles(theme => ({
     maxHeight: props => `calc(100vh - ${props.heightOffset}px - 57px)`,
     '&::-webkit-scrollbar': {
       width: '15px',
-      borderLeft: `1px solid ${theme.palette.secondary.dark}`,
+      borderLeft: `1px solid ${theme.palette.grey[400]}`,
     },
     '&::-webkit-scrollbar-thumb': {
-      backgroundColor: theme.palette.secondary.light,
-      borderLeft: `1px solid ${theme.palette.secondary.dark}`,
+      backgroundColor: theme.palette.grey["A100"],
+      borderLeft: `1px solid ${theme.palette.grey[400]}`,
     }
   },
   header: {
