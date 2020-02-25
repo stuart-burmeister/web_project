@@ -7,15 +7,15 @@ import React, { useEffect, useState } from "react";
 import { ADD_NEW_MESSAGE, CustomTable, DeleteDialog, ModifyDialog } from "..";
 
 const GET_USER_MESSAGES = gql`
-query getMessages($email: String!) {
-  getUser(email: $email) {
-    messages{
-      text
-      date
-      id
+  query getMessages($email: String!) {
+    getUser(email: $email) {
+      messages{
+        text
+        date
+        id
+      }
     }
   }
-}
 `;
 
 const DELETE_MESSSAGE = gql`

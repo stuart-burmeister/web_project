@@ -10,15 +10,15 @@ const useStyle = makeStyles(theme => ({
     flexDirection: "row",
   },
   input__panel: {
-    flex: 1,
+    flex: 2,
     paddingRight: "12px",
-   },
+  },
   box: {
     height: "100%",
     borderColor: theme.palette.secondary.main,
   },
   user__panel: {
-    flex: 2 ,
+    flex: 3,
     paddingLeft: "12px",
   },
 }));
@@ -32,7 +32,7 @@ const UserPage = () => {
 
   const changeUser = (newUser) => {
     setSelectedUser(newUser);
-    if(newUser){
+    if (newUser) {
       setCurrentName(newUser.username);
       setCurrentEmail(newUser.email);
     }

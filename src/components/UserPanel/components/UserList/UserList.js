@@ -23,7 +23,10 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
   },
   header__mail: {
-    width: "50%",
+    maxWidth: "250px",
+  },
+  header__name: {
+    minWidth: "calc(50% - 25px)"
   },
 }));
 
@@ -66,7 +69,7 @@ const UserList = props => {
               component="div">
               EMAIL
             </TableCell>
-            <TableCell className={cellClass}
+            <TableCell className={clsx(cellClass, classes.header__name)}
               component="div">
               NAME
             </TableCell>

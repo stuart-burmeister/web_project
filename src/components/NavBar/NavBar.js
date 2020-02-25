@@ -8,7 +8,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100vw",
     height: "100vh",
-    flexDirection: "row"
+    minHeight: "500px",
+    minWidth: "800px",
+    flexDirection: "row",
   },
   container: {
     display:"flex",
