@@ -11,27 +11,41 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   container: {
-    maxHeight: props => `calc(100vh - ${props.heightOffset}px - 57px)`,
-    '&::-webkit-scrollbar': {
-      width: '15px',
-      borderLeft: `1px solid ${theme.palette.secondary.dark}`,
-    },
-    '&::-webkit-scrollbar-thumb': {
-      backgroundColor: theme.palette.secondary.light,
-      borderLeft: `1px solid ${theme.palette.secondary.dark}`,
-    }
+    display:"block"
   },
-  header: {
+  row:{
+    display: "flex",
+  },
+  headerCell: {
+    display: "block",
+    width:"100%",
     fontWeight: "bold",
     backgroundColor: theme.palette.common.white,
     borderWidth: 1,
     borderColor: theme.palette.secondary.main,
   },
-  font: {
-    maxHeight: "20px",
+  body :{
+    display: "block",
+    overflow: "auto",
+    width: "100%",
+    height: props => `calc(100vh - ${props.heightOffset}px - 57px)`,
+    '&::-webkit-scrollbar': {
+      width: '15px',
+      borderLeft: `1px solid ${theme.palette.grey[400]}`,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: theme.palette.grey["A100"],
+      borderLeft: `1px solid ${theme.palette.grey[400]}`,
+    }
+  },
+  bodyCell: {
+    display:"block",
+    overflowX: "hidden",
+    textOverflow: "ellipsis",
+    width:"100%",
+    maxHeight: "25px",
     fontWeight: "bold",
     fontSize: 14,
-    borderWidth: 0,
   },
   even__row: { backgroundColor: theme.palette.common.white, },
   odd__row: { backgroundColor: theme.palette.secondary.main, },
@@ -45,16 +59,14 @@ const CustomTable = props => {
 
   return (
     <Box className={classes.root}>
-      <Table stickyHeader>
-        <TableHead >
-          {
-            renderHeader(classes.header)
-          }
-        </TableHead>
-      </Table>
-      <TableContainer className={classes.container}>
-        <Table>
-          <TableBody>
+      <TableContainer className={classes.container} component="div">
+        <Table className={classes.container} stickyHeader component="div">
+          <TableHead className={classes.container} component="div">
+            {
+              renderHeader(classes.row, classes.headerCell)
+            }
+          </TableHead>
+          <TableBody className={classes.body} component="div">
             {
               !loading &&
               list.map((row, index) => {
@@ -63,7 +75,7 @@ const CustomTable = props => {
                 if (isRowSelected) {
                   rowStyle = classes.selected__row;
                 }
-                return (renderItem(row, index, clsx(classes.font, rowStyle)))
+                return (renderItem(row, index, classes.row , clsx(classes.bodyCell, rowStyle)))
               })}
           </TableBody>
         </Table>

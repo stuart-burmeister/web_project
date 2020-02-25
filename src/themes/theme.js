@@ -11,6 +11,10 @@ const theme = {
       main: "#c8c8c8",
       contrastText: "#ffffff",
     },
+    grey: {
+      500 : "#979797",
+      A100: "#d8d8d8",
+    },
     rows:{
       even: "#ffffff",
       odd: "#979797",
