@@ -13,6 +13,7 @@ const useStyle = makeStyles(theme => ({
   },
   user__panel: {
     flex: 1,
+    maxWidth: "calc((100vw - 130px) *0.33)",
     marginRight: "13px",
   },
   box: {
@@ -22,6 +23,7 @@ const useStyle = makeStyles(theme => ({
   },
   message__panel: {
     flex: 2,
+    maxWidth: "calc((100vw - 130px - 26px) * 0.66)",
     marginLeft: "13px",
   },
   empty__panel: {

@@ -17,7 +17,10 @@ const useStyle = makeStyles(theme => ({
     height: "100%",
     flexDirection: "row",
   },
-  panel: { flex: 1, },
+  panel: {
+    flex: 1,
+    maxWidth: "calc(100vw - 130px)"
+  },
   box: {
     height: "100%",
     borderColor: theme.palette.secondary.main,

@@ -11,6 +11,7 @@ const useStyle = makeStyles(theme => ({
   },
   input__panel: {
     flex: 2,
+    maxWidth: "calc((100vw - 130px) * 0.4)",
     paddingRight: "12px",
   },
   box: {
@@ -19,6 +20,7 @@ const useStyle = makeStyles(theme => ({
   },
   user__panel: {
     flex: 3,
+    maxWidth: "calc((100vw - 130px) * 0.6)",
     paddingLeft: "12px",
   },
 }));

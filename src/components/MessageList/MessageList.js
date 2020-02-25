@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "100%",
     flexDirection: "column",
+    maxWidth:"inherit"
   },
   header__icon: {
     width: 50,

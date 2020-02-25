@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
     maxHeight: "25px",
     fontWeight: "bold",
     fontSize: 14,
+    whiteSpace: "nowrap",
   },
   even__row: { backgroundColor: theme.palette.common.white, },
   odd__row: { backgroundColor: theme.palette.secondary.main, },

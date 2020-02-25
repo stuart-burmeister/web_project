@@ -10,6 +10,13 @@ const useStyle = makeStyles(theme => ({
     height: "100%",
     flexDirection: "column",
   },
+  item: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    width: "100%",
+    height:"100%"
+  },
   box: {
     padding: 20,
     borderColor: theme.palette.secondary.main,
@@ -34,21 +41,23 @@ const MessagePanel = props => {
   return (
     <Box className={classes.root}>
       <Grid className={classes.root} container>
-        <Box className={classes.box} borderBottom={1} >
-          {
-            title && (
-              <Typography className={classes.heading}>
-                Total: {!isLoading && size}
-              </Typography>)
-          }
-        </Box>
-        <Grid className={classes.message__list} item>
-          <MessageList email={email}
-            onQuery={(messages, loading) => {
-              setSize(messages.length);
-              setIsLoading(loading);
-            }}
-            heightOffset={127}/>
+        <Grid className={classes.item} item>
+          <Box className={classes.box} borderBottom={1} >
+            {
+              title && (
+                <Typography className={classes.heading}>
+                  Total: {!isLoading && size}
+                </Typography>)
+            }
+          </Box>
+          <Grid className={classes.message__list} item>
+            <MessageList email={email}
+              onQuery={(messages, loading) => {
+                setSize(messages.length);
+                setIsLoading(loading);
+              }}
+              heightOffset={127}/>
+          </Grid>
         </Grid>
       </Grid>
     </Box>
