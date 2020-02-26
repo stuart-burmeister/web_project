@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
   },
   active__page: {
     flex: 1,
-    padding: 25,
+    margin: 25,
   },
 }));
 
