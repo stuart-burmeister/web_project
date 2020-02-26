@@ -8,10 +8,12 @@ const useStyle = makeStyles(theme => ({
     width: "100%",
     height: "100%",
     flexDirection: "row",
+    overflowWrap: "no-wrap"
   },
   input__panel: {
     flex: 2,
     maxWidth: "calc((100vw - 130px) * 0.4)",
+    minWidth: "380px",
     paddingRight: "12px",
   },
   box: {
@@ -21,6 +23,7 @@ const useStyle = makeStyles(theme => ({
   user__panel: {
     flex: 3,
     maxWidth: "calc((100vw - 130px) * 0.6)",
+    minWidth: "250px",
     paddingLeft: "12px",
   },
 }));
