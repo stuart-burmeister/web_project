@@ -48,7 +48,7 @@ const ModifyDialog = props => {
             setCurrentText(event.target.value);
           }}
           onKeyDown={({ key }) => {
-            if (key === "enter") {
+            if (key === "Enter") {
               onClose(true, currentText);
             }
           }} />
