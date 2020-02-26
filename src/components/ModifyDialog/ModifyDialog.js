@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
     flexDirection: "column",
     width: 400,
-    height: 200 },
+    height: 200
+  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 const ModifyDialog = props => {
   const { open, message, onClose, } = props;
-  
+
   const classes = useStyles();
 
   const [currentText, setCurrentText] = useState(message.text);
@@ -40,15 +41,28 @@ const ModifyDialog = props => {
         <DialogTitle disableTypography className={classes.title}>
           Modify
         </DialogTitle>
-        <TextField className={classes.text__field} variant="outlined" value={currentText}
+        <TextField className={classes.text__field}
+          variant="outlined"
+          value={currentText}
           onChange={(event) => {
             setCurrentText(event.target.value);
-            }} />
+          }}
+          onKeyDown={({ key }) => {
+            if (key === "enter") {
+              onClose(true, currentText);
+            }
+          }} />
         <DialogActions>
-          <Button className={classes.button} variant="contained" color="primary" onClick={() => onClose(true, currentText)}>
+          <Button className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={() => onClose(true, currentText)}>
             Yes
         </Button>
-          <Button className={classes.button} variant="contained" color="secondary" onClick={() => onClose(false, "")}>
+          <Button className={classes.button}
+            variant="contained"
+            color="secondary"
+            onClick={() => onClose(false, "")}>
             No
         </Button>
         </DialogActions>

@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     display: "block",
     overflow: "auto",
     width: "100%",
-    height: props => `calc(100vh - ${props.heightOffset}px - 57px)`,
+    height: props => `calc(100vh - 5px - ${props.heightOffset}px - 57px)`,
     '&::-webkit-scrollbar': {
       width: '15px',
       borderLeft: `1px solid ${theme.palette.grey[400]}`,
