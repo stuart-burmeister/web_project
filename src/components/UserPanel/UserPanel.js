@@ -16,7 +16,7 @@ const useStyle = makeStyles(theme => ({
     flex: 1,
     flexDirection: "column",
     width: "100%",
-    height:"100%"
+    height: "100%"
   },
   box: {
     flex: 1,
@@ -55,7 +55,7 @@ const UserPanel = props => {
             <SearchBar setFilter={(newFilter) => {
               setUserFilter(newFilter.toLowerCase());
               onSelect(null);
-              }} />
+            }} />
           </Box>
           <Grid className={classes.user__list} >
             <UserList

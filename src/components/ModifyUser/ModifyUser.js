@@ -90,7 +90,7 @@ const ModifyUser = props => {
       awaitRefetchQueries: true,
     }
   );
-  const [updateUser, {loading: updateLoading}] = useMutation(
+  const [updateUser, { loading: updateLoading }] = useMutation(
     DELETE_USER,
     {
       onCompleted: data => {
@@ -111,14 +111,14 @@ const ModifyUser = props => {
     }
   };
   const onModify = () => {
-    if (!inputEmail || !inputName || !password){
+    if (!inputEmail || !inputName || !password) {
       setEmailError(!inputEmail ? "Enter valid email" : "");
       setNameError(!inputName ? "Enter valid name" : "");
       setPasswordError(!password ? "Enter password" : "");
       setConfirmError("");
       return;
     }
-    if (password === confirm && password.length >0) {
+    if (password === confirm && password.length > 0) {
       updateUser({ variables: { email: email } });
     }
     else {
@@ -153,8 +153,8 @@ const ModifyUser = props => {
             helperText={emailError}
             value={inputEmail}
             onChange={(event) => setInputEmail(event.target.value)}
-            onKeyDown={({key}) => {
-              if(key === "Enter"){
+            onKeyDown={({ key }) => {
+              if (key === "Enter") {
                 onModify()
               }
             }}
@@ -169,8 +169,8 @@ const ModifyUser = props => {
             helperText={nameError}
             value={inputName}
             onChange={(event) => setInputName(event.target.value)}
-            onKeyDown={({key}) => {
-              if(key === "Enter"){
+            onKeyDown={({ key }) => {
+              if (key === "Enter") {
                 onModify()
               }
             }}
@@ -184,8 +184,8 @@ const ModifyUser = props => {
             helperText={passwordError}
             onChange={(event) => setPassword(event.target.value)}
             InputLabelProps={{ shrink: true, className: classes.input }}
-            onKeyDown={({key}) => {
-              if(key === "Enter"){
+            onKeyDown={({ key }) => {
+              if (key === "Enter") {
                 onModify()
               }
             }}
@@ -199,8 +199,8 @@ const ModifyUser = props => {
             helperText={confirmError}
             onChange={(event) => setConfirm(event.target.value)}
             InputLabelProps={{ shrink: true, className: classes.input }}
-            onKeyDown={({key}) => {
-              if(key === "Enter"){
+            onKeyDown={({ key }) => {
+              if (key === "Enter") {
                 onModify()
               }
             }}
@@ -208,7 +208,7 @@ const ModifyUser = props => {
         </Grid>
         <Grid className={classes.item} item>
           <Button className={classes.button}
-            variant="contained" 
+            variant="contained"
             fullWidth
             color="primary"
             disabled={isLoading}

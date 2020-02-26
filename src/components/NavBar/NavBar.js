@@ -64,6 +64,9 @@ const useStyles = makeStyles(theme => ({
 
 const NavBar = props => {
   const { children, tabIndex } = props;
+
+  const classes = useStyles();
+
   const linkPaths = [
     "/main",
     "/user",
@@ -72,7 +75,7 @@ const NavBar = props => {
     "/logout",
   ];
   let history = useHistory();
-  const classes = useStyles();
+
   return (
     <Grid container className={classes.root}>
       <Grid item >

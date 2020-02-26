@@ -37,12 +37,12 @@ const MessageInput = props => {
         label="Text"
         disabled={isLoading}
         onChange={({ target }) => setInputVal(target.value)} value={inputVal}
-        onKeyDown={({key}) => {
-          if (key === "Enter"){
+        onKeyDown={({ key }) => {
+          if (key === "Enter") {
             setMessage(inputVal);
             setInputVal("");
           }
-        }}/>
+        }} />
       <Button className={classes.button} disabled={isLoading} onClick={() => {
         setMessage(inputVal);
         setInputVal("");

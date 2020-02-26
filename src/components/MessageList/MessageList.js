@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "100%",
     flexDirection: "column",
-    maxWidth:"inherit"
+    maxWidth: "inherit",
   },
   header__icon: {
     width: 50,
@@ -39,16 +39,13 @@ const useStyles = makeStyles(theme => ({
     width: "40%",
     maxWidth: "200px",
   },
-  header__text: {
-
-  },
   delete__icon: {
     display: "flex",
     flexDirection: "column",
     width: "50%",
     height: "50%",
-    overflowX:"hidden",
-    overflowY:"hidden",
+    overflowX: "hidden",
+    overflowY: "hidden",
     backgroundColor: theme.palette.secondary.main,
     fontSize: 14,
     color: theme.palette.common.white,
@@ -166,7 +163,7 @@ const MessageList = props => {
         selectedItem={currentMessage}
         renderHeader={(rowClass, cellClass) =>
           <TableRow className={rowClass} component="div">
-            <TableCell className={clsx(cellClass, classes.header__icon)} component="div"/>
+            <TableCell className={clsx(cellClass, classes.header__icon)} component="div" />
             <TableCell className={clsx(cellClass, classes.header__date)} component="div">
               DATE
             </TableCell>
@@ -176,7 +173,7 @@ const MessageList = props => {
           </TableRow>
         }
         renderItem={(row, index, rowClass, cellClass) =>
-          <TableRow className={rowClass} component="div" key={"row-"+index}>
+          <TableRow className={rowClass} component="div" key={"row-" + index}>
             <TableCell className={clsx(cellClass, classes.header__icon)} component="div">
               <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
                 <Box >
@@ -218,3 +215,4 @@ MessageList.propTypes = {
 
 export default MessageList;
 export { GET_USER_MESSAGES };
+

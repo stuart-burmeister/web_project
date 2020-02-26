@@ -12,10 +12,10 @@ const theme = {
       contrastText: "#ffffff",
     },
     grey: {
-      500 : "#979797",
+      500: "#979797",
       A100: "#d8d8d8",
     },
-    rows:{
+    rows: {
       even: "#ffffff",
       odd: "#979797",
     },
@@ -26,20 +26,20 @@ const theme = {
       secondary: "#c8c8c8",
     },
     divider: "#c8c8c8",
-    backdrop: {main: "rgba(0,0,0,0.85)"},
+    backdrop: { main: "rgba(0,0,0,0.85)" },
   },
   overrides: {
     MuiOutlinedInput: {
       root: {
-          '& $notchedOutline': {
-              borderColor: '#c8c8c8',
-          },
-          '&:hover:not($disabled):not($focused):not($error) $notchedOutline': {
-              borderColor: '#73bbff',
-          },
-          '&$focused $notchedOutline': {
-              borderColor: '#73bbff',
-          },
+        '& $notchedOutline': {
+          borderColor: '#c8c8c8',
+        },
+        '&:hover:not($disabled):not($focused):not($error) $notchedOutline': {
+          borderColor: '#73bbff',
+        },
+        '&$focused $notchedOutline': {
+          borderColor: '#73bbff',
+        },
       },
     },
     MuiFormLabel: {

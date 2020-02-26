@@ -1,7 +1,7 @@
+import { Box, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
-import { Box, makeStyles } from "@material-ui/core";
-import { MainPage, MessagePage, NavBar, UserPage, SignIn, SignUp } from "../../components";
+import { MainPage, MessagePage, NavBar, SignIn, SignUp, UserPage } from "../../components";
 
 const useStyles = makeStyles(() => ({
   root: {

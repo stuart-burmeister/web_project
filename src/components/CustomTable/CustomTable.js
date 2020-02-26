@@ -1,7 +1,7 @@
 import { Box, makeStyles, Table, TableBody, TableContainer, TableHead } from "@material-ui/core";
+import clsx from "clsx";
 import PropTypes from "prop-types";
 import React from "react";
-import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -11,20 +11,20 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   container: {
-    display:"block"
+    display: "block"
   },
-  row:{
+  row: {
     display: "flex",
   },
   headerCell: {
     display: "block",
-    width:"100%",
+    width: "100%",
     fontWeight: "bold",
     backgroundColor: theme.palette.common.white,
     borderWidth: 1,
     borderColor: theme.palette.secondary.main,
   },
-  body :{
+  body: {
     display: "block",
     overflow: "auto",
     width: "100%",
@@ -40,10 +40,10 @@ const useStyles = makeStyles(theme => ({
     }
   },
   bodyCell: {
-    display:"block",
+    display: "block",
     overflowX: "hidden",
     textOverflow: "ellipsis",
-    width:"100%",
+    width: "100%",
     maxHeight: "25px",
     fontWeight: "bold",
     fontSize: 14,
@@ -77,7 +77,7 @@ const CustomTable = props => {
                 if (isRowSelected) {
                   rowStyle = classes.selected__row;
                 }
-                return (renderItem(row, index, classes.row , clsx(classes.bodyCell, rowStyle)))
+                return (renderItem(row, index, classes.row, clsx(classes.bodyCell, rowStyle)))
               })}
           </TableBody>
         </Table>

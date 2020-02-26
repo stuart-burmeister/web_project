@@ -35,10 +35,11 @@ const ModifyDialog = props => {
 
   const [currentText, setCurrentText] = useState(message.text);
   useEffect(() => setCurrentText(message.text), [message]);
+
   return (
-    <Dialog open={open} className={classes.root}>
+    <Dialog className={classes.root} open={open}>
       <Box className={classes.container}>
-        <DialogTitle disableTypography className={classes.title}>
+        <DialogTitle className={classes.title} disableTypography>
           Modify
         </DialogTitle>
         <TextField className={classes.text__field}

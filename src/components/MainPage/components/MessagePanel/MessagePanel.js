@@ -15,7 +15,7 @@ const useStyle = makeStyles(theme => ({
     flex: 1,
     flexDirection: "column",
     width: "100%",
-    height:"100%"
+    height: "100%"
   },
   box: {
     padding: 20,
@@ -56,7 +56,7 @@ const MessagePanel = props => {
                 setSize(messages.length);
                 setIsLoading(loading);
               }}
-              heightOffset={127}/>
+              heightOffset={127} />
           </Grid>
         </Grid>
       </Grid>

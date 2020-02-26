@@ -46,6 +46,7 @@ const SignUp = props => {
   const classes = useStyles();
 
   const [openBackdrop, setOpenBackdrop] = useState(useBackdrop);
+  
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
