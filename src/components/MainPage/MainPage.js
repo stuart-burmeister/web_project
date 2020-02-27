@@ -10,7 +10,7 @@ const useStyle = makeStyles(theme => ({
     display: "flex",
     width: "calc(100vw - 130px)",
     height: "calc(100vh - 50px)",
-    flexDirection:"row",
+    flexDirection: "row",
   },
   user__panel: {
     flex: 1,
@@ -27,10 +27,13 @@ const useStyle = makeStyles(theme => ({
   message__panel: {
     flex: 2,
     height: "100%",
-    width: "calc((100% - 26px) * 0.3)",
+    width: "calc((100% - 25px) * 0.6)",
     marginLeft: "13px",
   },
   empty__panel: {
+    height: "100%",
+    width: "100%",
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: theme.palette.common.black,
@@ -63,7 +66,7 @@ const MainPage = () => {
             {
               currentUser ?
                 <MessagePanel title email={currentUser.email} /> :
-                <Box className={clsx(classes.root, classes.empty__panel)}>
+                <Box className={clsx(classes.empty__panel)}>
                   <Typography className={classes.message} color="primary">
                     Select an item on the left.
                   </Typography>
