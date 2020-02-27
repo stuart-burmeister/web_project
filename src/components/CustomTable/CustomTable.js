@@ -11,11 +11,13 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   container: {
+    display: "block",
     width: "100%",
     height:"100%",
   },
   header:{
-    height: "24px",
+    display:"block",
+    height: "57px",
     width: "100%",
   },
   row: {
@@ -32,6 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
   body: {
     display: "block",
+    overflow: "auto",
     width: "100%",
     height: "calc(100% - 57px)",
     '&::-webkit-scrollbar': {
