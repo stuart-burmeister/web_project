@@ -8,22 +8,26 @@ import { MessagePanel } from "./components/";
 const useStyle = makeStyles(theme => ({
   root: {
     display: "flex",
-    width: "100%",
-    height: "100%",
+    width: "calc(100vw - 130px)",
+    height: "calc(100vh - 50px)",
+    flexDirection:"row",
   },
   user__panel: {
     flex: 1,
-    maxWidth: "calc((100vw - 130px) * 0.33)",
+    height: "100%",
+    width: "calc((100% - 25px) * 0.3)",
     marginRight: "13px",
   },
   box: {
     height: "100%",
+    width: "100%",
     borderWidth: "1px",
     borderColor: theme.palette.secondary.main,
   },
   message__panel: {
     flex: 2,
-    maxWidth: "calc((100vw - 130px - 26px) * 0.66)",
+    height: "100%",
+    width: "calc((100% - 26px) * 0.3)",
     marginLeft: "13px",
   },
   empty__panel: {

@@ -11,13 +11,19 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   container: {
-    display: "block"
+    width: "100%",
+    height:"100%",
+  },
+  header:{
+    height: "24px",
+    width: "100%",
   },
   row: {
     display: "flex",
   },
   headerCell: {
     display: "block",
+    height: "24px",
     width: "100%",
     fontWeight: "bold",
     backgroundColor: theme.palette.common.white,
@@ -26,10 +32,8 @@ const useStyles = makeStyles(theme => ({
   },
   body: {
     display: "block",
-    overflow: "auto",
     width: "100%",
-    height: props => `calc(100vh - 5px - ${props.heightOffset}px - 57px)`,
-    minHeight: props => `calc(500px - 5px - ${props.heightOffset}px - 57px)`,
+    height: "calc(100% - 57px)",
     '&::-webkit-scrollbar': {
       width: '15px',
       borderLeft: `1px solid ${theme.palette.grey[400]}`,
@@ -63,7 +67,7 @@ const CustomTable = props => {
     <Box className={classes.root}>
       <TableContainer className={classes.container} component="div">
         <Table className={classes.container} stickyHeader component="div">
-          <TableHead className={classes.container} component="div">
+          <TableHead className={classes.header} component="div">
             {
               renderHeader(classes.row, classes.headerCell)
             }

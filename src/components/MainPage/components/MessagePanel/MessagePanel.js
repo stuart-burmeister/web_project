@@ -18,6 +18,8 @@ const useStyle = makeStyles(theme => ({
     height: "100%"
   },
   box: {
+    display:"flex",
+    height: "36px",
     padding: 20,
     borderColor: theme.palette.secondary.main,
   },
@@ -27,7 +29,9 @@ const useStyle = makeStyles(theme => ({
     fontSize: 24,
     color: theme.palette.common.black,
   },
-  message__list: { flex: 9, },
+  message__list: { 
+    height: "calc(100% - 75px)",
+   },
 }));
 
 const MessagePanel = props => {
@@ -50,14 +54,14 @@ const MessagePanel = props => {
                 </Typography>)
             }
           </Box>
-          <Grid className={classes.message__list} item>
+          <Box className={classes.message__list}>
             <MessageList email={email}
               onQuery={(messages, loading) => {
                 setSize(messages.length);
                 setIsLoading(loading);
               }}
               heightOffset={127} />
-          </Grid>
+          </Box>
         </Grid>
       </Grid>
     </Box>
