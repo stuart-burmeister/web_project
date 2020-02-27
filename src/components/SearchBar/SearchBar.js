@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   icon: { color: theme.palette.common.white }
 }));
 
-const SearchBar = (props) => {
+const SearchBar = props => {
   const { setFilter } = props;
   
   const classes = useStyles();
@@ -53,7 +53,7 @@ const SearchBar = (props) => {
 }
 
 SearchBar.propTypes = {
-  setFilter: PropTypes.func.isRequired
+  setFilter: PropTypes.func.isRequired,
 }
 
 export default SearchBar;
