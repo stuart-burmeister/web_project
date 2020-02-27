@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
 const CustomTable = props => {
   const { loading, list, selectedItem, renderHeader, renderItem, } = props;
 
-  const classes = useStyles(props);
+  const classes = useStyles();
 
   return (
     <Box className={classes.root}>
