@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CustomTable = props => {
-  const { loading, list, selectedItem, renderItem, header } = props;
+  const { loading, list, selectedItem, renderItem, header, onSelect } = props;
 
   const classes = useStyles();
 
@@ -111,7 +111,9 @@ const CustomTable = props => {
                 <Box className={classes.row} key={"row-" + index}>
                   {
                     items.map((element, index) =>
-                      <Box className={clsx(classes.bodyCell, rowStyle, header[index].className)} key={"cell-" + index}>
+                      <Box className={clsx(classes.bodyCell, rowStyle, header[index].className)}
+                        key={"cell-" + index}
+                        onClick={() => header[index].selectable && onSelect ? onSelect(row) : {}}>
                         {element}
                       </Box>
                     )}
@@ -134,7 +136,6 @@ CustomTable.propTypes = {
     selectable: PropTypes.bool,
   })),
   renderItem: PropTypes.func.isRequired,
-  heightOffset: PropTypes.number.isRequired,
 };
 
 export default CustomTable;

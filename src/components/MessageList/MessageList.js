@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MessageList = props => {
-  const { email, filter = "", onQuery = () => { }, heightOffset } = props;
+  const { email, filter = "", onQuery = () => { },} = props;
 
   const classes = useStyles(props);
 
@@ -156,28 +156,19 @@ const MessageList = props => {
   }
 
   const headers = [
-    { title: "", className: classes.header__icon },
-    { title: "DATE", className: classes.header__date },
-    { title: "NAME", className: undefined },
+    { title: "", className: classes.header__icon, },
+    { title: "DATE", className: classes.header__date, selectable: true },
+    { title: "NAME", className: undefined, selectable: true },
   ]
 
   return (
     <Box className={classes.root}>
-      <CustomTable heightOffset={heightOffset}
-        loading={loading}
+      <CustomTable loading={loading}
         header={headers}
         list={messages}
+        onSelect={(message) => onClick(message, setOpenModify)}
         selectedItem={currentMessage}
-        renderHeader={(rowClass, cellClass) => [
-          <Box className={classes.header__icon} />,
-          <Typography>
-            DATE
-            </Typography>,
-          <Typography>
-            TEXT
-            </Typography>
-        ]}
-        renderItem={(row, index, textStyle, cellClass) => [
+        renderItem={(row, _, textStyle) => [
           <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
             <Box >
               X

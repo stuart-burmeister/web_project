@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const UserList = props => {
-  const { filter, selectedUser, onSelect, heightOffset } = props;
+  const { filter, selectedUser, onSelect } = props;
 
   const classes = useStyles();
 
@@ -49,9 +49,9 @@ const UserList = props => {
     pollInterval: 5000,
   });
 
-  const headers =[
-    {title: "EMAIL", className: classes.header__mail},
-    {title: "NAME", className: classes.header__name},
+  const headers = [
+    { title: "EMAIL", className: classes.header__mail, selectable: true },
+    { title: "NAME", className: classes.header__name, selectable: true },
   ]
 
   useEffect(() => {
@@ -66,12 +66,12 @@ const UserList = props => {
 
   return (
     <Box className={classes.root}>
-      <CustomTable heightOffset={heightOffset}
-        loading={loading}
+      <CustomTable loading={loading}
         header={headers}
         list={users}
         selectedItem={selectedUser}
-        renderItem={(row, index, textStyle, cellClass) => [
+        onSelect={(user) => onSelect(user)}
+        renderItem={(row, _, textStyle) => [
           <Typography className={textStyle}>
             {row.email}
           </Typography>,
