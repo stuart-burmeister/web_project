@@ -16,11 +16,10 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
   },
   header: {
-    display: "sticky",
-    height: "57px",
+    height: "58px",
     width: "100%",
     borderWidth: 1,
-
+    color: theme.palette.secondary.main,
   },
   row: {
     display: "flex",
@@ -41,12 +40,13 @@ const useStyles = makeStyles(theme => ({
     fontSize: 14,
     textOverflow: "ellipsis",
     overflowX: "hidden",
+    color: theme.palette.common.black
   },
   body: {
     display: "block",
     overflow: "auto",
     width: "100%",
-    height: "calc(100% - 57px)",
+    height: "calc(100% - 58px)",
     '&::-webkit-scrollbar': {
       width: '15px',
       borderLeft: `1px solid ${theme.palette.grey[400]}`,
@@ -80,7 +80,7 @@ const CustomTable = props => {
     <Box className={classes.root}>
       <Grid className={classes.container} container>
         <Grid className={classes.header} item>
-          <Box className={classes.row}>
+          <Box className={classes.row} borderBottom={1}>
             {
               header.map((cell, index) => {
                 if (cell.title) {
