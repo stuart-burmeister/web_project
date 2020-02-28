@@ -89,7 +89,6 @@ UserList.propTypes = {
     name: PropTypes.string,
   }),
   onSelect: PropTypes.func.isRequired,
-  heightOffset: PropTypes.number,
 }
 
 export default UserList;

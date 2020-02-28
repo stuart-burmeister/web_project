@@ -59,7 +59,6 @@ const UserPanel = props => {
           </Box>
           <Grid className={classes.user__list} >
             <UserList
-              heightOffset={!title ? 147 : 180}
               filter={userFilter}
               selectedUser={selectedUser}
               onSelect={(user) => onSelect(user)} />

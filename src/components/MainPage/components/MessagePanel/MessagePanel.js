@@ -59,8 +59,7 @@ const MessagePanel = props => {
               onQuery={(messages, loading) => {
                 setSize(messages.length);
                 setIsLoading(loading);
-              }}
-              heightOffset={127} />
+              }} />
           </Box>
         </Grid>
       </Grid>

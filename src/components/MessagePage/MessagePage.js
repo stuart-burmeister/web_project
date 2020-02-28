@@ -81,7 +81,7 @@ const MessagePage = () => {
               <SearchBar setFilter={(newFilter) => setFilter(newFilter)} />
             </Box>
             <Box className={classes.message__panel}>
-              <MessageList email={email} filter={filter} heightOffset={244} />
+              <MessageList email={email} filter={filter}/>
             </Box>
           </Box>
         </Grid>

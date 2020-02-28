@@ -65,7 +65,6 @@ export const Default = () => {
   return (
     <Box border={1} className={classes.root}>
       <CustomTable list={defaultData}
-        heightOffset={100}
         header={headerData}
         renderItem={(row, index, textStyle) => [
           <Typography className={textStyle}>
@@ -90,7 +89,6 @@ export const LongField = () => {
   return (
     <Box border={1} className={classes.root}>
       <CustomTable list={overflowData}
-        heightOffset={100}
         header={headerData}
         renderItem={(row, index, textStyle) => [
           <Typography className={textStyle}>

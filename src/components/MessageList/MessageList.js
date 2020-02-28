@@ -201,7 +201,6 @@ MessageList.propTypes = {
   email: PropTypes.string.isRequired,
   filter: PropTypes.string,
   onQuery: PropTypes.func,
-  heightOffset: PropTypes.number.isRequired,
 };
 
 export default MessageList;
