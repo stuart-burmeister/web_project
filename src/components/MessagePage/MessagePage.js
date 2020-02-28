@@ -2,8 +2,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { Box, Grid, makeStyles } from "@material-ui/core";
 import gql from "graphql-tag";
 import React, { useState } from "react";
-import { GET_USER_MESSAGES, MessageList, SearchBar } from "../";
-import { MessageInput } from "./components";
+import { GET_USER_MESSAGES, MessageList, SearchBar, MessageInput } from "../";
 
 const ADD_NEW_MESSAGE = gql`
 mutation createMessage($user: String!, $text: String!) {

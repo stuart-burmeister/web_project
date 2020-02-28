@@ -2,6 +2,7 @@ export { default as CustomBackdrop } from "./CustomBackdrop";
 export { default as CustomTable } from "./CustomTable";
 export { default as DeleteDialog } from "./DeleteDialog";
 export { default as MainPage } from "./MainPage";
+export { default as MessageInput } from "./MessageInput";
 export { default as MessageList, GET_USER_MESSAGES } from "./MessageList";
 export { ADD_NEW_MESSAGE, default as MessagePage } from "./MessagePage";
 export { default as ModifyDialog } from "./ModifyDialog";
