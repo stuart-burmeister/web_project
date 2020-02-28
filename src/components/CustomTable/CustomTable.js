@@ -130,6 +130,7 @@ CustomTable.propTypes = {
   loading: PropTypes.bool,
   list: PropTypes.arrayOf(PropTypes.any).isRequired,
   selectedItem: PropTypes.any,
+  onSelect: PropTypes.func,
   header: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     className: PropTypes.any,

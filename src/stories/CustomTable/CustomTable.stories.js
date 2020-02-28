@@ -1,5 +1,5 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { CustomTable } from "../../components";
 
 const useStyles = makeStyles(theme => ({
@@ -32,24 +32,23 @@ const longData = {
 };
 
 const defaultData = [
-  dummyData,
-  dummyData,
-  dummyData,
-  dummyData,
-  dummyData,
-  dummyData,
-  dummyData,
+  {id:1,...dummyData},
+  {id:2,...dummyData},
+  {id:3,...dummyData},
+  {id:4,...dummyData},
+  {id:5,...dummyData},
+  {id:6,...dummyData},
+  {id:7,...dummyData},
 ];
 
 const overflowData = [
-  longData,
-  longData,
-  longData,
-  longData,
-  longData,
-  longData,
-  longData,
-  longData,
+  {id:1,...longData},
+  {id:2,...longData},
+  {id:3,...longData},
+  {id:4,...longData},
+  {id:5,...longData},
+  {id:6,...longData},
+  {id:7,...longData},
 ];
 
 
@@ -57,14 +56,19 @@ const overflowData = [
 export const Default = () => {
   const classes = useStyles();
 
+  const [currentRow, setCurrentRow] = useState(undefined);
+
   const headerData = [
-    { title: "INDEX", className: classes.header__index },
-    { title: "VALUE", }
+    { title: "INDEX", className: classes.header__index, selectable: true },
+    { title: "VALUE", selectable: true }
   ];
 
   return (
     <Box border={1} className={classes.root}>
-      <CustomTable list={defaultData}
+      <CustomTable 
+        selectedItem={currentRow}
+        onSelect={(row) => setCurrentRow(row)}
+        list={defaultData}
         header={headerData}
         renderItem={(row, index, textStyle) => [
           <Typography className={textStyle}>
@@ -81,14 +85,19 @@ export const Default = () => {
 export const LongField = () => {
   const classes = useStyles();
 
+  const [currentRow, setCurrentRow] = useState(undefined);
+  
   const headerData = [
-    { title: "USER", className: classes.header__user },
-    { title: "VALUE", }
+    { title: "USER", className: classes.header__user, selectable:true },
+    { title: "VALUE", selectable:true }
   ];
 
   return (
     <Box border={1} className={classes.root}>
-      <CustomTable list={overflowData}
+      <CustomTable
+        selectedItem={currentRow}
+        onSelect={(row) => setCurrentRow(row)}
+        list={overflowData}
         header={headerData}
         renderItem={(row, index, textStyle) => [
           <Typography className={textStyle}>
