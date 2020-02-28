@@ -30,7 +30,7 @@ const useStyle = makeStyles(theme => ({
     color: theme.palette.common.black,
   },
   message__list: { 
-    height: "calc(100% - 75px)",
+    height: "calc(100% - 77px)",
    },
 }));
 

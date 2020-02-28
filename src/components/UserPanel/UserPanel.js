@@ -29,7 +29,7 @@ const useStyle = makeStyles(theme => ({
     color: theme.palette.common.black,
   },
   user__list: {
-    height: props => `calc(100% - ${ props.title ? "137px" : "97px"})`
+    height: props => `calc(100% - ${ props.title ? "138px" : "98px"})`
   },
 }))
 

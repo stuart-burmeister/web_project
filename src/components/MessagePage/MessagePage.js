@@ -35,7 +35,7 @@ const useStyle = makeStyles(theme => ({
     color: theme.palette.secondary.main,
   },
   message__panel: {
-    height: "calc( 100% - 200px)",
+    height: "calc( 100% - 202px)",
   }
 }))
 
