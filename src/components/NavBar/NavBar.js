@@ -74,7 +74,9 @@ const NavBar = props => {
     "blank",
     "/logout",
   ];
-  let history = useHistory();
+  
+  //let history = useHistory();
+  let history = {push: () => {}};
 
   return (
     <Grid container className={classes.root}>
