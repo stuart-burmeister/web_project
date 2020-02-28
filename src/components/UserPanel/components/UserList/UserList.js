@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Box, makeStyles, TableCell, TableRow } from "@material-ui/core";
+import { Box, makeStyles, TableCell, TableRow, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
@@ -64,32 +64,24 @@ const UserList = props => {
         loading={loading}
         list={users}
         selectedItem={selectedUser}
-        renderHeader={(rowClass, cellClass) =>
-          <TableRow className={rowClass} component="div" >
-            <TableCell className={clsx(cellClass, classes.header__mail)}
-              component="div">
-              EMAIL
-            </TableCell>
-            <TableCell className={clsx(cellClass, classes.header__name)}
-              component="div">
-              NAME
-            </TableCell>
-          </TableRow>
-        }
-        renderItem={(row, index, rowClass, cellClass) =>
-            <TableRow className={rowClass} component="div" key={"row-" + index} onClick={() => onSelect(row)}>
-              <TableCell className={clsx(cellClass, classes.header__mail)}
-                component="div"
-                variant="body">
-                {row.email}
-              </TableCell>
-              <TableCell className={cellClass}
-                component="div" 
-                variant="body">
-                {row.username}
-              </TableCell>
-            </TableRow>
-          }/>
+        renderHeader={(rowClass, cellClass) => [
+          <Typography>
+            EMAIL
+          </Typography>,
+          <Typography>
+            NAME
+          </Typography>
+        ]}
+        renderItem={(row, index, rowClass, cellClass) => [
+          <Typography>
+            {row.email}
+          </Typography>,
+          <Box className={cellClass}
+            component="div"
+            variant="body">
+            {row.username}
+          </Box>,
+        ]} />
     </Box>
   );
 };

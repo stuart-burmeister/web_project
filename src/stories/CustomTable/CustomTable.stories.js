@@ -1,6 +1,18 @@
 import React from "react";
 import { CustomTable } from "../../components";
-import { TableRow, TableCell } from "@material-ui/core";
+import { TableRow, TableCell, Grid, Box, Typography, makeStyles } from "@material-ui/core";
+import clsx from "clsx";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: "yellow",
+    width: 100,
+  },
+  text: {
+    fontWeight: "bold",
+    fontSize: 14,
+  }
+}))
 
 export default {
   component: CustomTable,
@@ -20,29 +32,32 @@ const defaultData = [
   dummyData,
 ];
 
+
+
 export const Default = () => {
+  const classes = useStyles();
+
+  const headerData = [
+    { title: "INDEX", className: classes.root },
+    { title: "VALUE", }
+  ];
+
   return (
-    <CustomTable list={defaultData}
-      heightOffset={100}
-      renderHeader={(rowStyle, cellStyle) =>
-        <TableRow className={rowStyle} component="div">
-          <TableCell className={cellStyle} component="div">
-            Index
-          </TableCell>
-          <TableCell className={cellStyle} component="div">
-            Value
-          </TableCell>
-        </TableRow>
-      }
-      renderItem={(row, index, rowStyle, cellStyle) =>
-        <TableRow className={rowStyle} component="div" key={"row-"+index}>
-          <TableCell className={cellStyle} component="div">
-            {index}
-          </TableCell>
-          <TableCell className={cellStyle} component="div">
-            {row.value}
-          </TableCell>
-        </TableRow>
-      }
-    />);
+    <Box style={{ height: 300, width: 500 }}>
+      <CustomTable list={defaultData}
+        heightOffset={100}
+        header={headerData}
+        renderItem={(row, index, textStyle) =>
+          [
+            <Typography className={textStyle}>
+              {index}
+            </Typography>,
+            <Typography className={textStyle}>
+              {row.value}
+            </Typography>
+          ]
+        }
+      />
+    </Box>
+  );
 }

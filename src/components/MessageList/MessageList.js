@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Box, IconButton, makeStyles, TableCell, TableRow } from "@material-ui/core";
+import { Box, IconButton, makeStyles, TableCell, TableRow, Grid, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
@@ -161,40 +161,34 @@ const MessageList = props => {
         loading={loading}
         list={messages}
         selectedItem={currentMessage}
-        renderHeader={(rowClass, cellClass) =>
-          <TableRow className={rowClass} component="div">
-            <TableCell className={clsx(cellClass, classes.header__icon)} component="div" />
-            <TableCell className={clsx(cellClass, classes.header__date)} component="div">
-              DATE
-            </TableCell>
-            <TableCell className={cellClass} component="div">
-              TEXT
-            </TableCell>
-          </TableRow>
-        }
-        renderItem={(row, index, rowClass, cellClass) =>
-          <TableRow className={rowClass} component="div" key={"row-" + index}>
-            <TableCell className={clsx(cellClass, classes.header__icon)} component="div">
-              <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
-                <Box >
-                  X
+        renderHeader={(rowClass, cellClass) => [
+          <Box className={classes.header__icon} />,
+          <Typography>
+            DATE
+            </Typography>,
+          <Typography>
+            TEXT
+            </Typography>
+        ]}
+        renderItem={(row, index, rowClass, cellClass) => [
+          <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
+            <Box >
+              X
                 </Box>
-              </IconButton>
-            </TableCell>
-            <TableCell className={clsx(cellClass, classes.header__date)} onClick={() => onClick(row, setOpenModify)} component="div">
-              {FORMAT_DATE(row.date)}
-            </TableCell>
-            <TableCell className={cellClass} onClick={() => onClick(row, setOpenModify)} component="div">
-              {row.text}
-            </TableCell>
-          </TableRow>
-        } />
-      <ModifyDialog open={openModify}
+          </IconButton>,
+          <Typography>
+            {FORMAT_DATE(row.date)}
+          </Typography>,
+          <Typography>
+            {row.text}
+          </Typography>
+        ]} />
+      < ModifyDialog open={openModify}
         onClose={(shouldModify, newText) => onModify(shouldModify, newText)}
         message={currentMessage} />
       <DeleteDialog open={openDelete}
         onClose={(shouldDelete) => onDelete(shouldDelete)} />
-    </Box>
+    </Box >
   );
 };
 
