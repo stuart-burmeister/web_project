@@ -39,6 +39,8 @@ const useStyles = makeStyles(theme => ({
   text: {
     fontWeight: "bold",
     fontSize: 14,
+    textOverflow: "ellipsis",
+    overflowX: "hidden",
   },
   body: {
     display: "block",
@@ -70,7 +72,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CustomTable = props => {
-  const { loading, list, selectedItem, renderHeader, renderItem, header } = props;
+  const { loading, list, selectedItem, renderItem, header } = props;
 
   const classes = useStyles();
 
@@ -90,7 +92,7 @@ const CustomTable = props => {
                     </Box>
                   );
                 }
-                return <Box className={clsx(classes.text, cell.className)} />;
+                return <Box className={clsx(classes.headerCell, cell.className)} />;
               })
             }
           </Box>
@@ -104,12 +106,12 @@ const CustomTable = props => {
               if (isRowSelected) {
                 rowStyle = classes.selected__row;
               }
-              const items = renderItem(row, index, classes.row, clsx(classes.bodyCell, rowStyle));
+              const items = renderItem(row, index, classes.text);
               return (
                 <Box className={classes.row} key={"row-" + index}>
                   {
                     items.map((element, index) =>
-                      <Box className={clsx(classes.bodyCell, rowStyle)} key={"cell-" + index}>
+                      <Box className={clsx(classes.bodyCell, rowStyle, header[index].className)} key={"cell-" + index}>
                         {element}
                       </Box>
                     )}
@@ -129,8 +131,8 @@ CustomTable.propTypes = {
   header: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     className: PropTypes.any,
+    selectable: PropTypes.bool,
   })),
-  //renderHeader: PropTypes.func.isRequired,
   renderItem: PropTypes.func.isRequired,
   heightOffset: PropTypes.number.isRequired,
 };

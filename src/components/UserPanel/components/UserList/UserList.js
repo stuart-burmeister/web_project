@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
     height: "100%",
     width: "100%",
     flexDirection: "column",
+    minWidth: "300px",
   },
   header__mail: {
     maxWidth: "250px",
@@ -48,6 +49,11 @@ const UserList = props => {
     pollInterval: 5000,
   });
 
+  const headers =[
+    {title: "EMAIL", className: classes.header__mail},
+    {title: "NAME", className: classes.header__name},
+  ]
+
   useEffect(() => {
     if (data && data.searchUser) {
       const userList = data.searchUser.filter((entry) => entry.username.toLowerCase().includes(filter.toLowerCase()))
@@ -62,25 +68,16 @@ const UserList = props => {
     <Box className={classes.root}>
       <CustomTable heightOffset={heightOffset}
         loading={loading}
+        header={headers}
         list={users}
         selectedItem={selectedUser}
-        renderHeader={(rowClass, cellClass) => [
-          <Typography>
-            EMAIL
-          </Typography>,
-          <Typography>
-            NAME
-          </Typography>
-        ]}
-        renderItem={(row, index, rowClass, cellClass) => [
-          <Typography>
+        renderItem={(row, index, textStyle, cellClass) => [
+          <Typography className={textStyle}>
             {row.email}
           </Typography>,
-          <Box className={cellClass}
-            component="div"
-            variant="body">
+          <Typography className={textStyle}>
             {row.username}
-          </Box>,
+          </Typography>,
         ]} />
     </Box>
   );

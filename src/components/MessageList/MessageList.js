@@ -155,10 +155,17 @@ const MessageList = props => {
     setOpenDialog(true);
   }
 
+  const headers = [
+    { title: "", className: classes.header__icon },
+    { title: "DATE", className: classes.header__date },
+    { title: "NAME", className: undefined },
+  ]
+
   return (
     <Box className={classes.root}>
       <CustomTable heightOffset={heightOffset}
         loading={loading}
+        header={headers}
         list={messages}
         selectedItem={currentMessage}
         renderHeader={(rowClass, cellClass) => [
@@ -170,16 +177,16 @@ const MessageList = props => {
             TEXT
             </Typography>
         ]}
-        renderItem={(row, index, rowClass, cellClass) => [
+        renderItem={(row, index, textStyle, cellClass) => [
           <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
             <Box >
               X
-                </Box>
+            </Box>
           </IconButton>,
-          <Typography>
+          <Typography className={textStyle}>
             {FORMAT_DATE(row.date)}
           </Typography>,
-          <Typography>
+          <Typography className={textStyle}>
             {row.text}
           </Typography>
         ]} />
