@@ -8,25 +8,35 @@ import { MessagePanel } from "./components/";
 const useStyle = makeStyles(theme => ({
   root: {
     display: "flex",
-    width: "100%",
-    height: "100%",
+    width: "calc(100vw - 130px)",
+    height: "calc(100vh - 50px)",
+    flexDirection: "row",
+    flexWrap: "nowrap"
   },
   user__panel: {
     flex: 1,
-    maxWidth: "calc((100vw - 130px) * 0.33)",
+    height: "100%",
+    width: "calc((100% - 25px) * 0.3)",
+    minWidth: "300px",
     marginRight: "13px",
   },
   box: {
     height: "100%",
+    width: "100%",
     borderWidth: "1px",
     borderColor: theme.palette.secondary.main,
   },
   message__panel: {
     flex: 2,
-    maxWidth: "calc((100vw - 130px - 26px) * 0.66)",
+    height: "100%",
+    width: "calc((100% - 25px) * 0.6)",
+    minWidth: "300px",
     marginLeft: "13px",
   },
   empty__panel: {
+    height: "100%",
+    width: "100%",
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: theme.palette.common.black,
@@ -59,7 +69,7 @@ const MainPage = () => {
             {
               currentUser ?
                 <MessagePanel title email={currentUser.email} /> :
-                <Box className={clsx(classes.root, classes.empty__panel)}>
+                <Box className={clsx(classes.empty__panel)}>
                   <Typography className={classes.message} color="primary">
                     Select an item on the left.
                   </Typography>

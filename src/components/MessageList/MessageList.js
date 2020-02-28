@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Box, IconButton, makeStyles, TableCell, TableRow } from "@material-ui/core";
-import clsx from "clsx";
+import { Box, IconButton, makeStyles, Typography } from "@material-ui/core";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
@@ -53,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MessageList = props => {
-  const { email, filter = "", onQuery = () => { }, heightOffset } = props;
+  const { email, filter = "", onQuery = () => { },} = props;
 
   const classes = useStyles(props);
 
@@ -155,46 +154,38 @@ const MessageList = props => {
     setOpenDialog(true);
   }
 
+  const headers = [
+    { title: "", className: classes.header__icon, },
+    { title: "DATE", className: classes.header__date, selectable: true },
+    { title: "NAME", className: undefined, selectable: true },
+  ]
+
   return (
     <Box className={classes.root}>
-      <CustomTable heightOffset={heightOffset}
-        loading={loading}
+      <CustomTable loading={loading}
+        header={headers}
         list={messages}
+        onSelect={(message) => onClick(message, setOpenModify)}
         selectedItem={currentMessage}
-        renderHeader={(rowClass, cellClass) =>
-          <TableRow className={rowClass} component="div">
-            <TableCell className={clsx(cellClass, classes.header__icon)} component="div" />
-            <TableCell className={clsx(cellClass, classes.header__date)} component="div">
-              DATE
-            </TableCell>
-            <TableCell className={cellClass} component="div">
-              TEXT
-            </TableCell>
-          </TableRow>
-        }
-        renderItem={(row, index, rowClass, cellClass) =>
-          <TableRow className={rowClass} component="div" key={"row-" + index}>
-            <TableCell className={clsx(cellClass, classes.header__icon)} component="div">
-              <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
-                <Box >
-                  X
-                </Box>
-              </IconButton>
-            </TableCell>
-            <TableCell className={clsx(cellClass, classes.header__date)} onClick={() => onClick(row, setOpenModify)} component="div">
-              {FORMAT_DATE(row.date)}
-            </TableCell>
-            <TableCell className={cellClass} onClick={() => onClick(row, setOpenModify)} component="div">
-              {row.text}
-            </TableCell>
-          </TableRow>
-        } />
-      <ModifyDialog open={openModify}
+        renderItem={(row, _, textStyle) => [
+          <IconButton className={classes.delete__icon} onClick={() => onClick(row, setOpenDelete)} >
+            <Box >
+              X
+            </Box>
+          </IconButton>,
+          <Typography className={textStyle}>
+            {FORMAT_DATE(row.date)}
+          </Typography>,
+          <Typography className={textStyle}>
+            {row.text}
+          </Typography>
+        ]} />
+      < ModifyDialog open={openModify}
         onClose={(shouldModify, newText) => onModify(shouldModify, newText)}
         message={currentMessage} />
       <DeleteDialog open={openDelete}
         onClose={(shouldDelete) => onDelete(shouldDelete)} />
-    </Box>
+    </Box >
   );
 };
 
@@ -210,7 +201,6 @@ MessageList.propTypes = {
   email: PropTypes.string.isRequired,
   filter: PropTypes.string,
   onQuery: PropTypes.func,
-  heightOffset: PropTypes.number.isRequired,
 };
 
 export default MessageList;

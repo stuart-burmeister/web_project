@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Box, makeStyles, TableCell, TableRow } from "@material-ui/core";
-import clsx from "clsx";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
@@ -21,6 +20,7 @@ const useStyles = makeStyles(() => ({
     height: "100%",
     width: "100%",
     flexDirection: "column",
+    minWidth: "300px",
   },
   header__mail: {
     maxWidth: "250px",
@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const UserList = props => {
-  const { filter, selectedUser, onSelect, heightOffset } = props;
+  const { filter, selectedUser, onSelect } = props;
 
   const classes = useStyles();
 
@@ -48,6 +48,11 @@ const UserList = props => {
     pollInterval: 5000,
   });
 
+  const headers = [
+    { title: "EMAIL", className: classes.header__mail, selectable: true },
+    { title: "NAME", className: classes.header__name, selectable: true },
+  ]
+
   useEffect(() => {
     if (data && data.searchUser) {
       const userList = data.searchUser.filter((entry) => entry.username.toLowerCase().includes(filter.toLowerCase()))
@@ -60,36 +65,19 @@ const UserList = props => {
 
   return (
     <Box className={classes.root}>
-      <CustomTable heightOffset={heightOffset}
-        loading={loading}
+      <CustomTable loading={loading}
+        header={headers}
         list={users}
         selectedItem={selectedUser}
-        renderHeader={(rowClass, cellClass) =>
-          <TableRow className={rowClass} component="div" >
-            <TableCell className={clsx(cellClass, classes.header__mail)}
-              component="div">
-              EMAIL
-            </TableCell>
-            <TableCell className={clsx(cellClass, classes.header__name)}
-              component="div">
-              NAME
-            </TableCell>
-          </TableRow>
-        }
-        renderItem={(row, index, rowClass, cellClass) =>
-            <TableRow className={rowClass} component="div" key={"row-" + index} onClick={() => onSelect(row)}>
-              <TableCell className={clsx(cellClass, classes.header__mail)}
-                component="div"
-                variant="body">
-                {row.email}
-              </TableCell>
-              <TableCell className={cellClass}
-                component="div" 
-                variant="body">
-                {row.username}
-              </TableCell>
-            </TableRow>
-          }/>
+        onSelect={(user) => onSelect(user)}
+        renderItem={(row, _, textStyle) => [
+          <Typography className={textStyle}>
+            {row.email}
+          </Typography>,
+          <Typography className={textStyle}>
+            {row.username}
+          </Typography>,
+        ]} />
     </Box>
   );
 };
@@ -101,8 +89,8 @@ UserList.propTypes = {
     name: PropTypes.string,
   }),
   onSelect: PropTypes.func.isRequired,
-  heightOffset: PropTypes.number,
 }
 
 export default UserList;
 export { SEARCH_USERS };
+

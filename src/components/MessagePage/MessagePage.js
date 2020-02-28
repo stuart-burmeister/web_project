@@ -13,23 +13,32 @@ mutation createMessage($user: String!, $text: String!) {
 
 const useStyle = makeStyles(theme => ({
   root: {
-    width: "100%",
-    height: "100%",
+    width: "calc(100vw - 130px)",
+    height: "calc(100vh - 50px)",
     flexDirection: "row",
+    flexWrap: "nowrap"
   },
   panel: {
     flex: 1,
-    maxWidth: "calc(100vw - 130px)"
+    height: "100%",
+    width: "100%",
+    minWidth: "300px",
   },
   box: {
     height: "100%",
+    width: "100%",
     borderColor: theme.palette.secondary.main,
   },
   input__panel: {
     flex: 1,
+    height: "60px",
+    width: "calc(100% - 40px)",
     padding: 20,
     color: theme.palette.secondary.main,
   },
+  message__panel: {
+    height: "calc( 100% - 202px)",
+  }
 }))
 
 const MessagePage = () => {
@@ -71,8 +80,8 @@ const MessagePage = () => {
             <Box className={classes.input__panel} borderBottom={1}>
               <SearchBar setFilter={(newFilter) => setFilter(newFilter)} />
             </Box>
-            <Box>
-              <MessageList email={email} filter={filter} heightOffset={244} />
+            <Box className={classes.message__panel}>
+              <MessageList email={email} filter={filter}/>
             </Box>
           </Box>
         </Grid>

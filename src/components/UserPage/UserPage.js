@@ -5,15 +5,16 @@ import { ModifyUser, SignUp, UserPanel } from "../";
 const useStyle = makeStyles(theme => ({
   root: {
     display: "flex",
-    width: "100%",
-    height: "100%",
+    width: "calc(100vw - 130px)",
+    height: "calc(100vh - 50px)",
     flexDirection: "row",
-    overflowWrap: "no-wrap"
+    flexWrap: "nowrap",
   },
   input__panel: {
     flex: 2,
-    maxWidth: "calc((100vw - 130px) * 0.4)",
+    width: "calc((100% - 25px) * 0.4)",
     minWidth: "380px",
+    height: "100%",
     paddingRight: "12px",
   },
   box: {
@@ -22,8 +23,9 @@ const useStyle = makeStyles(theme => ({
   },
   user__panel: {
     flex: 3,
-    maxWidth: "calc((100vw - 130px) * 0.6)",
-    minWidth: "250px",
+    width: "calc((100% - 25px) * 0.6)",
+    minWidth: "300px",
+    height: "100%",
     paddingLeft: "12px",
   },
 }));

@@ -1,4 +1,4 @@
-import { Box, makeStyles, Table, TableBody, TableContainer, TableHead } from "@material-ui/core";
+import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import React from "react";
@@ -11,25 +11,42 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   container: {
-    display: "block"
+    display: "block",
+    width: "100%",
+    height: "100%",
+  },
+  header: {
+    height: "58px",
+    width: "100%",
+    borderWidth: 1,
+    color: theme.palette.secondary.main,
   },
   row: {
     display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    height: "57px",
   },
   headerCell: {
-    display: "block",
+    display: "flex",
     width: "100%",
-    fontWeight: "bold",
+    padding: "16px",
     backgroundColor: theme.palette.common.white,
     borderWidth: 1,
     borderColor: theme.palette.secondary.main,
+  },
+  text: {
+    fontWeight: "bold",
+    fontSize: 14,
+    textOverflow: "ellipsis",
+    overflowX: "hidden",
+    color: theme.palette.common.black
   },
   body: {
     display: "block",
     overflow: "auto",
     width: "100%",
-    height: props => `calc(100vh - 5px - ${props.heightOffset}px - 57px)`,
-    minHeight: props => `calc(500px - 5px - ${props.heightOffset}px - 57px)`,
+    height: "calc(100% - 58px)",
     '&::-webkit-scrollbar': {
       width: '15px',
       borderLeft: `1px solid ${theme.palette.grey[400]}`,
@@ -44,7 +61,7 @@ const useStyles = makeStyles(theme => ({
     overflowX: "hidden",
     textOverflow: "ellipsis",
     width: "100%",
-    maxHeight: "25px",
+    padding: 16,
     fontWeight: "bold",
     fontSize: 14,
     whiteSpace: "nowrap",
@@ -55,33 +72,56 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CustomTable = props => {
-  const { loading, list, selectedItem, renderHeader, renderItem, } = props;
+  const { loading, list, selectedItem, renderItem, header, onSelect } = props;
 
-  const classes = useStyles(props);
+  const classes = useStyles();
 
   return (
     <Box className={classes.root}>
-      <TableContainer className={classes.container} component="div">
-        <Table className={classes.container} stickyHeader component="div">
-          <TableHead className={classes.container} component="div">
+      <Grid className={classes.container} container>
+        <Grid className={classes.header} item>
+          <Box className={classes.row} borderBottom={1}>
             {
-              renderHeader(classes.row, classes.headerCell)
-            }
-          </TableHead>
-          <TableBody className={classes.body} component="div">
-            {
-              !loading &&
-              list.map((row, index) => {
-                var rowStyle = (index % 2 === 0) ? classes.even__row : classes.odd__row;
-                const isRowSelected = selectedItem && row === selectedItem;
-                if (isRowSelected) {
-                  rowStyle = classes.selected__row;
+              header.map((cell, index) => {
+                if (cell.title) {
+                  return (
+                    <Box className={clsx(classes.headerCell, cell.className)} key={"header-" + index}>
+                      <Typography className={classes.text}>
+                        {cell.title}
+                      </Typography>
+                    </Box>
+                  );
                 }
-                return (renderItem(row, index, classes.row, clsx(classes.bodyCell, rowStyle)))
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                return <Box className={clsx(classes.headerCell, cell.className)} key={"header-" + index} />;
+              })
+            }
+          </Box>
+        </Grid>
+        <Grid className={classes.body} component="div">
+          {
+            !loading &&
+            list.map((row, index) => {
+              var rowStyle = (index % 2 === 0) ? classes.even__row : classes.odd__row;
+              const isRowSelected = selectedItem && row === selectedItem;
+              if (isRowSelected) {
+                rowStyle = classes.selected__row;
+              }
+              const items = renderItem(row, index, classes.text);
+              return (
+                <Box className={classes.row} key={"row-" + index}>
+                  {
+                    items.map((element, index) =>
+                      <Box className={clsx(classes.bodyCell, rowStyle, header[index].className)}
+                        key={"cell-" + index}
+                        onClick={() => header[index].selectable && onSelect ? onSelect(row) : {}}>
+                        {element}
+                      </Box>
+                    )}
+                </Box>
+              );
+            })}
+        </Grid>
+      </Grid>
     </Box>
   );
 };
@@ -90,9 +130,12 @@ CustomTable.propTypes = {
   loading: PropTypes.bool,
   list: PropTypes.arrayOf(PropTypes.any).isRequired,
   selectedItem: PropTypes.any,
-  renderHeader: PropTypes.func.isRequired,
+  header: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    className: PropTypes.any,
+    selectable: PropTypes.bool,
+  })),
   renderItem: PropTypes.func.isRequired,
-  heightOffset: PropTypes.number.isRequired,
 };
 
 export default CustomTable;
