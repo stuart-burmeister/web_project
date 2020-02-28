@@ -11,11 +11,13 @@ const useStyle = makeStyles(theme => ({
     width: "calc(100vw - 130px)",
     height: "calc(100vh - 50px)",
     flexDirection: "row",
+    flexWrap: "nowrap"
   },
   user__panel: {
     flex: 1,
     height: "100%",
     width: "calc((100% - 25px) * 0.3)",
+    minWidth: "300px",
     marginRight: "13px",
   },
   box: {
@@ -28,6 +30,7 @@ const useStyle = makeStyles(theme => ({
     flex: 2,
     height: "100%",
     width: "calc((100% - 25px) * 0.6)",
+    minWidth: "300px",
     marginLeft: "13px",
   },
   empty__panel: {

@@ -8,6 +8,7 @@ const useStyle = makeStyles(theme => ({
     width: "calc(100vw - 130px)",
     height: "calc(100vh - 50px)",
     flexDirection: "row",
+    flexWrap: "nowrap",
   },
   input__panel: {
     flex: 2,
@@ -23,7 +24,7 @@ const useStyle = makeStyles(theme => ({
   user__panel: {
     flex: 3,
     width: "calc((100% - 25px) * 0.6)",
-    minWidth: "calc(100% - 405px)",
+    minWidth: "300px",
     height: "100%",
     paddingLeft: "12px",
   },

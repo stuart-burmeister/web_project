@@ -92,7 +92,7 @@ const CustomTable = props => {
                     </Box>
                   );
                 }
-                return <Box className={clsx(classes.headerCell, cell.className)} />;
+                return <Box className={clsx(classes.headerCell, cell.className)} key={"header-" + index} />;
               })
             }
           </Box>
