@@ -5,7 +5,6 @@ import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: "yellow",
     width: 100,
   },
   text: {
@@ -47,17 +46,14 @@ export const Default = () => {
       <CustomTable list={defaultData}
         heightOffset={100}
         header={headerData}
-        renderItem={(row, index, textStyle) =>
-          [
-            <Typography className={textStyle}>
-              {index}
-            </Typography>,
-            <Typography className={textStyle}>
-              {row.value}
-            </Typography>
-          ]
-        }
-      />
+        renderItem={(row, index, textStyle) => [
+          <Typography className={textStyle}>
+            {index}
+          </Typography>,
+          <Typography className={textStyle}>
+            {row.value}
+          </Typography>
+        ]} />
     </Box>
   );
 }
