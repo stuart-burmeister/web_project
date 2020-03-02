@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: "bold",
     fontSize: 14,
   }
-}))
+}));
 
 export default {
   component: CustomTable,
