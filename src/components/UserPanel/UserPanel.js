@@ -1,8 +1,7 @@
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { SearchBar } from "../";
-import { UserList } from "./components";
+import { SearchBar, UserList } from "../";
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -29,7 +28,7 @@ const useStyle = makeStyles(theme => ({
     color: theme.palette.common.black,
   },
   user__list: {
-    height: props => `calc(100% - ${ props.title ? "138px" : "98px"})`
+    height: props => `calc(100% - ${props.title ? "138px" : "98px"})`
   },
 }))
 

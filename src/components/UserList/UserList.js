@@ -3,7 +3,7 @@ import { Box, makeStyles, Typography } from "@material-ui/core";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import CustomTable from "../../../CustomTable";
+import CustomTable from "../CustomTable";
 
 const SEARCH_USERS = gql`
   query searchUser($username: String, $email: String) {

@@ -11,5 +11,6 @@ export { default as NavBar } from "./NavBar";
 export { default as SearchBar } from "./SearchBar";
 export { default as SignIn } from "./SignIn";
 export { default as SignUp } from "./SignUp";
+export { default as UserList, SEARCH_USERS } from "./UserList";
 export { default as UserPage } from "./UserPage";
-export { default as UserPanel, SEARCH_USERS } from "./UserPanel";
+export { default as UserPanel } from "./UserPanel";
