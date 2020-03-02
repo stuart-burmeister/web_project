@@ -18,7 +18,7 @@ const useStyle = makeStyles(theme => ({
     height: "100%",
     width: "calc((100% - 25px) * 0.3)",
     minWidth: "300px",
-    marginRight: "13px",
+    marginRight: "25px",
   },
   box: {
     height: "100%",
@@ -31,7 +31,6 @@ const useStyle = makeStyles(theme => ({
     height: "100%",
     width: "calc((100% - 25px) * 0.6)",
     minWidth: "300px",
-    marginLeft: "13px",
   },
   empty__panel: {
     height: "100%",

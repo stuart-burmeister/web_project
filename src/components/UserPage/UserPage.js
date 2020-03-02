@@ -15,9 +15,10 @@ const useStyle = makeStyles(theme => ({
     width: "calc((100% - 25px) * 0.4)",
     minWidth: "380px",
     height: "100%",
-    paddingRight: "12px",
+    marginRight: "25px",
   },
   box: {
+    width: "100%",
     height: "100%",
     borderColor: theme.palette.secondary.main,
   },
@@ -26,7 +27,6 @@ const useStyle = makeStyles(theme => ({
     width: "calc((100% - 25px) * 0.6)",
     minWidth: "300px",
     height: "100%",
-    paddingLeft: "12px",
   },
 }));
 
