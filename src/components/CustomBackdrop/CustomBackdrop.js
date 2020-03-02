@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   backdrop: {
     position: "absolute",
     zIndex: 5,
-    display: "block || flex",
+    display: "flex",
     alignContent: "center",
     justifyContent: "center",
     flexDirection: "column",

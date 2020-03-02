@@ -5,7 +5,7 @@ import clsx from "clsx";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { CustomBackdrop, SEARCH_USERS } from "../";
+import { SEARCH_USERS } from "../";
 
 export const SIGNUP_USER = gql`
   mutation signUp($email: String!, $username: String!, $password: String!) {
@@ -41,12 +41,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SignUp = props => {
-  const { onSignUp, useBackdrop = false, onCancel } = props;
+  const { onSignUp, onCancel } = props;
 
   const classes = useStyles();
 
-  const [openBackdrop, setOpenBackdrop] = useState(useBackdrop);
-  
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -102,9 +100,6 @@ const SignUp = props => {
 
   return (
     <Box className={classes.root}>
-      <CustomBackdrop open={openBackdrop}
-        title="Welcome to Vatech!"
-        onClick={() => setOpenBackdrop(false)}/>
       <Grid className={classes.container}
         container
         direction="column"
@@ -122,12 +117,12 @@ const SignUp = props => {
             error={emailError !== ""}
             helperText={emailError}
             InputLabelProps={{ shrink: true, className: classes.input }}
-            onChange={(event) => setEmail(event.target.value)} 
-            onKeyDown={({key}) => {
-              if(key === "Enter"){
+            onChange={(event) => setEmail(event.target.value)}
+            onKeyDown={({ key }) => {
+              if (key === "Enter") {
                 signUpUser()
               }
-            }}/>
+            }} />
         </Grid>
         <Grid item className={classes.item}>
           <TextField className={classes.input}
@@ -137,12 +132,12 @@ const SignUp = props => {
             error={nameError !== ""}
             helperText={nameError}
             InputLabelProps={{ shrink: true, className: classes.input }}
-            onChange={(event) => setName(event.target.value)} 
-            onKeyDown={({key}) => {
-              if(key === "Enter"){
+            onChange={(event) => setName(event.target.value)}
+            onKeyDown={({ key }) => {
+              if (key === "Enter") {
                 signUpUser()
               }
-            }}/>
+            }} />
         </Grid>
         <Grid className={classes.item} item>
           <TextField className={classes.input}
@@ -153,12 +148,12 @@ const SignUp = props => {
             helperText={passwordError}
             InputLabelProps={{ shrink: true, className: classes.input }}
             type="password"
-            onChange={(event) => setPassword(event.target.value)} 
-            onKeyDown={({key}) => {
-              if(key === "Enter"){
+            onChange={(event) => setPassword(event.target.value)}
+            onKeyDown={({ key }) => {
+              if (key === "Enter") {
                 signUpUser()
               }
-            }}/>
+            }} />
         </Grid>
         <Grid item className={classes.item}>
           <TextField className={classes.input}
@@ -169,12 +164,12 @@ const SignUp = props => {
             helperText={confirmError}
             InputLabelProps={{ shrink: true, className: classes.input }}
             type="password"
-            onChange={(event) => setConfirm(event.target.value)} 
-            onKeyDown={({key}) => {
-              if(key === "Enter"){
+            onChange={(event) => setConfirm(event.target.value)}
+            onKeyDown={({ key }) => {
+              if (key === "Enter") {
                 signUpUser()
               }
-            }}/>
+            }} />
         </Grid>
         <Grid className={classes.item} item>
           <Button className={classes.button}
@@ -190,7 +185,7 @@ const SignUp = props => {
           <Button className={clsx(classes.button, classes.input)}
             variant="contained"
             fullWidth
-            onClick={() => useBackdrop ? setOpenBackdrop(true) : onCancel()}
+            onClick={() => onCancel()}
             color="secondary"
             disabled={loading}>
             Cancel

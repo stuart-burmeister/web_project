@@ -1,6 +1,6 @@
 import { Box, Grid, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
-import { ModifyUser, SignUp, UserPanel } from "../";
+import { CustomBackdrop, ModifyUser, SignUp, UserPanel } from "../";
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -16,6 +16,7 @@ const useStyle = makeStyles(theme => ({
     minWidth: "380px",
     height: "100%",
     marginRight: "25px",
+    position:"relative",
   },
   box: {
     width: "100%",
@@ -36,6 +37,7 @@ const UserPage = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentName, setCurrentName] = useState("");
   const [currentEmail, setCurrentEmail] = useState("");
+  const [openBackdrop, setOpenBackdrop] = useState(true);
 
   const changeUser = (newUser) => {
     setSelectedUser(newUser);
@@ -45,7 +47,7 @@ const UserPage = () => {
     }
   };
 
-  var inputClass = (<SignUp onCancel={() => { }} onSignUp={() => { }} useBackdrop={true} />);
+  var inputClass = (<SignUp onCancel={() => setOpenBackdrop(true)} onSignUp={() => { }} />);
   if (selectedUser !== null) {
     inputClass = <ModifyUser name={currentName} email={currentEmail}
       onCancel={() => changeUser(null)} />
@@ -57,6 +59,9 @@ const UserPage = () => {
       <Grid className={classes.input__panel} item>
         <Box className={classes.box}
           border={1}>
+          <CustomBackdrop open={openBackdrop}
+            title="Welcome to Vatech!"
+            onClick={() => setOpenBackdrop(false)} />
           {inputClass}
         </Box>
       </Grid>
