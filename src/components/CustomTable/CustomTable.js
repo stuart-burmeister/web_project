@@ -76,6 +76,15 @@ const CustomTable = props => {
 
   const classes = useStyles();
 
+  const onItemSelected = (item, isItemSelected) => {
+    if (isItemSelected) {
+      onSelect(null);
+    }
+    else {
+      onSelect(item);
+    }
+  };
+
   return (
     <Box className={classes.root}>
       <Grid className={classes.container} container>
@@ -113,7 +122,7 @@ const CustomTable = props => {
                     items.map((element, index) =>
                       <Box className={clsx(classes.bodyCell, rowStyle, header[index].className)}
                         key={"cell-" + index}
-                        onClick={() => header[index].selectable && onSelect ? onSelect(row) : {}}>
+                        onClick={() => header[index].selectable && onSelect ? onItemSelected(row, isRowSelected) : {}}>
                         {element}
                       </Box>
                     )}
