@@ -16,7 +16,7 @@ const useStyle = makeStyles(theme => ({
     minWidth: "380px",
     height: "100%",
     marginRight: "25px",
-    position:"relative",
+    position: "relative",
   },
   box: {
     width: "100%",
@@ -51,6 +51,9 @@ const UserPage = () => {
   if (selectedUser !== null) {
     inputClass = <ModifyUser name={currentName} email={currentEmail}
       onCancel={() => changeUser(null)} />
+      if (openBackdrop){
+        setOpenBackdrop(false);
+      }
   }
 
   return (
