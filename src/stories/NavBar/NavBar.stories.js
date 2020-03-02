@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavBar } from "../../components";
-import { useState } from "react";
 
 export default {
   component: NavBar,
@@ -10,5 +9,6 @@ export default {
 
 export const Default = () => {
   const [index, setIndex] = useState(0);
-  return <NavBar tabIndex={index}/>
+
+  return <NavBar tabIndex={index} onChange={(newValue) => setIndex(newValue)} />
 }

@@ -2,7 +2,6 @@ import { AppBar, Grid, makeStyles, Tab, Tabs } from "@material-ui/core";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import React from "react";
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,32 +12,32 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "row",
   },
   container: {
-    display:"flex",
+    display: "flex",
     flexDirection: "column",
     height: "100%",
     width: 80,
     alignItems: "center",
     justifyContent: "flex-start",
   },
-  tabs__root:{
-    display:"flex",
-    height:"100%",
+  tabs__root: {
+    display: "flex",
+    height: "100%",
   },
   tabs__indicator: {
-    display:"none",
+    display: "none",
   },
-  tabs__flexContainer:{
-    display:"flex",
-    height:"100%",
+  tabs__flexContainer: {
+    display: "flex",
+    height: "100%",
   },
   tab__root: {
-    position:"relative",
+    position: "relative",
     minWidth: 80,
     width: 80,
     height: 80,
     fontSize: 14,
     fontWeight: "bold",
-    color:theme.palette.common.white,
+    color: theme.palette.common.white,
   },
   tab__selected: {
     color: theme.palette.common.black,
@@ -49,12 +48,12 @@ const useStyles = makeStyles(theme => ({
     justifySelf: "flex-end",
     justifyItems: "flex-end",
     justifyContent: "flex-end",
-    alignSelf:"flex-end",
-    alignItems:"flex-end",
-    alignContent:"flex-end"
+    alignSelf: "flex-end",
+    alignItems: "flex-end",
+    alignContent: "flex-end"
   },
-  filler:{
-    flex:8
+  filler: {
+    flex: 8
   },
   active__page: {
     flex: 1,
@@ -63,20 +62,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const NavBar = props => {
-  const { children, tabIndex } = props;
+  const { children, tabIndex, onChange } = props;
 
   const classes = useStyles();
-
-  const linkPaths = [
-    "/main",
-    "/user",
-    "/message",
-    "blank",
-    "/logout",
-  ];
-  
-  //let history = useHistory();
-  let history = {push: () => {}};
 
   return (
     <Grid container className={classes.root}>
@@ -91,31 +79,31 @@ const NavBar = props => {
             orientation="vertical"
             variant="fullWidth"
             value={tabIndex}
-            onChange={(_, newValue) => history.push(linkPaths[newValue])}>
+            onChange={(_, newValue) => onChange(newValue)}>
             <Tab classes={{
               root: classes.tab__root,
               selected: classes.tab__selected,
-              }}
+            }}
               label="Main" />
             <Tab classes={{
               root: classes.tab__root,
               selected: classes.tab__selected,
-              }}
+            }}
               label="User" />
             <Tab classes={{
-              root: clsx(classes.tab__root) ,
+              root: clsx(classes.tab__root),
               selected: classes.tab__selected,
-              }}
+            }}
               label="Message" />
             <Tab classes={{
               root: clsx(classes.tab__root, classes.filler),
-              }}
-              disabled/>
+            }}
+              disabled />
             <Tab classes={{
               root: clsx(classes.tab__root, classes.tab__signout),
               selected: classes.tab__selected,
-              }}
-              label="Logout"/>
+            }}
+              label="Logout" />
           </Tabs>
         </AppBar>
       </Grid>
@@ -130,6 +118,7 @@ const NavBar = props => {
 
 NavBar.propTypes = {
   tabIndex: PropTypes.number.isRequired,
+  history: PropTypes.any.isRequired,
 };
 
 export default NavBar;

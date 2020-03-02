@@ -15,14 +15,25 @@ const MainRoute = () => {
   const classes = useStyles();
 
   const [isSignedIn, setIsSignedIn] = useState(sessionStorage.getItem("currentUser") !== null);
+
   const history = useHistory();
+
+  const linkPaths = [
+    "/main",
+    "/user",
+    "/message",
+    "blank",
+    "/logout",
+  ];
+
+  const onTabChanged = (newValue) => { history.push(linkPaths[newValue]) }
 
   return (
     <Switch>
       <Route path="/main">
         {
           isSignedIn ? (
-            <NavBar tabIndex={0}>
+            <NavBar tabIndex={0} onChange={(newValue) => onTabChanged(newValue)} >
               <MainPage />
             </NavBar>) :
             (
@@ -32,7 +43,7 @@ const MainRoute = () => {
       <Route path="/user">
         {
           isSignedIn ? (
-            <NavBar tabIndex={1}>
+            <NavBar tabIndex={1} onChange={(newValue) => onTabChanged(newValue)}>
               <UserPage />
             </NavBar>) :
             (
@@ -42,7 +53,7 @@ const MainRoute = () => {
       <Route path="/message">
         {
           isSignedIn ? (
-            <NavBar tabIndex={2}>
+            <NavBar tabIndex={2} onChange={(newValue) => onTabChanged(newValue)}>
               <MessagePage />
             </NavBar>) :
             (
@@ -79,7 +90,7 @@ const MainRoute = () => {
       <Route path="/">
         <Redirect to={isSignedIn ? "/main" : "/signin"} />
       </Route>
-    </Switch>
+    </Switch >
   );
 }
 
