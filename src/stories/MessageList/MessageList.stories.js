@@ -3,7 +3,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import React from "react";
 import { GET_USER_MESSAGES, MessageList } from "../../components";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: 300,
     width: 500,

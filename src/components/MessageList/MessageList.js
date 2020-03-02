@@ -17,7 +17,7 @@ const GET_USER_MESSAGES = gql`
   }
 `;
 
-const DELETE_MESSSAGE = gql`
+const DELETE_MESSAGE = gql`
   mutation deleteMessage($id: ID!) {
     removeMessage(id: $id)
   }
@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MessageList = props => {
-  const { email, filter = "", onQuery = () => { },} = props;
+  const { email, filter = "", onQuery = () => { }, } = props;
 
   const classes = useStyles(props);
 
@@ -74,7 +74,7 @@ const MessageList = props => {
   });
 
   const [deleteMessage] = useMutation(
-    DELETE_MESSSAGE,
+    DELETE_MESSAGE,
     {
       onCompleted: data => {
         setOpenDelete(false);
@@ -103,7 +103,7 @@ const MessageList = props => {
     }
   );
   const [updateMessage] = useMutation(
-    DELETE_MESSSAGE,
+    DELETE_MESSAGE,
     {
       onCompleted: data => {
         createMessage({ variables: { user: email, text: newMessage } });
@@ -180,7 +180,7 @@ const MessageList = props => {
             {row.text}
           </Typography>
         ]} />
-      < ModifyDialog open={openModify}
+      <ModifyDialog open={openModify}
         onClose={(shouldModify, newText) => onModify(shouldModify, newText)}
         message={currentMessage} />
       <DeleteDialog open={openDelete}
@@ -204,5 +204,5 @@ MessageList.propTypes = {
 };
 
 export default MessageList;
-export { GET_USER_MESSAGES };
+export { GET_USER_MESSAGES, DELETE_MESSAGE };
 
