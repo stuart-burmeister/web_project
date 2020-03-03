@@ -1,7 +1,7 @@
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,13 +27,18 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "57px",
   },
-  headerCell: {
+  header__cell: {
     display: "flex",
     width: "100%",
     padding: "16px",
     backgroundColor: theme.palette.common.white,
     borderWidth: 1,
     borderColor: theme.palette.secondary.main,
+  },
+  header__scrollbar: {
+    width: "15px",
+    maxWidth:"15px",
+    minWidth: "15px",
   },
   text: {
     fontWeight: "bold",
@@ -56,7 +61,7 @@ const useStyles = makeStyles(theme => ({
       borderLeft: `1px solid ${theme.palette.grey[400]}`,
     }
   },
-  bodyCell: {
+  body__cell: {
     display: "block",
     overflowX: "hidden",
     textOverflow: "ellipsis",
@@ -76,6 +81,9 @@ const CustomTable = props => {
 
   const classes = useStyles();
 
+  const [bodyElement, setBodyElement] = useState(undefined);
+  const [isScrolling, setIsScrolling] = useState(false);
+
   const onItemSelected = (item, isItemSelected) => {
     if (isItemSelected) {
       onSelect(null);
@@ -84,6 +92,20 @@ const CustomTable = props => {
       onSelect(item);
     }
   };
+
+  useEffect(() => {
+    if (bodyElement !== undefined){
+      const clientHeight = bodyElement.clientHeight;
+      const scrollHeight = bodyElement.scrollHeight;
+      if  (clientHeight !== scrollHeight)
+      {
+        setIsScrolling(true);
+      }
+      else{
+        setIsScrolling(false);
+      }
+    }
+  }, [list,bodyElement]);
 
   return (
     <Box className={classes.root}>
@@ -94,19 +116,22 @@ const CustomTable = props => {
               header.map((cell, index) => {
                 if (cell.title) {
                   return (
-                    <Box className={clsx(classes.headerCell, cell.className)} key={"header-" + index}>
+                    <Box className={clsx(classes.header__cell, cell.className)} key={"header-" + index}>
                       <Typography className={classes.text}>
                         {cell.title}
                       </Typography>
                     </Box>
                   );
                 }
-                return <Box className={clsx(classes.headerCell, cell.className)} key={"header-" + index} />;
+                return <Box className={clsx(classes.header__cell, cell.className)} key={"header-" + index} />;
               })
+            }
+            {
+              isScrolling && <Box className={classes.header__scrollbar}/>
             }
           </Box>
         </Grid>
-        <Grid className={classes.body} component="div">
+        <Grid className={classes.body} component="div" ref={(divElement) => {setBodyElement(divElement) }}>
           {
             !loading &&
             list.map((row, index) => {
@@ -120,7 +145,7 @@ const CustomTable = props => {
                 <Box className={classes.row} key={"row-" + index}>
                   {
                     items.map((element, index) =>
-                      <Box className={clsx(classes.bodyCell, rowStyle, header[index].className)}
+                      <Box className={clsx(classes.body__cell, rowStyle, header[index].className)}
                         key={"cell-" + index}
                         onClick={() => header[index].selectable && onSelect ? onItemSelected(row, isRowSelected) : {}}>
                         {element}
