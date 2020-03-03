@@ -94,6 +94,7 @@ const SignIn = props => {
         </Grid>
         <Grid item className={classes.item}>
           <TextField className={classes.input}
+            id="email"
             variant="outlined"
             label="EMAIL"
             value={email}
@@ -108,7 +109,9 @@ const SignIn = props => {
             }}/>
         </Grid>
         <Grid item className={classes.item}>
-          <TextField variant="outlined" className={classes.input}
+          <TextField className={classes.input}
+            id="password"
+            variant="outlined" 
             label="PASSWORD"
             error={passwordError !== ""}
             helperText={passwordError}
@@ -122,9 +125,10 @@ const SignIn = props => {
             }}/>
         </Grid>
         <Grid item className={classes.item}>
-          <Button variant="contained"
+          <Button className={classes.button}
+            id="signin"
+            variant="contained"
             fullWidth
-            className={classes.button}
             color="primary"
             onClick={() => signInAccount()}
             disabled={loading}>
@@ -133,6 +137,7 @@ const SignIn = props => {
         </Grid>
         <Grid item className={classes.item}>
           <Button className={classes.link}
+            id="signup"
             onClick={() => onSignUpClick()}
             disabled={loading}>
             Sign up
