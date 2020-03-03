@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
   container: {
     flex: 1,
     flexDirection: "column",
+    flexWrap: "nowrap",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -198,7 +199,7 @@ const SignUp = props => {
 
 SignUp.propTypes = {
   onSignUp: PropTypes.func.isRequired,
-  openBackdrop: PropTypes.bool,
+  onCancel: PropTypes.func.isRequired,
 }
 
 export default SignUp;
