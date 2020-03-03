@@ -118,7 +118,7 @@ const NavBar = props => {
 
 NavBar.propTypes = {
   tabIndex: PropTypes.number.isRequired,
-  history: PropTypes.any.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default NavBar;
