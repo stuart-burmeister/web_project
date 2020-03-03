@@ -47,10 +47,8 @@ export const Default = () => {
   const [selectedUser, setSelectedUser] = useState(null)
 
   return (
-    <MockedProvider mocks={mockData} addTypename={false} >
       <Box className={classes.root} border={1}>
         <UserList filter="" selectedUser={selectedUser} onSelect={(user) => setSelectedUser(user)} />
       </Box>
-    </MockedProvider>
   )
 }

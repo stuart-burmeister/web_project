@@ -45,10 +45,8 @@ const mockData = [
 export const Default = () => {
   const classes = useStyles();
   return (
-    <MockedProvider mocks={mockData} addTypename={false} >
       <Box className={classes.root} border={1}>
         <MessageList email="test@testmail.com" />
       </Box>
-    </MockedProvider>
   )
 }

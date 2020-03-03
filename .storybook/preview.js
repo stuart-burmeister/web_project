@@ -1,7 +1,8 @@
-import React from "react";
+import { createMuiTheme } from '@material-ui/core';
+import { ThemeProvider } from "@material-ui/styles";
 import { addDecorator } from "@storybook/react";
+import React from 'react';
+import ApolloProvider from '../src/api/ApolloProvider';
 import { theme } from "../src/themes";
 
-import { muiTheme } from 'storybook-addon-material-ui';
-
-addDecorator(muiTheme(theme));
+addDecorator(storyFn => <ApolloProvider><ThemeProvider theme={createMuiTheme(theme)}>{storyFn()}</ThemeProvider></ApolloProvider>);
