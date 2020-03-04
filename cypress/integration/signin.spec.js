@@ -1,7 +1,7 @@
 /// <reference types="Cypress"/>
 
 describe('The Signin Page', function() {
-  it('successfully loads', function() {
+  it('successfully loads & signs in', function() {
     
     // test redirects
     cy.visit('/main', {
@@ -19,4 +19,10 @@ describe('The Signin Page', function() {
 
     cy.url().should('include', '/main')
   })
+
+  it('successfully logs out', function() {
+    cy.contains("Logout").click()
+    cy.url().should('include', '/signin')
+  })    
+
 })

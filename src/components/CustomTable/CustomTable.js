@@ -111,7 +111,7 @@ const CustomTable = props => {
     <Box className={classes.root}>
       <Grid className={classes.container} container>
         <Grid className={classes.header} item>
-          <Box className={classes.row} borderBottom={1}>
+          <Box className={classes.row} borderBottom={1} id="table_header">
             {
               header.map((cell, index) => {
                 if (cell.title) {
@@ -131,7 +131,7 @@ const CustomTable = props => {
             }
           </Box>
         </Grid>
-        <Grid className={classes.body} component="div" ref={(divElement) => {setBodyElement(divElement) }}>
+        <Grid className={classes.body} id="table_body" component="div" ref={(divElement) => {setBodyElement(divElement) }}>
           {
             !loading &&
             list.map((row, index) => {

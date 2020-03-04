@@ -40,7 +40,7 @@ const UserPanel = props => {
   const [userFilter, setUserFilter] = useState("");
 
   return (
-    <Box className={classes.root}>
+    <Box className={classes.root} id="user_panel">
       <Grid className={classes.root} container>
         <Grid className={classes.item} item>
           <Box className={classes.box}

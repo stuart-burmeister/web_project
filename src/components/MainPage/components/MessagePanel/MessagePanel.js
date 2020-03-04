@@ -43,10 +43,10 @@ const MessagePanel = props => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <Box className={classes.root}>
+    <Box className={classes.root} id="message_panel">
       <Grid className={classes.root} container>
         <Grid className={classes.item} item>
-          <Box className={classes.box} borderBottom={1} >
+          <Box className={classes.box} borderBottom={1} id="title" >
             {
               title && (
                 <Typography className={classes.heading}>
