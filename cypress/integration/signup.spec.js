@@ -3,7 +3,6 @@
 describe('The Signup Page', function () {
   it('successfully signs up a user', function () {
 
-    // test redirects
     cy.visit('/signup', {
       onBeforeLoad: (win) => {
         win.sessionStorage.clear()
@@ -12,23 +11,18 @@ describe('The Signup Page', function () {
 
     cy.url().should('include', '/signup')
 
-    // test signup
     cy.get("#email").type("test_signup")
     cy.get("#name").type("test")
     cy.get("#password").type("test")
     cy.get("#confirm").type("test")
     cy.get("#signup").click()
+
+    cy.wait(1000)
+
+    cy.url().should('include', '/signin')
   });
 
   it('successfully signs in new user', function () {
-    
-    cy.visit('/signup', {
-      onBeforeLoad: (win) => {
-        win.sessionStorage.clear()
-      }
-    });
-
-    cy.visit('/signin')
     cy.url().should('include', '/signin')
 
     cy.get("#email").type("test_signup")
@@ -37,6 +31,7 @@ describe('The Signup Page', function () {
       cy.wait(1000);
       expect(sessionStorage.getItem('currentUser')).to.eq('test_signup')
     });
+    cy.url().should('include', '/main')
   });
 
   it('successfully deletes new user', function () {
@@ -56,11 +51,11 @@ describe('The Signup Page', function () {
 
     cy.get("#yes").click()
 
-    cy.get("#table_body").should("not.contain", "test_signup")
+    cy.get("#table_body").find(">div").should("not.contain.text", "test_signup")
+    
     cy.get("#table_body").within(() => {
       cy.contains("test_signup").should("not.exist")
     })
-
 
   });
 })

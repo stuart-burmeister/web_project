@@ -60,7 +60,6 @@ const SignUp = props => {
     SIGNUP_USER,
     {
       onCompleted: data => {
-        onSignUp();
         setEmail("");
         setName("");
         setPassword("");
@@ -70,6 +69,7 @@ const SignUp = props => {
         setNameError("");
         setPasswordError("");
         setConfirmError("");
+        onSignUp();
       },
       onError: error => {
         alert("Sign Up failed: " + error.message);

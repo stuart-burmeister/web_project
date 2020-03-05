@@ -3,8 +3,7 @@
 describe('The Signin Page', function() {
   it('successfully loads & signs in', function() {
     
-    // test redirects
-    cy.visit('/main', {
+    cy.visit('/signin', {
       onBeforeLoad: (win) => {
         win.sessionStorage.clear()
       }
@@ -12,7 +11,6 @@ describe('The Signin Page', function() {
 
     cy.url().should('include', '/signin')
 
-    // test signup
     cy.get("#email").type("test")
     cy.get("#password").type("test")
     cy.get("#signin").click().should(() => 
@@ -27,5 +25,4 @@ describe('The Signin Page', function() {
   )
     cy.url().should('include', '/signin')
   })    
-
 })
