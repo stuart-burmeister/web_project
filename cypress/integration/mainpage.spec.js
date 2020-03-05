@@ -8,7 +8,7 @@ describe('The Main Page', function() {
       onBeforeLoad: (win) => {
         win.sessionStorage.setItem("currentUser", "test");
       }
-    }) 
+    })
 
     cy.url().should('include', '/main')
 

@@ -112,6 +112,7 @@ const SignUp = props => {
         </Grid>
         <Grid className={classes.item} item>
           <TextField className={classes.input}
+            id="email"
             variant="outlined"
             label="EMAIL"
             value={email}
@@ -127,6 +128,7 @@ const SignUp = props => {
         </Grid>
         <Grid item className={classes.item}>
           <TextField className={classes.input}
+            id="name"
             variant="outlined"
             label="NAME"
             value={name}
@@ -142,6 +144,7 @@ const SignUp = props => {
         </Grid>
         <Grid className={classes.item} item>
           <TextField className={classes.input}
+            id="password"
             variant="outlined"
             label="PASSWORD"
             value={password}
@@ -158,6 +161,7 @@ const SignUp = props => {
         </Grid>
         <Grid item className={classes.item}>
           <TextField className={classes.input}
+            id="confirm"
             variant="outlined"
             label="PASSWORD CONFIRM"
             value={confirm}
@@ -174,6 +178,7 @@ const SignUp = props => {
         </Grid>
         <Grid className={classes.item} item>
           <Button className={classes.button}
+            id="signup"
             variant="contained"
             fullWidth
             color="primary"
