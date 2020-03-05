@@ -23,10 +23,16 @@ const MainRoute = () => {
     "/user",
     "/message",
     "blank",
-    "/logout",
+    "/signin",
   ];
 
-  const onTabChanged = (newValue) => { history.push(linkPaths[newValue]) }
+  const onTabChanged = (newValue) => {
+    if (newValue === 4) {
+      sessionStorage.removeItem('currentUser');
+      setIsSignedIn(false);
+    }
+    history.push(linkPaths[newValue])
+  }
 
   return (
     <Switch>
@@ -60,11 +66,6 @@ const MainRoute = () => {
               <Redirect to="/signin" />
             )}
       </Route>
-      <Route path="/logout" render={() => {
-        sessionStorage.removeItem('currentUser');
-        setIsSignedIn(false);
-        return (<Redirect to="/signin" from="/logout" />);
-      }} />
       <Route path="/signin">
         {
           isSignedIn ? (<Redirect to="/main" />) : (

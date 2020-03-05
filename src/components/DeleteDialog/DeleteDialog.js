@@ -34,10 +34,10 @@ const DeleteDialog = props => {
           Delete!
         </DialogTitle>
         <DialogActions>
-          <Button className={classes.button} variant="contained" color="primary" onClick={() => onClose(true)}>
+          <Button className={classes.button} id="yes" variant="contained" color="primary" onClick={() => onClose(true)}>
             Yes
           </Button>
-          <Button className={classes.button} variant="contained" color="secondary" onClick={() => onClose(false)}>
+          <Button className={classes.button} id="no" variant="contained" color="secondary" onClick={() => onClose(false)}>
             No
           </Button>
         </DialogActions>

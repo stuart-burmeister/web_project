@@ -146,6 +146,7 @@ const ModifyUser = props => {
         </Grid>
         <Grid item className={classes.item}>
           <TextField className={classes.input}
+            id="email"
             variant="outlined"
             label="EMAIL"
             disabled={isLoading}
@@ -162,6 +163,7 @@ const ModifyUser = props => {
         </Grid>
         <Grid item className={classes.item}>
           <TextField className={classes.input}
+            id="name"
             variant="outlined"
             label="NAME"
             disabled={isLoading}
@@ -178,6 +180,7 @@ const ModifyUser = props => {
         </Grid>
         <Grid item className={classes.item}>
           <TextField variant="outlined" className={classes.input}
+            id="password"
             label="PASSWORD"
             disabled={isLoading}
             error={passwordError !== ""}
@@ -193,6 +196,7 @@ const ModifyUser = props => {
         </Grid>
         <Grid item className={classes.item}>
           <TextField variant="outlined" className={classes.input}
+            id="confirm"
             label="PASSWORD CONFIRM"
             disabled={isLoading}
             error={confirmError !== ""}
@@ -208,6 +212,7 @@ const ModifyUser = props => {
         </Grid>
         <Grid className={classes.item} item>
           <Button className={classes.button}
+            id="save"
             variant="contained"
             fullWidth
             color="primary"
@@ -218,6 +223,7 @@ const ModifyUser = props => {
         </Grid>
         <Grid className={classes.item} item>
           <Button className={classes.button}
+            id="delete"
             variant="contained"
             fullWidth
             color="secondary"
@@ -228,6 +234,7 @@ const ModifyUser = props => {
         </Grid>
         <Grid className={classes.item} item>
           <Button className={classes.button}
+            id="cancel"
             variant="contained"
             fullWidth
             color="secondary"
