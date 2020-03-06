@@ -1,4 +1,5 @@
 import { Box, makeStyles } from '@material-ui/core';
+import { action } from "@storybook/addon-actions";
 import React, { useState } from "react";
 import { UserList } from "../../components";
 
@@ -20,9 +21,14 @@ export const Default = () => {
 
   const [selectedUser, setSelectedUser] = useState(null)
 
+  const onSelect = (user) => {
+    setSelectedUser(user);
+    action("select user")(user);
+  }
+
   return (
-      <Box className={classes.root} border={1}>
-        <UserList filter="" selectedUser={selectedUser} onSelect={(user) => setSelectedUser(user)} />
-      </Box>
+    <Box className={classes.root} border={1}>
+      <UserList filter="" selectedUser={selectedUser} onSelect={(user) => onSelect(user)} />
+    </Box>
   )
 }

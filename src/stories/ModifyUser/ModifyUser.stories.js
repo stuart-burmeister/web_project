@@ -1,4 +1,5 @@
 import { Box, makeStyles } from "@material-ui/core";
+import { action } from "@storybook/addon-actions";
 import React from "react";
 import { ModifyUser } from "../../components";
 
@@ -26,7 +27,7 @@ export const Default = () => {
 
   return (
     <Box border={1} className={classes.root}>
-      <ModifyUser name={""} email={email} onCancel={() => console.log("Cancel Modify")} />
+      <ModifyUser name={""} email={email} onCancel={() => action("cancel modify")()} />
     </Box>
   );
 };

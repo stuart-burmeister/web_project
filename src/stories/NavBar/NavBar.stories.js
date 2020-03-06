@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import React, { useState } from "react";
 import { NavBar } from "../../components";
 
@@ -10,5 +11,10 @@ export default {
 export const Default = () => {
   const [index, setIndex] = useState(0);
 
-  return <NavBar tabIndex={index} onChange={(newValue) => setIndex(newValue)} />
+  const onChange = (newValue) => {
+    setIndex(newValue)
+    action("change tab")(newValue);
+  }
+
+  return <NavBar tabIndex={index} onChange={(newValue) => onChange(newValue)} />
 }

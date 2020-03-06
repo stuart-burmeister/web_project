@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import React from "react";
 import { SearchBar } from "../../components";
 
@@ -8,7 +9,7 @@ export default {
 };
 
 export const Default = () => {
-  return <SearchBar setFilter={(filter)=>{
-    console.log("Filter for: " + filter);
-  }}/>
+  return <SearchBar setFilter={(filter) => {
+    action("Filtering")(filter);
+  }} />
 }

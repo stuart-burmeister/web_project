@@ -1,7 +1,7 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
+import { action } from "@storybook/addon-actions";
 import React, { useState } from "react";
 import { CustomTable } from "../../components";
-import { action } from "@storybook/addon-actions";
 
 const useStyles = makeStyles(() => ({
   root: {

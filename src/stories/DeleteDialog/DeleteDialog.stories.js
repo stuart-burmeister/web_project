@@ -1,4 +1,5 @@
-import { Box, makeStyles, Button } from "@material-ui/core";
+import { Box, Button, makeStyles } from "@material-ui/core";
+import { action } from "@storybook/addon-actions";
 import React, { useState } from "react";
 import { DeleteDialog } from "../../components";
 
@@ -25,8 +26,8 @@ export const Default = () => {
   const [open, setOpen] = useState(false);
 
   const onClose = response =>{
-    console.log(response ? "Yes" : "No");
     setOpen(false)
+    action("dialog response")(response)
   }
 
   return (

@@ -1,6 +1,7 @@
 import { Box, makeStyles } from "@material-ui/core";
 import React from "react";
 import { SignUp } from "../../components";
+import { action } from "@storybook/addon-actions";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -24,7 +25,7 @@ export const Default = () => {
 
   return (
     <Box border={1} className={classes.root}>
-      <SignUp onSignUp={() => console.log("Signed Up")} onCancel={() => console.log("Cancel Signup")}/>
+      <SignUp onSignUp={() => action("Signed Up")()} onCancel={() => action("Cancel Signup")()}/>
     </Box>
   );
 };

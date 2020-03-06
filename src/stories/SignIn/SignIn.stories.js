@@ -1,4 +1,5 @@
 import { Box, makeStyles } from "@material-ui/core";
+import { action } from "@storybook/addon-actions";
 import React from "react";
 import { SignIn } from "../../components";
 
@@ -24,7 +25,7 @@ export const Default = () => {
 
   return (
     <Box border={1} className={classes.root}>
-      <SignIn onSignIn={() => console.log("Signed In")} onSignUpClick={() => console.log("Move to SignUp")}/>
+      <SignIn onSignIn={() => action("Signed In")()} onSignUpClick={() => action("Move to SignUp")()}/>
     </Box>
   );
 };

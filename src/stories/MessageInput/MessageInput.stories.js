@@ -1,5 +1,6 @@
 import React from "react";
 import { MessageInput } from "../../components";
+import { action } from "@storybook/addon-actions";
 
 export default {
   component: MessageInput,
@@ -9,6 +10,6 @@ export default {
 
 export const Default = () => {
   return <MessageInput setMessage={(msg)=>{
-    console.log(msg);
+    action("Message input")(msg);
   }}/>
 }
