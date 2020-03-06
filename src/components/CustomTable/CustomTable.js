@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
   header__scrollbar: {
     width: "15px",
-    maxWidth:"15px",
+    maxWidth: "15px",
     minWidth: "15px",
   },
   text: {
@@ -94,18 +94,17 @@ const CustomTable = props => {
   };
 
   useEffect(() => {
-    if (bodyElement !== undefined){
+    if (bodyElement !== undefined) {
       const clientHeight = bodyElement.clientHeight;
       const scrollHeight = bodyElement.scrollHeight;
-      if  (clientHeight !== scrollHeight)
-      {
+      if (clientHeight !== scrollHeight) {
         setIsScrolling(true);
       }
-      else{
+      else {
         setIsScrolling(false);
       }
     }
-  }, [list,bodyElement]);
+  }, [list, bodyElement]);
 
   return (
     <Box className={classes.root}>
@@ -127,16 +126,24 @@ const CustomTable = props => {
               })
             }
             {
-              isScrolling && <Box className={classes.header__scrollbar}/>
+              isScrolling && <Box className={classes.header__scrollbar} />
             }
           </Box>
         </Grid>
-        <Grid className={classes.body} id="table_body" component="div" ref={(divElement) => {setBodyElement(divElement) }}>
+        <Grid className={classes.body} id="table_body" component="div" ref={(divElement) => { setBodyElement(divElement) }}>
           {
             !loading &&
             list.map((row, index) => {
               var rowStyle = (index % 2 === 0) ? classes.even__row : classes.odd__row;
-              const isRowSelected = selectedItem && row === selectedItem;
+              let isRowSelected = false;
+              for (let key in row) {
+                if (selectedItem && row[key] === selectedItem[key]) {
+                  isRowSelected = true;
+                } else {
+                  isRowSelected = false;
+                  break;
+                }
+              }
               if (isRowSelected) {
                 rowStyle = classes.selected__row;
               }
