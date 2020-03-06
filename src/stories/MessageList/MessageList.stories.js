@@ -22,7 +22,7 @@ export const Default = () => {
 
   return (
       <Box className={classes.root} border={1}>
-        <MessageList email={email} />
+        <MessageList email={email ? email : ""} />
       </Box>
   )
 }
