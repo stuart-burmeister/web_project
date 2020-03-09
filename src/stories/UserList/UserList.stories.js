@@ -21,7 +21,7 @@ const UserListWrapper = () => {
 
   const onSelect = (user) => {
     setSelectedUser(user);
-    action("select user")(user);
+    action("Selected User")(user);
   }
 
   return (

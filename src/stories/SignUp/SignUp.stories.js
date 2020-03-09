@@ -25,7 +25,7 @@ export const Default = () => {
 
   return (
     <Box border={1} className={classes.root}>
-      <SignUp onSignUp={() => action("Signed Up")()} onCancel={() => action("Cancel Signup")()}/>
+      <SignUp onSignUp={() => action("Signed Up Successfully")()} onCancel={() => action("Cancel Signup")()}/>
     </Box>
   );
 };

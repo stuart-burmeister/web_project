@@ -27,7 +27,7 @@ export const Default = () => {
 
   return (
     <Box border={1} className={classes.root}>
-      <ModifyUser name={""} email={email ? email : ""} onCancel={() => action("cancel modify")()} />
+      <ModifyUser name={""} email={email ? email : ""} onCancel={() => action("Cancel Modify")()} />
     </Box>
   );
 };

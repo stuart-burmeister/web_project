@@ -13,7 +13,7 @@ export const Default = () => {
 
   const onChange = (newValue) => {
     setIndex(newValue)
-    action("change tab")(newValue);
+    action("Change Tab")(newValue);
   }
 
   return <NavBar tabIndex={index} onChange={(newValue) => onChange(newValue)} />

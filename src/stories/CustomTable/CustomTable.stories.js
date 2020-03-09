@@ -100,7 +100,7 @@ export const LongField = () => {
 
   const onSelect = (element) => {
     setCurrentRow(element);
-    action("selected")(element)
+    action("Selected")(element)
   }
 
   return (

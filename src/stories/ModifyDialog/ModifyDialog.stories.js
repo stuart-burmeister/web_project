@@ -26,7 +26,7 @@ export const Default = () => {
   const [open, setOpen] = useState(false);
 
   const onClose = response => {
-    action("response")(response ? "Yes" : "No");
+    action("Response")(response ? "Yes" : "No");
     setOpen(false)
   }
 
