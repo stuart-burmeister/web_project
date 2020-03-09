@@ -1,19 +1,19 @@
+
+import { Button, Typography } from "@material-ui/core";
 import { addons, types } from "@storybook/addons";
-import { useParameter } from "@storybook/api";
 import { AddonPanel } from "@storybook/components";
 import React, { Fragment, useState } from "react";
-import { Button } from "@material-ui/core";
 
 const Content = () => {
-  //const currentUser = sessionStorage.getItem("currentUser");
-
   const [currentUser, setCurrentUser] = useState(sessionStorage.getItem("currentUser"));
 
   return (
     <Fragment>
-      {
-        `Current User Email: ${currentUser}`
-      }
+      <Typography>
+        {
+          `Current User Email: ${currentUser}`
+        }
+      </Typography>
       <Button variant="contained" onClick={() => setCurrentUser(sessionStorage.getItem("currentUser"))}>
         Refresh User
       </Button>
