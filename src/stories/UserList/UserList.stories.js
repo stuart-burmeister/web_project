@@ -16,9 +16,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-export const Default = () => {
-  const classes = useStyles();
-
+const UserListWrapper = () => {
   const [selectedUser, setSelectedUser] = useState(null)
 
   const onSelect = (user) => {
@@ -27,8 +25,16 @@ export const Default = () => {
   }
 
   return (
+    <UserList filter="" selectedUser={selectedUser} onSelect={(user) => onSelect(user)} />
+  )
+}
+
+export const Default = () => {
+  const classes = useStyles();
+
+  return (
     <Box className={classes.root} border={1}>
-      <UserList filter="" selectedUser={selectedUser} onSelect={(user) => onSelect(user)} />
+      <UserListWrapper/>
     </Box>
   )
 }
